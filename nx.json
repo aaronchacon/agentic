@@ -65,15 +65,37 @@
         "default",
         "^production"
       ]
+    },
+    "@nx/angular:package": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@nx/angular:unit-test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ]
     }
   },
   "release": {
     "projects": [
-      "api"
+      "api",
+      "agentic",
+      "agentic-themes"
     ],
     "projectsRelationship": "independent",
     "docker": {
       "skipVersionActions": true
+    },
+    "version": {
+      "preVersionCommand": "pnpm dlx nx run-many -t build"
     }
   },
   "plugins": [

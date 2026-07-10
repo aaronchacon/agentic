@@ -1,0 +1,37 @@
+{
+  "name": "agentic-themes",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/agentic-themes/src",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "manifestRootsToUpdate": [
+        "dist/{projectRoot}"
+      ],
+      "currentVersionResolver": "git-tag",
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "tags": ["scope:agentic", "type:themes"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/agentic-themes",
+        "main": "packages/agentic-themes/src/index.ts",
+        "tsConfig": "packages/agentic-themes/tsconfig.lib.json",
+        "assets": [
+          "packages/agentic-themes/*.md"
+        ]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    }
+  }
+}

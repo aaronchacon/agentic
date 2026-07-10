@@ -5,11 +5,11 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: [
-      '**/dist',
-      '**/vite.config.*.timestamp*',
-      '**/vitest.config.*.timestamp*',
-    ],
+      "ignores": [
+        "**/dist",
+        "**/vite.config.*.timestamp*",
+        "**/vitest.config.*.timestamp*"
+      ]
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -21,20 +21,18 @@ export default [
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
           depConstraints: [
             {
-              sourceTag: 'scope:shared',
-              onlyDependOnLibsWithTags: ['scope:shared'],
+              sourceTag: 'scope:agentic',
+              onlyDependOnLibsWithTags: ['scope:agentic'],
             },
             {
-              sourceTag: 'scope:shop',
-              onlyDependOnLibsWithTags: ['scope:shop', 'scope:shared'],
+              // The Angular runtime may use the framework-agnostic themes.
+              sourceTag: 'type:runtime',
+              onlyDependOnLibsWithTags: ['type:runtime', 'type:themes'],
             },
             {
-              sourceTag: 'scope:api',
-              onlyDependOnLibsWithTags: ['scope:api', 'scope:shared'],
-            },
-            {
-              sourceTag: 'type:data',
-              onlyDependOnLibsWithTags: ['type:data'],
+              // Themes are framework-agnostic and must not depend on the runtime.
+              sourceTag: 'type:themes',
+              onlyDependOnLibsWithTags: ['type:themes'],
             },
           ],
         },

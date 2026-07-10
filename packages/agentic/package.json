@@ -1,0 +1,11 @@
+{
+  "name": "@aaronch/agentic",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@aaronch/agentic-themes": "workspace:^",
+    "rxjs": "^7.8.0"
+  },
+  "sideEffects": false
+}
