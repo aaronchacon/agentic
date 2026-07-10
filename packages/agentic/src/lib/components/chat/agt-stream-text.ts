@@ -98,19 +98,18 @@ export class AgtStreamText {
       const total = this.targetTokens().length;
       const current = this.revealedCount();
       if (current >= total) {
+        // Caught up: stop the loop (no idle 60fps spin). The effect restarts it
+        // when more tokens arrive; once streaming ends the effect reveals the rest.
         this.carry = 0;
-        if (!this.streaming()) {
-          this.running = false;
-          return;
-        }
-      } else {
-        this.carry += dt * this.wps;
-        const step = Math.floor(this.carry);
-        if (step >= 1) {
-          const next = Math.min(total, current + step);
-          this.carry -= next - current;
-          this.revealedCount.set(next);
-        }
+        this.running = false;
+        return;
+      }
+      this.carry += dt * this.wps;
+      const step = Math.floor(this.carry);
+      if (step >= 1) {
+        const next = Math.min(total, current + step);
+        this.carry -= next - current;
+        this.revealedCount.set(next);
       }
       this.raf = requestAnimationFrame(tick);
     };

@@ -29,6 +29,20 @@ export function renderMarkdown(source: string): string {
   }
 }
 
+/**
+ * Turn an arbitrary tool/approval `detail` into markdown: strings verbatim,
+ * objects as a fenced JSON block. Safe against circular structures.
+ */
+export function toDetailMarkdown(detail: unknown): string {
+  if (detail === null || detail === undefined || detail === '') return '';
+  if (typeof detail === 'string') return detail;
+  try {
+    return '```json\n' + JSON.stringify(detail, null, 2) + '\n```';
+  } catch {
+    return String(detail);
+  }
+}
+
 function escapeHtml(value: string): string {
   return value.replace(
     /[&<>"']/g,

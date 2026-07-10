@@ -6,6 +6,7 @@
    [innerHTML] and the code card injected at runtime — scoped to this host. */
 :host ::ng-deep {
   .agt-md {
+    font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
     font-size: 0.95rem;
     line-height: 1.65;
     color: var(--agt-md-color, var(--agt-content-color, #0f172a));

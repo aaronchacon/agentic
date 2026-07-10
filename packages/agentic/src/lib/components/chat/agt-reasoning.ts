@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { AgtStreamText, type StreamSpeed } from './agt-stream-text';
 
 const AUTO_CLOSE_DELAY = 1000;
@@ -96,6 +105,10 @@ export class AgtReasoning {
           }, AUTO_CLOSE_DELAY);
         }
       }
+    });
+
+    inject(DestroyRef).onDestroy(() => {
+      if (this.closeTimer) clearTimeout(this.closeTimer);
     });
   }
 

@@ -8,6 +8,12 @@ export { AgtChat } from './lib/components/chat/agt-chat';
 export { AgtReasoning } from './lib/components/chat/agt-reasoning';
 export { AgtStreamText } from './lib/components/chat/agt-stream-text';
 export type { StreamSpeed } from './lib/components/chat/agt-stream-text';
+export { AgtToolCall } from './lib/components/tool-call/agt-tool-call';
+export { AgtSuggestion } from './lib/components/suggestion/agt-suggestion';
+export { AgtSummary } from './lib/components/summary/agt-summary';
+export { AgtSidebar } from './lib/components/sidebar/agt-sidebar';
+export { AgtPlan } from './lib/components/plan/agt-plan';
+export { AgtApproval } from './lib/components/approval/agt-approval';
 
 // Runtime
 export { injectAgent } from './lib/core/agent-store';

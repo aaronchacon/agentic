@@ -14,8 +14,6 @@ import { primitive } from './tokens';
 /** Scheme-independent semantic tokens shared by light & dark. */
 const semanticCommon = {
   transitionDuration: '0.2s',
-  fontFamily: '{font.family}',
-  fontFamilyMono: '{font.familyMono}',
   focusRing: {
     width: '2px',
     style: 'solid',
@@ -145,6 +143,11 @@ export const Base: Preset = {
       borderColor: '{ai.borderColor}',
       accent: '{ai.gradient}',
       radius: '{radius.lg}',
+    },
+    sidebar: {
+      fabBackground: '{ai.gradient}',
+      fabColor: '{ai.contrastColor}',
+      badgeBackground: '{state.danger.color}',
     },
   },
 };

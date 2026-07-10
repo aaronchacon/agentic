@@ -1,0 +1,147 @@
+:host {
+  display: block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+  background: var(--agt-content-background, #ffffff);
+  border: 1px solid var(--agt-content-border-color, #e5e5e5);
+  border-radius: var(--agt-radius-md, 10px);
+}
+
+.agt-tool__header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--agt-content-color, #0f172a);
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.agt-tool__header:hover {
+  background: var(--agt-content-hover-background, #f4f4f4);
+}
+
+.agt-tool__title {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.agt-tool__wrench {
+  flex: 0 0 auto;
+  color: var(--agt-content-muted-color, #64748b);
+}
+
+.agt-tool__name {
+  overflow: hidden;
+  font-family: var(--agt-font-family-mono, ui-monospace, monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agt-tool__badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  align-items: center;
+  padding: 1px 8px;
+  font-size: 0.72rem;
+  border-radius: 999px;
+}
+.agt-tool__badge--running {
+  color: var(--agt-content-muted-color, #64748b);
+  background: var(--agt-content-muted-background, #f1f5f9);
+}
+.agt-tool__badge--success {
+  color: var(--agt-state-success-color, #059669);
+  background: var(--agt-state-success-background, #d1fae5);
+}
+.agt-tool__badge--error {
+  color: var(--agt-state-danger-color, #dc2626);
+  background: var(--agt-state-danger-background, #fee2e2);
+}
+
+.agt-tool__spinner {
+  animation: agt-tool-spin 0.8s linear infinite;
+}
+@keyframes agt-tool-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.agt-tool__chevron {
+  flex: 0 0 auto;
+  color: var(--agt-content-muted-color, #64748b);
+  transition: transform 0.2s ease;
+}
+.agt-tool__chevron.is-open {
+  transform: rotate(180deg);
+}
+
+/* Collapsible panel */
+.agt-tool__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+.agt-tool__panel.is-open {
+  grid-template-rows: 1fr;
+}
+/* The clip wrapper collapses cleanly (border/padding live on the inner). */
+.agt-tool__panel-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+.agt-tool__panel-inner {
+  padding: 12px;
+  border-top: 1px solid var(--agt-content-border-color, #e5e5e5);
+}
+
+.agt-tool__steps {
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: 0.86rem;
+  color: var(--agt-content-muted-color, #64748b);
+}
+.agt-tool__steps li {
+  margin: 2px 0;
+}
+
+.agt-tool__muted {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--agt-content-muted-color, #64748b);
+}
+
+.agt-tool__label {
+  margin: 0 0 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--agt-content-muted-color, #64748b);
+}
+.agt-tool__label--error {
+  color: var(--agt-state-danger-color, #dc2626);
+}
+/* Space steps above a following result label */
+.agt-tool__steps + .agt-tool__label {
+  margin-top: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agt-tool__chevron,
+  .agt-tool__panel {
+    transition: none;
+  }
+}

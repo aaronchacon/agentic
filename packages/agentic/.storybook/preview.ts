@@ -19,6 +19,7 @@ const withTheme: Decorator = (story, context) => {
   document.documentElement.classList.toggle('agt-dark', dark);
   document.body.style.background = 'var(--agt-content-background)';
   document.body.style.color = 'var(--agt-content-color)';
+  document.body.style.fontFamily = 'var(--agt-font-family)';
 
   return story();
 };

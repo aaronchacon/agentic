@@ -1,0 +1,131 @@
+:host {
+  display: block;
+  font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+  color: var(--agt-content-color, #0f172a);
+}
+
+.agt-suggestion__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--agt-content-color, #0f172a);
+}
+
+.agt-suggestion__field {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding-right: 8px;
+  background: var(--agt-content-background, #ffffff);
+  border: 1px solid var(--agt-content-border-color, #e5e5e5);
+  border-radius: var(--agt-radius-md, 10px);
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.agt-suggestion__field:focus-within {
+  border-color: var(--agt-primary-color, #2563eb);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--agt-primary-color, #2563eb) 20%, transparent);
+}
+/* Provenance accents */
+.agt-suggestion__field[data-state='suggested'] {
+  border-color: var(--agt-ai-border-color, #ddd6fe);
+}
+.agt-suggestion__field[data-state='accepted'] {
+  border-color: var(--agt-ai-border-color, #ddd6fe);
+}
+.agt-suggestion__field[data-state='edited'] {
+  border-color: var(--agt-state-warn-color, #d97706);
+}
+
+.agt-suggestion__input-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.agt-suggestion__input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 9px 12px;
+  font: inherit;
+  color: var(--agt-content-color, #0f172a);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.agt-suggestion__input::placeholder {
+  color: var(--agt-content-muted-color, #9ca3af);
+}
+
+/* Ghost text overlay — must mirror the input's padding/font exactly */
+.agt-suggestion__ghost {
+  position: absolute;
+  inset: 0;
+  padding: 9px 12px;
+  overflow: hidden;
+  font: inherit;
+  color: var(--agt-content-muted-color, #9ca3af);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+/* Accept / reject */
+.agt-suggestion__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 2px;
+}
+.agt-suggestion__accept,
+.agt-suggestion__reject {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.agt-suggestion__accept {
+  color: var(--agt-state-success-color, #059669);
+}
+.agt-suggestion__reject {
+  color: var(--agt-content-muted-color, #64748b);
+}
+.agt-suggestion__accept:hover,
+.agt-suggestion__reject:hover {
+  background: var(--agt-content-hover-background, #f4f4f4);
+}
+
+/* Provenance badges */
+.agt-suggestion__badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 9px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+.agt-suggestion__badge--ai {
+  color: var(--agt-ai-color, #7c3aed);
+  background: var(--agt-ai-subtle-background, #f5f3ff);
+}
+.agt-suggestion__badge--edited {
+  color: var(--agt-state-warn-color, #b45309);
+  background: var(--agt-state-warn-background, #fef3c7);
+}
+
+.agt-suggestion__hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--agt-content-muted-color, #64748b);
+}
