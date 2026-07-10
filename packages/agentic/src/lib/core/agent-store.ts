@@ -61,23 +61,42 @@ export function injectAgent(config: AgentConfig): AgentStore {
   let activeAgentId: string | null = null;
   let sub: Subscription | null = null;
 
-  function appendDelta(delta: string): void {
+  function ensureAgentMessage(): string {
     if (activeAgentId === null) {
       const id = uid('agent');
       activeAgentId = id;
-      messages.update((list) => [...list, { id, role: 'agent', content: delta, streaming: true }]);
-      return;
+      messages.update((list) => [
+        ...list,
+        { id, role: 'agent', content: '', reasoning: '', streaming: true, reasoningStreaming: false },
+      ]);
     }
-    const id = activeAgentId;
+    return activeAgentId;
+  }
+
+  function appendReasoning(delta: string): void {
+    const id = ensureAgentMessage();
     messages.update((list) =>
-      list.map((m) => (m.id === id ? { ...m, content: m.content + delta } : m)),
+      list.map((m) =>
+        m.id === id ? { ...m, reasoning: m.reasoning + delta, reasoningStreaming: true } : m,
+      ),
+    );
+  }
+
+  function appendDelta(delta: string): void {
+    const id = ensureAgentMessage();
+    messages.update((list) =>
+      list.map((m) =>
+        m.id === id ? { ...m, content: m.content + delta, reasoningStreaming: false } : m,
+      ),
     );
   }
 
   function finishStreaming(): void {
     const id = activeAgentId;
     if (id !== null) {
-      messages.update((list) => list.map((m) => (m.id === id ? { ...m, streaming: false } : m)));
+      messages.update((list) =>
+        list.map((m) => (m.id === id ? { ...m, streaming: false, reasoningStreaming: false } : m)),
+      );
     }
     activeAgentId = null;
   }
@@ -104,6 +123,9 @@ export function injectAgent(config: AgentConfig): AgentStore {
 
   function handle(event: AgentEvent): void {
     switch (event.type) {
+      case 'reasoning':
+        appendReasoning(event.delta);
+        break;
       case 'text':
         appendDelta(event.delta);
         break;
@@ -133,7 +155,14 @@ export function injectAgent(config: AgentConfig): AgentStore {
     activeAgentId = null;
     messages.update((list) => [
       ...list,
-      { id: uid('user'), role: 'user', content: message, streaming: false },
+      {
+        id: uid('user'),
+        role: 'user',
+        content: message,
+        reasoning: '',
+        streaming: false,
+        reasoningStreaming: false,
+      },
     ]);
     isRunning.set(true);
     sub?.unsubscribe();

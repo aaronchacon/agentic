@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.agt-reasoning__trigger {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 2px 0;
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--agt-content-muted-color, #64748b);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.agt-reasoning__trigger:hover {
+  color: var(--agt-content-color, #0f172a);
+}
+
+.agt-reasoning__icon {
+  flex: 0 0 auto;
+}
+
+.agt-reasoning__chevron {
+  transition: transform 0.2s ease;
+}
+.agt-reasoning__chevron.is-open {
+  transform: rotate(180deg);
+}
+
+/* Shimmering "Thinking…" text */
+.agt-reasoning__shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--agt-content-muted-color, #64748b) 0%,
+    var(--agt-content-color, #0f172a) 50%,
+    var(--agt-content-muted-color, #64748b) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: agt-reasoning-shimmer 1.8s linear infinite;
+}
+
+@keyframes agt-reasoning-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Collapsible panel — animated with the grid-rows technique */
+.agt-reasoning__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.28s ease,
+    opacity 0.28s ease,
+    margin-top 0.28s ease;
+}
+
+.agt-reasoning__panel.is-open {
+  grid-template-rows: 1fr;
+  margin-top: 8px;
+  opacity: 1;
+}
+
+.agt-reasoning__panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: 12px;
+  font-size: 0.9rem;
+  border-left: 2px solid var(--agt-content-border-color, #e2e8f0);
+
+  /* Mute the streamed markdown inside the reasoning panel */
+  --agt-md-color: var(--agt-content-muted-color, #64748b);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agt-reasoning__shimmer {
+    animation: none;
+  }
+  .agt-reasoning__chevron,
+  .agt-reasoning__panel {
+    transition: none;
+  }
+}

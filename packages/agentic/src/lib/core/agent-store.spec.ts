@@ -88,6 +88,38 @@ describe('injectAgent', () => {
     expect(finalMessages[finalMessages.length - 1].streaming).toBe(false);
   });
 
+  it('attaches streamed reasoning to the agent message before the answer', () => {
+    const store = makeStore(
+      createFixtureTransport(
+        [
+          { type: 'reasoning', delta: 'Checking the case… ' },
+          { type: 'reasoning', delta: 'no sanctions hits.' },
+          { type: 'text', delta: 'Approved.' },
+          { type: 'done' },
+        ],
+        { immediate: true },
+      ),
+    );
+
+    store.send('go');
+    const agent = store.messages()[1];
+    expect(agent.reasoning).toBe('Checking the case… no sanctions hits.');
+    expect(agent.reasoningStreaming).toBe(false);
+    expect(agent.content).toBe('Approved.');
+    expect(agent.streaming).toBe(false);
+  });
+
+  it('keeps reasoningStreaming true while only reasoning arrives', () => {
+    const store = makeStore(
+      createFixtureTransport([{ type: 'reasoning', delta: 'thinking…' }], { immediate: true }),
+    );
+
+    store.send('go');
+    const agent = store.messages()[1];
+    expect(agent.reasoning).toBe('thinking…');
+    expect(agent.reasoningStreaming).toBe(true);
+  });
+
   it('reset() clears all state', () => {
     const store = makeStore(
       createFixtureTransport([{ type: 'text', delta: 'x' }, { type: 'done' }], { immediate: true }),

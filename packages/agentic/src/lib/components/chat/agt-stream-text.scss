@@ -1,0 +1,238 @@
+:host {
+  display: block;
+}
+
+/* `::ng-deep` is required so these styles reach the markdown HTML bound via
+   [innerHTML] and the code card injected at runtime — scoped to this host. */
+:host ::ng-deep {
+  .agt-md {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--agt-md-color, var(--agt-content-color, #0f172a));
+  }
+
+  .agt-md > :first-child {
+    margin-top: 0;
+  }
+  .agt-md > :last-child {
+    margin-bottom: 0;
+  }
+  .agt-md p,
+  .agt-md ul,
+  .agt-md ol,
+  .agt-md blockquote,
+  .agt-md table {
+    margin: 0 0 0.75em;
+  }
+
+  .agt-md h1,
+  .agt-md h2,
+  .agt-md h3,
+  .agt-md h4 {
+    margin: 1.1em 0 0.5em;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .agt-md h1 {
+    font-size: 1.35rem;
+  }
+  .agt-md h2 {
+    font-size: 1.2rem;
+  }
+  .agt-md h3 {
+    font-size: 1.05rem;
+  }
+
+  .agt-md ul,
+  .agt-md ol {
+    padding-left: 1.4em;
+  }
+  .agt-md li {
+    margin: 0.2em 0;
+  }
+
+  .agt-md a {
+    color: var(--agt-primary-color, #2563eb);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .agt-md blockquote {
+    padding-left: 0.9em;
+    color: var(--agt-content-muted-color, #64748b);
+    border-left: 3px solid var(--agt-content-border-color, #e2e8f0);
+  }
+
+  /* Inline code */
+  .agt-md :not(pre) > code {
+    padding: 0.15em 0.4em;
+    font-family: var(--agt-font-family-mono, ui-monospace, monospace);
+    font-size: 0.86em;
+    background: var(--agt-content-muted-background, #f1f5f9);
+    border: 1px solid var(--agt-content-border-color, #e2e8f0);
+    border-radius: 6px;
+  }
+
+  /* ---------- VS Code-like code card ---------- */
+  .agt-code {
+    margin: 0 0 0.85em;
+    overflow: hidden;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+  }
+
+  .agt-code__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 8px 5px 14px;
+    background: #252526;
+    border-bottom: 1px solid #333333;
+  }
+
+  .agt-code__lang {
+    font-family: var(--agt-font-family-mono, ui-monospace, monospace);
+    font-size: 0.72rem;
+    color: #9aa1ab;
+    letter-spacing: 0.02em;
+  }
+
+  .agt-code__copy {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    font: inherit;
+    font-size: 0.72rem;
+    color: #cccccc;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+  .agt-code__copy:hover,
+  .agt-code__copy:focus-visible {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .agt-code pre {
+    margin: 0;
+    padding: 14px;
+    overflow-x: auto;
+    background: transparent;
+    border: none;
+  }
+  .agt-code code {
+    padding: 0;
+    font-family: var(--agt-font-family-mono, ui-monospace, monospace);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #d4d4d4;
+    background: none;
+  }
+
+  /* highlight.js — VS Code Dark+ palette */
+  .hljs-comment,
+  .hljs-quote {
+    color: #6a9955;
+    font-style: italic;
+  }
+  .hljs-keyword,
+  .hljs-literal,
+  .hljs-name,
+  .hljs-selector-tag {
+    color: #569cd6;
+  }
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-meta .hljs-string {
+    color: #ce9178;
+  }
+  .hljs-number,
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #b5cea8;
+  }
+  .hljs-title,
+  .hljs-title.function_,
+  .hljs-section {
+    color: #dcdcaa;
+  }
+  .hljs-title.class_,
+  .hljs-type,
+  .hljs-built_in {
+    color: #4ec9b0;
+  }
+  .hljs-variable,
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-property,
+  .hljs-template-variable {
+    color: #9cdcfe;
+  }
+  .hljs-operator,
+  .hljs-punctuation {
+    color: #d4d4d4;
+  }
+  .hljs-meta,
+  .hljs-doctag {
+    color: #c586c0;
+  }
+  .hljs-deletion {
+    color: #f48771;
+  }
+  .hljs-addition {
+    color: #b5cea8;
+  }
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  .hljs-strong {
+    font-weight: 700;
+  }
+
+  /* Tables */
+  .agt-md table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .agt-md th,
+  .agt-md td {
+    padding: 6px 10px;
+    text-align: left;
+    border: 1px solid var(--agt-content-border-color, #e2e8f0);
+  }
+  .agt-md th {
+    background: var(--agt-content-muted-background, #f8fafc);
+    font-weight: 600;
+  }
+
+  /* Streaming cursor — appended after the last rendered block */
+  .agt-md--streaming > *:last-child::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 1.05em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    border-radius: 1px;
+    background: var(--agt-content-color, #0f172a);
+    animation: agt-cursor-pulse 1.1s ease-in-out infinite;
+  }
+}
+
+@keyframes agt-cursor-pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host ::ng-deep .agt-md--streaming > *:last-child::after {
+    animation: none;
+  }
+}

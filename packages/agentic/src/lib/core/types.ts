@@ -11,6 +11,7 @@ export type MessageRole = 'user' | 'agent';
  * emits these; the kit only renders them.
  */
 export type AgentEvent =
+  | { type: 'reasoning'; delta: string }
   | { type: 'text'; delta: string }
   | { type: 'tool_call'; id: string; name: string; status: ToolCallStatus; detail?: unknown }
   | { type: 'step'; id: string; label: string; status: PlanStepStatus }
@@ -22,6 +23,10 @@ export interface AgentMessage {
   id: string;
   role: MessageRole;
   content: string;
+  /** Chain-of-thought / reasoning streamed before the answer (agent messages). */
+  reasoning: string;
+  /** True while reasoning tokens are still arriving (before the answer starts). */
+  reasoningStreaming: boolean;
   streaming: boolean;
 }
 

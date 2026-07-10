@@ -99,7 +99,7 @@ export const Base: Preset = {
           mutedBackground: '{surface.50}',
           borderColor: '{surface.200}',
           color: '{surface.900}',
-          mutedColor: '{surface.400}',
+          mutedColor: '{surface.500}',
         },
         primary: {
           color: '{blue.400}',

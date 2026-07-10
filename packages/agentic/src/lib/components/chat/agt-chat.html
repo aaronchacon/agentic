@@ -1,0 +1,84 @@
+<div class="agt-chat__scroll" #scroll (scroll)="onScroll(scroll)">
+  <div class="agt-chat__thread" role="log" aria-live="polite">
+    @if (store().messages().length === 0 && !thinking()) {
+      <div class="agt-chat__empty">
+        <p class="agt-chat__empty-title">{{ emptyTitle() }}</p>
+        @if (suggestions().length) {
+          <div class="agt-chat__suggestions">
+            @for (suggestion of suggestions(); track suggestion) {
+              <button type="button" class="agt-chat__suggestion" (click)="sendSuggestion(suggestion)">
+                {{ suggestion }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+    } @else {
+      @for (message of store().messages(); track message.id) {
+        @if (message.role === 'user') {
+          <div class="agt-chat__turn agt-chat__turn--user">
+            <div class="agt-chat__user-bubble">{{ message.content }}</div>
+          </div>
+        } @else {
+          <div class="agt-chat__turn agt-chat__turn--agent">
+            @if (message.reasoning) {
+              <agt-reasoning [content]="message.reasoning" [streaming]="message.reasoningStreaming" />
+            }
+            <agt-stream-text
+              [text]="message.content"
+              [streaming]="message.streaming"
+              [speed]="streamSpeed()"
+            />
+          </div>
+        }
+      }
+
+      @if (thinking()) {
+        <div class="agt-chat__turn agt-chat__turn--agent">
+          <div class="agt-chat__thinking" role="status" aria-label="Thinking"><span></span></div>
+        </div>
+      }
+    }
+
+    @if (store().error(); as error) {
+      <div class="agt-chat__error" role="alert">{{ error }}</div>
+    }
+  </div>
+</div>
+
+<div class="agt-chat__composer">
+  <form class="agt-chat__field" (submit)="onSubmit($event)">
+    <textarea
+      #input
+      class="agt-chat__textarea"
+      rows="1"
+      [attr.aria-label]="ariaLabel()"
+      [placeholder]="placeholder()"
+      [value]="draft()"
+      (input)="onInput(input)"
+      (keydown.enter)="onEnter($event)"
+      [disabled]="store().isRunning()"
+    ></textarea>
+    <button
+      type="submit"
+      class="agt-chat__send"
+      [disabled]="store().isRunning() || !draft().trim()"
+      aria-label="Send message"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5" />
+        <path d="M6 11l6-6 6 6" />
+      </svg>
+    </button>
+  </form>
+</div>
