@@ -71,16 +71,16 @@
     font-size: 0.86em;
     background: var(--agt-content-muted-background, #f1f5f9);
     border: 1px solid var(--agt-content-border-color, #e2e8f0);
-    border-radius: 6px;
+    border-radius: var(--agt-radius-sm, 6px);
   }
 
-  /* ---------- VS Code-like code card ---------- */
+  /* ---------- VS Code-like code card (colours intentionally fixed, radius follows theme) ---------- */
   .agt-code {
     margin: 0 0 0.85em;
     overflow: hidden;
     background: #1e1e1e;
     border: 1px solid #2a2a2a;
-    border-radius: 10px;
+    border-radius: var(--agt-radius-md, 10px);
   }
 
   .agt-code__head {
@@ -108,7 +108,7 @@
     color: #cccccc;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 6px;
+    border-radius: var(--agt-radius-sm, 6px);
     cursor: pointer;
     transition:
       background 0.15s ease,

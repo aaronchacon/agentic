@@ -123,11 +123,13 @@ export const Base: Preset = {
   },
   components: {
     chat: {
-      userBubbleBackground: '{primary.color}',
-      userBubbleColor: '{primary.contrastColor}',
+      userBubbleBackground: '{content.hoverBackground}',
+      userBubbleColor: '{content.color}',
       agentBubbleBackground: '{content.hoverBackground}',
       agentBubbleColor: '{content.color}',
       bubbleRadius: '{radius.lg}',
+      composerRadius: '{radius.xl}',
+      suggestionRadius: '{radius.lg}',
       cursorColor: '{ai.color}',
     },
     toolCall: {
@@ -176,26 +178,92 @@ export function definePreset(base: Preset, overrides: DeepPartial<Preset>): Pres
 }
 
 /**
- * Alternate preset: emerald primary + softer radii, proving restyle-by-override.
+ * Alternate preset: a faithful clone of PrimeNG's **Aura** theme — a monochrome
+ * "noir" look on the zinc palette (near-white primary on near-black surfaces in
+ * dark mode). Proves restyle-by-override: the whole surface + accent system is
+ * swapped by merging onto {@link Base}. Semantic state colours (success/danger/…)
+ * and component tokens are inherited.
+ *
+ * Values mirror PrimeNG Aura dark: page `#09090b`, content `#18181b`,
+ * hover `#27272a`, border `#3f3f46`, text `#ffffff`, muted `#a1a1aa`,
+ * primary `#fafafa`, radius 6px.
  */
 export const Aurora: Preset = definePreset(Base, {
   semantic: {
-    radius: { sm: '8px', md: '10px', lg: '14px', xl: '20px' },
+    radius: { sm: '4px', md: '6px', lg: '8px', xl: '12px' },
     colorScheme: {
       light: {
+        surface: {
+          0: '#ffffff',
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+          950: '#09090b',
+        },
+        content: {
+          background: '#ffffff',
+          hoverBackground: '#f4f4f5',
+          mutedBackground: '#fafafa',
+          borderColor: '#e4e4e7',
+          color: '#18181b',
+          mutedColor: '#71717a',
+        },
         primary: {
-          color: '{emerald.600}',
-          contrastColor: '{neutral.0}',
-          hoverColor: '{emerald.500}',
-          activeColor: '#047857',
+          color: '#18181b',
+          contrastColor: '#fafafa',
+          hoverColor: '#27272a',
+          activeColor: '#3f3f46',
+        },
+        ai: {
+          color: '#18181b',
+          contrastColor: '#ffffff',
+          subtleBackground: '#f4f4f5',
+          borderColor: '#e4e4e7',
+          gradient: 'linear-gradient(90deg, #18181b, #71717a)',
         },
       },
       dark: {
+        surface: {
+          0: '#ffffff',
+          50: '#09090b',
+          100: '#18181b',
+          200: '#27272a',
+          300: '#3f3f46',
+          400: '#52525b',
+          500: '#71717a',
+          600: '#a1a1aa',
+          700: '#d4d4d8',
+          800: '#e4e4e7',
+          900: '#f4f4f5',
+          950: '#fafafa',
+        },
+        content: {
+          background: '#18181b',
+          hoverBackground: '#27272a',
+          mutedBackground: '#27272a',
+          borderColor: '#3f3f46',
+          color: '#ffffff',
+          mutedColor: '#a1a1aa',
+        },
         primary: {
-          color: '{emerald.400}',
-          contrastColor: '{neutral.950}',
-          hoverColor: '#6ee7b7',
-          activeColor: '#a7f3d0',
+          color: '#fafafa',
+          contrastColor: '#09090b',
+          hoverColor: '#e4e4e7',
+          activeColor: '#d4d4d8',
+        },
+        ai: {
+          color: '#fafafa',
+          contrastColor: '#09090b',
+          subtleBackground: '#27272a',
+          borderColor: '#3f3f46',
+          gradient: 'linear-gradient(90deg, #fafafa, #a1a1aa)',
         },
       },
     },

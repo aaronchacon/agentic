@@ -10,13 +10,13 @@ import {
 } from '@angular/core';
 
 /**
- * A collapsible copilot side panel that wraps its content (e.g. `<agt-chat>`).
+ * A collapsible agent side panel that wraps its content (e.g. `<agt-chat>`).
  * When closed it shows a floating action button (FAB) with an optional badge
  * ("has something to say"); when open it slides in a docked panel with a header
  * and the projected content. Manages focus and `inert` for accessibility.
  *
  * ```html
- * <agt-sidebar [(open)]="open" title="Copilot" [badge]="unread">
+ * <agt-sidebar [(open)]="open" title="Agent" [badge]="unread">
  *   <agt-chat [store]="agent" />
  * </agt-sidebar>
  * ```
@@ -65,7 +65,7 @@ import {
           #closeBtn
           type="button"
           class="agt-sidebar__close"
-          aria-label="Close copilot"
+          aria-label="Close agent panel"
           (click)="setOpen(false)"
         >
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
@@ -83,7 +83,7 @@ import {
 export class AgtSidebar {
   /** Whether the panel is open (two-way). */
   readonly open = model(false);
-  readonly title = input('Copilot');
+  readonly title = input('Agent');
   readonly side = input<'right' | 'left'>('right');
   /** `true` shows a dot; a number shows a count. */
   readonly badge = input<number | boolean>(false);
@@ -105,7 +105,7 @@ export class AgtSidebar {
   protected readonly fabLabel = computed(() => {
     const badge = this.badge();
     const count = typeof badge === 'number' ? badge : 0;
-    return count > 0 ? `Open copilot, ${count} new` : 'Open copilot';
+    return count > 0 ? `Open agent panel, ${count} new` : 'Open agent panel';
   });
 
   private skipInitial = true;

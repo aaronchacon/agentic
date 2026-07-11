@@ -62,7 +62,7 @@
   color: var(--agt-content-muted-color, #64748b);
   background: transparent;
   border: none;
-  border-radius: 7px;
+  border-radius: var(--agt-radius-sm, 7px);
   cursor: pointer;
   transition:
     background 0.15s ease,
@@ -86,7 +86,7 @@
   display: block;
   height: 12px;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-radius: var(--agt-radius-sm, 6px);
   background: linear-gradient(
     90deg,
     var(--agt-content-muted-background, #f1f5f9) 25%,

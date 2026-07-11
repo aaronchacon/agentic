@@ -97,7 +97,7 @@ type Story = StoryObj<ChatDemo>;
 
 export const EmptyWithSuggestions: Story = {
   args: {
-    emptyTitle: 'Ask the KYC copilot',
+    emptyTitle: 'Ask the KYC agent',
     suggestions: ['Summarize this case', 'What documents are missing?', 'Any inconsistencies?'],
     streamSpeed: 'smooth',
     script: reply,

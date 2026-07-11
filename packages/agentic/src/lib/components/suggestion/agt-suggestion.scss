@@ -87,7 +87,7 @@
   height: 28px;
   background: transparent;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--agt-radius-sm, 6px);
   cursor: pointer;
   transition: background 0.15s ease;
 }

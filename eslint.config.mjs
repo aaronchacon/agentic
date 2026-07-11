@@ -25,6 +25,11 @@ export default [
               onlyDependOnLibsWithTags: ['scope:agentic'],
             },
             {
+              // The docs app consumes the published libraries as a real consumer would.
+              sourceTag: 'type:app',
+              onlyDependOnLibsWithTags: ['type:app', 'type:runtime', 'type:themes'],
+            },
+            {
               // The Angular runtime may use the framework-agnostic themes.
               sourceTag: 'type:runtime',
               onlyDependOnLibsWithTags: ['type:runtime', 'type:themes'],

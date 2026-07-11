@@ -96,7 +96,7 @@
   font-size: 0.82rem;
   font-weight: 600;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--agt-radius-md, 8px);
   cursor: pointer;
   transition:
     background 0.15s ease,

@@ -77,6 +77,8 @@ export class AgtChat {
     this.dispatch();
   }
 
+  // Angular types `$event` for the `keydown.enter` pseudo-event as the generic
+  // `Event`, so we narrow to `KeyboardEvent` here to read `shiftKey`.
   protected onEnter(event: Event): void {
     if (!(event as KeyboardEvent).shiftKey) {
       event.preventDefault();

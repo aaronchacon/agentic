@@ -1,0 +1,28 @@
+# agentic
+
+> Production-grade Angular 21 UI components for AI & agent interfaces - streaming chat, tool-calling, reasoning, plans and human-in-the-loop approvals. Themeable via a 3-layer design-token system, accessible (a11y AA), and backend-agnostic through an AG-UI-compatible event contract.
+
+agentic is a component library installed from npm (`@aaronch/agentic` + `@aaronch/agentic-themes`), not a copy-paste snippet kit. Components are standalone, signal-based, OnPush, dark/light and keyboard-first. The library never talks to an LLM: you connect your own transport (SSE / WebSocket / fixtures) that emits `AgentEvent`s, and the kit renders them.
+
+## Docs
+
+- [Introduction](/): Overview, install and a live streaming-chat demo.
+- [Theming](/theming): 3-layer tokens (primitive -> semantic -> component), built-in presets (Base / Aurora), `definePreset()`, runtime restyling with `AgenticThemeService`, and class-based dark mode.
+
+## Components
+
+- [Chat](/components/chat): ChatGPT-style streaming chat - markdown with syntax-highlighted code, a collapsible reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.
+- [Tool Call](/components/tool-call): Visualizes a tool invocation - running (spinner + steps), success (result) or error (detail), with a syntax-highlighted JSON block.
+- [Suggestion](/components/suggestion): A form field with an AI suggestion shown as ghost text; tracks provenance (suggested -> accepted -> edited by human) and a confidence badge.
+- [Summary](/components/summary): An AI-generated summary card, clearly marked as AI content, with regenerate + copy actions and a loading skeleton.
+- [Sidebar](/components/sidebar): A collapsible agent side panel with a floating launcher and unread badge; manages focus and `inert`.
+- [Plan](/components/plan): The agent's execution trace as a vertical timeline of steps (pending / active / done / error).
+- [Approval](/components/approval): A human-in-the-loop gate - approve, edit or reject an action before the agent proceeds. Non-negotiable in regulated flows.
+
+## Contract
+
+- The UI renders a small, AG-UI-compatible event stream: `text`, `reasoning`, `tool_call`, `step`, `approval_request`, `done`, `error`. `injectAgent({ transport })` exposes signals (`messages()`, `isRunning()`, `plan()`, `pendingApproval()`) and actions (`send()`, `approve(id)`, `reject(id)`). `createFixtureTransport(script)` replays recorded responses for demos with no API key.
+
+## Optional
+
+- [Full documentation as markdown](/llms-full.txt): Every page's content concatenated into a single file.

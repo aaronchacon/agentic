@@ -17,12 +17,12 @@ import { AgtSidebar } from './agt-sidebar';
   imports: [AgtSidebar, AgtChat],
   template: `
     <div class="demo-app">
-      <p>Your app content — open the copilot from the button. →</p>
+      <p>Your app content — open the agent from the button. →</p>
     </div>
     <agt-sidebar [(open)]="open" [title]="title" [badge]="badge">
       <agt-chat
         [store]="store"
-        emptyTitle="Ask the KYC copilot"
+        emptyTitle="Ask the KYC agent"
         [suggestions]="['Why do you need this?', 'What documents are missing?']"
       />
     </agt-sidebar>
@@ -39,7 +39,7 @@ import { AgtSidebar } from './agt-sidebar';
 class SidebarDemo implements OnInit {
   private readonly injector = inject(EnvironmentInjector);
   @Input() open = false;
-  @Input() title = 'Copilot';
+  @Input() title = 'Agent';
   @Input() badge: number | boolean = false;
 
   store!: AgentStore;
@@ -70,9 +70,9 @@ export default meta;
 type Story = StoryObj<SidebarDemo>;
 
 export const Closed: Story = {
-  args: { open: false, title: 'KYC Copilot', badge: 2 },
+  args: { open: false, title: 'KYC Agent', badge: 2 },
 };
 
 export const Open: Story = {
-  args: { open: true, title: 'KYC Copilot', badge: false },
+  args: { open: true, title: 'KYC Agent', badge: false },
 };
