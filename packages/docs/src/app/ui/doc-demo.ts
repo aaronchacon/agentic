@@ -16,11 +16,19 @@ import hljs from 'highlight.js/lib/common';
     <div class="doc-demo">
       <div class="doc-demo__tabs">
         @if (preview()) {
-          <button type="button" [class.is-active]="tab() === 'preview'" (click)="tab.set('preview')">
+          <button
+            type="button"
+            [class.is-active]="tab() === 'preview'"
+            (click)="tab.set('preview')"
+          >
             Preview
           </button>
         }
-        <button type="button" [class.is-active]="tab() === 'code'" (click)="tab.set('code')">
+        <button
+          type="button"
+          [class.is-active]="tab() === 'code'"
+          (click)="tab.set('code')"
+        >
           Code
         </button>
       </div>
@@ -51,7 +59,9 @@ export class DocDemo {
   protected readonly copied = signal(false);
 
   protected readonly highlighted = computed(() => {
-    const lang = hljs.getLanguage(this.language()) ? this.language() : 'plaintext';
+    const lang = hljs.getLanguage(this.language())
+      ? this.language()
+      : 'plaintext';
     return hljs.highlight(this.code().trim(), { language: lang }).value;
   });
 

@@ -22,7 +22,10 @@ export class AgenticThemeService {
   private styleEl: HTMLStyleElement | null = null;
 
   private readonly _preset = signal<Preset>(Base);
-  private options: Required<BuildThemeOptions> = { darkMode: 'class', darkSelector: '.agt-dark' };
+  private options: Required<BuildThemeOptions> = {
+    darkMode: 'class',
+    darkSelector: '.agt-dark',
+  };
 
   /** The currently applied preset. */
   readonly preset = this._preset.asReadonly();

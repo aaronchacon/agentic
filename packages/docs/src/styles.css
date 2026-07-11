@@ -11,7 +11,14 @@ body {
 
 body {
   margin: 0;
-  font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+  font-family: var(
+    --agt-font-family,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif
+  );
   color: var(--agt-content-color, #0f172a);
   background: var(--agt-surface-50, #f8fafc);
   -webkit-font-smoothing: antialiased;

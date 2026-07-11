@@ -67,7 +67,14 @@ export function injectAgent(config: AgentConfig): AgentStore {
       activeAgentId = id;
       messages.update((list) => [
         ...list,
-        { id, role: 'agent', content: '', reasoning: '', streaming: true, reasoningStreaming: false },
+        {
+          id,
+          role: 'agent',
+          content: '',
+          reasoning: '',
+          streaming: true,
+          reasoningStreaming: false,
+        },
       ]);
     }
     return activeAgentId;
@@ -77,7 +84,9 @@ export function injectAgent(config: AgentConfig): AgentStore {
     const id = ensureAgentMessage();
     messages.update((list) =>
       list.map((m) =>
-        m.id === id ? { ...m, reasoning: m.reasoning + delta, reasoningStreaming: true } : m,
+        m.id === id
+          ? { ...m, reasoning: m.reasoning + delta, reasoningStreaming: true }
+          : m,
       ),
     );
   }
@@ -86,7 +95,9 @@ export function injectAgent(config: AgentConfig): AgentStore {
     const id = ensureAgentMessage();
     messages.update((list) =>
       list.map((m) =>
-        m.id === id ? { ...m, content: m.content + delta, reasoningStreaming: false } : m,
+        m.id === id
+          ? { ...m, content: m.content + delta, reasoningStreaming: false }
+          : m,
       ),
     );
   }
@@ -95,7 +106,11 @@ export function injectAgent(config: AgentConfig): AgentStore {
     const id = activeAgentId;
     if (id !== null) {
       messages.update((list) =>
-        list.map((m) => (m.id === id ? { ...m, streaming: false, reasoningStreaming: false } : m)),
+        list.map((m) =>
+          m.id === id
+            ? { ...m, streaming: false, reasoningStreaming: false }
+            : m,
+        ),
       );
     }
     activeAgentId = null;
@@ -130,13 +145,22 @@ export function injectAgent(config: AgentConfig): AgentStore {
         appendDelta(event.delta);
         break;
       case 'tool_call':
-        upsertToolCall({ id: event.id, name: event.name, status: event.status, detail: event.detail });
+        upsertToolCall({
+          id: event.id,
+          name: event.name,
+          status: event.status,
+          detail: event.detail,
+        });
         break;
       case 'step':
         upsertStep({ id: event.id, label: event.label, status: event.status });
         break;
       case 'approval_request':
-        pendingApproval.set({ id: event.id, action: event.action, payload: event.payload });
+        pendingApproval.set({
+          id: event.id,
+          action: event.action,
+          payload: event.payload,
+        });
         break;
       case 'done':
         finishStreaming();

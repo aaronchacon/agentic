@@ -4,9 +4,13 @@ import { injectAgent, type AgentStore } from '../../core/agent-store';
 import { createFixtureTransport } from '../../core/fixture-transport';
 import { AgtChat } from './agt-chat';
 
-function storeWith(events: Parameters<typeof createFixtureTransport>[0]): AgentStore {
+function storeWith(
+  events: Parameters<typeof createFixtureTransport>[0],
+): AgentStore {
   return TestBed.runInInjectionContext(() =>
-    injectAgent({ transport: createFixtureTransport(events, { immediate: true }) }),
+    injectAgent({
+      transport: createFixtureTransport(events, { immediate: true }),
+    }),
   );
 }
 
@@ -14,7 +18,10 @@ describe('AgtChat', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('shows the empty state with suggestions and sends on click', () => {
-    const store = storeWith([{ type: 'text', delta: 'Hi there' }, { type: 'done' }]);
+    const store = storeWith([
+      { type: 'text', delta: 'Hi there' },
+      { type: 'done' },
+    ]);
     const fixture = TestBed.createComponent(AgtChat);
     fixture.componentRef.setInput('store', store);
     fixture.componentRef.setInput('suggestions', ['Summarize this case']);
@@ -41,7 +48,9 @@ describe('AgtChat', () => {
     store.send('hello');
     fixture.detectChanges();
 
-    const textarea = fixture.nativeElement.querySelector('.agt-chat__textarea') as HTMLTextAreaElement;
+    const textarea = fixture.nativeElement.querySelector(
+      '.agt-chat__textarea',
+    ) as HTMLTextAreaElement;
     expect(textarea.disabled).toBe(true);
     expect(store.isRunning()).toBe(true);
   });

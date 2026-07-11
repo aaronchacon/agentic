@@ -16,6 +16,6 @@ export default defineConfig(() => ({
     coverage: {
       reportsDirectory: '../../coverage/packages/agentic-themes',
       provider: 'v8' as const,
-    }
+    },
   },
 }));

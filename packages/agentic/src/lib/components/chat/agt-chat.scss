@@ -89,7 +89,10 @@
   padding: 10px 16px;
   line-height: 1.55;
   color: var(--agt-chat-user-bubble-color, var(--agt-content-color, #0f172a));
-  background: var(--agt-chat-user-bubble-background, var(--agt-content-hover-background, #f4f4f4));
+  background: var(
+    --agt-chat-user-bubble-background,
+    var(--agt-content-hover-background, #f4f4f4)
+  );
   border-radius: var(--agt-chat-bubble-radius, 20px);
   white-space: pre-wrap;
   overflow-wrap: anywhere;

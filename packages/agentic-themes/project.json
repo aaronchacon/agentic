@@ -5,9 +5,7 @@
   "projectType": "library",
   "release": {
     "version": {
-      "manifestRootsToUpdate": [
-        "dist/{projectRoot}"
-      ],
+      "manifestRootsToUpdate": ["dist/{projectRoot}"],
       "currentVersionResolver": "git-tag",
       "fallbackCurrentVersionResolver": "disk"
     }
@@ -16,16 +14,12 @@
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/agentic-themes",
         "main": "packages/agentic-themes/src/index.ts",
         "tsConfig": "packages/agentic-themes/tsconfig.lib.json",
-        "assets": [
-          "packages/agentic-themes/*.md"
-        ]
+        "assets": ["packages/agentic-themes/*.md"]
       }
     },
     "nx-release-publish": {

@@ -19,7 +19,11 @@ type Story = StoryObj<AgtToolCall>;
 export const Running: Story = {
   args: {
     toolCall: { id: '1', name: 'verify_document', status: 'running' },
-    steps: ['Loading compliance rules', 'Extracting document fields', 'Scoring risk'],
+    steps: [
+      'Loading compliance rules',
+      'Extracting document fields',
+      'Scoring risk',
+    ],
   },
 };
 
@@ -40,7 +44,8 @@ export const Errored: Story = {
       id: '3',
       name: 'screen_sanctions',
       status: 'error',
-      detail: 'Timeout contacting the sanctions provider (HTTP 503). Retry recommended.',
+      detail:
+        'Timeout contacting the sanctions provider (HTTP 503). Retry recommended.',
     },
   },
 };

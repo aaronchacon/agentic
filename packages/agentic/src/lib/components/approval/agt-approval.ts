@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, input, model, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  model,
+  output,
+} from '@angular/core';
 import { AgtStreamText } from '../chat/agt-stream-text';
 import { toDetailMarkdown } from '../chat/markdown';
 
@@ -21,18 +28,52 @@ import { toDetailMarkdown } from '../chat/markdown';
     <div class="agt-approval__head">
       <span class="agt-approval__mark" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="15" height="15">
-          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" />
-          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4" />
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"
+          />
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m9 12 2 2 4-4"
+          />
         </svg>
       </span>
       <span class="agt-approval__title">{{ title() }}</span>
       @if (state() !== 'pending') {
-        <span class="agt-approval__status agt-approval__status--{{ state() }}" role="status">
+        <span
+          class="agt-approval__status agt-approval__status--{{ state() }}"
+          role="status"
+        >
           @if (state() === 'approved') {
-            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4 10-10" /></svg>
+            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m5 12 4 4 10-10"
+              />
+            </svg>
             Approved
           } @else {
-            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" /></svg>
+            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                d="M6 6l12 12M18 6 6 18"
+              />
+            </svg>
             Rejected
           }
         </span>
@@ -49,14 +90,26 @@ import { toDetailMarkdown } from '../chat/markdown';
     @if (state() === 'pending') {
       <div class="agt-approval__actions">
         @if (editable()) {
-          <button type="button" class="agt-approval__btn agt-approval__btn--ghost" (click)="onEdit()">
+          <button
+            type="button"
+            class="agt-approval__btn agt-approval__btn--ghost"
+            (click)="onEdit()"
+          >
             Edit
           </button>
         }
-        <button type="button" class="agt-approval__btn agt-approval__btn--reject" (click)="onReject()">
+        <button
+          type="button"
+          class="agt-approval__btn agt-approval__btn--reject"
+          (click)="onReject()"
+        >
           Reject
         </button>
-        <button type="button" class="agt-approval__btn agt-approval__btn--approve" (click)="onApprove()">
+        <button
+          type="button"
+          class="agt-approval__btn agt-approval__btn--approve"
+          (click)="onApprove()"
+        >
           Approve
         </button>
       </div>
@@ -78,7 +131,9 @@ export class AgtApproval {
   readonly reject = output<void>();
   readonly edit = output<void>();
 
-  protected readonly detailMarkdown = computed(() => toDetailMarkdown(this.detail()));
+  protected readonly detailMarkdown = computed(() =>
+    toDetailMarkdown(this.detail()),
+  );
 
   protected onApprove(): void {
     this.approve.emit();

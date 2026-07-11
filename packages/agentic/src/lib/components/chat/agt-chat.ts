@@ -41,7 +41,8 @@ export class AgtChat {
   protected readonly draft = signal('');
 
   private readonly scrollEl = viewChild<ElementRef<HTMLElement>>('scroll');
-  private readonly inputEl = viewChild<ElementRef<HTMLTextAreaElement>>('input');
+  private readonly inputEl =
+    viewChild<ElementRef<HTMLTextAreaElement>>('input');
   /** Whether the transcript is pinned to the bottom (auto-scroll follows new content). */
   private stick = true;
 
@@ -49,7 +50,10 @@ export class AgtChat {
   protected readonly thinking = computed(() => {
     const store = this.store();
     const messages = store.messages();
-    return store.isRunning() && (messages.length === 0 || messages[messages.length - 1].role === 'user');
+    return (
+      store.isRunning() &&
+      (messages.length === 0 || messages[messages.length - 1].role === 'user')
+    );
   });
 
   constructor() {

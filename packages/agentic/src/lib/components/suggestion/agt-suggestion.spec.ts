@@ -12,19 +12,29 @@ function render(inputs: Record<string, unknown>) {
 }
 
 function stateOf(el: HTMLElement): string | null {
-  return el.querySelector('.agt-suggestion__field')?.getAttribute('data-state') ?? null;
+  return (
+    el.querySelector('.agt-suggestion__field')?.getAttribute('data-state') ??
+    null
+  );
 }
 
 describe('AgtSuggestion', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('shows the suggested state with ghost text, confidence and accept/reject', () => {
-    const el = render({ label: 'Full name', suggestion: 'Ada Lovelace', confidence: 0.98 })
-      .nativeElement as HTMLElement;
+    const el = render({
+      label: 'Full name',
+      suggestion: 'Ada Lovelace',
+      confidence: 0.98,
+    }).nativeElement as HTMLElement;
     expect(stateOf(el)).toBe('suggested');
-    expect(el.querySelector('.agt-suggestion__ghost')?.textContent).toContain('Ada Lovelace');
+    expect(el.querySelector('.agt-suggestion__ghost')?.textContent).toContain(
+      'Ada Lovelace',
+    );
     expect(el.querySelector('.agt-suggestion__accept')).toBeTruthy();
-    expect(el.querySelector('.agt-suggestion__hint')?.textContent).toContain('98%');
+    expect(el.querySelector('.agt-suggestion__hint')?.textContent).toContain(
+      '98%',
+    );
   });
 
   it('accepts the suggestion → AI badge with confidence', () => {
@@ -34,16 +44,21 @@ describe('AgtSuggestion', () => {
     fixture.detectChanges();
     expect(fixture.componentInstance.value()).toBe('Ada Lovelace');
     expect(stateOf(el)).toBe('accepted');
-    expect(el.querySelector('.agt-suggestion__badge--ai')?.textContent).toContain('98%');
+    expect(
+      el.querySelector('.agt-suggestion__badge--ai')?.textContent,
+    ).toContain('98%');
   });
 
   it('marks an edited AI value as "Edited by human"', () => {
-    const el = render({ suggestion: 'Ada Lovelace', value: 'Ada K. Lovelace', accepted: true })
-      .nativeElement as HTMLElement;
+    const el = render({
+      suggestion: 'Ada Lovelace',
+      value: 'Ada K. Lovelace',
+      accepted: true,
+    }).nativeElement as HTMLElement;
     expect(stateOf(el)).toBe('edited');
-    expect(el.querySelector('.agt-suggestion__badge--edited')?.textContent).toContain(
-      'Edited by human',
-    );
+    expect(
+      el.querySelector('.agt-suggestion__badge--edited')?.textContent,
+    ).toContain('Edited by human');
   });
 
   it('reject dismisses the suggestion', () => {

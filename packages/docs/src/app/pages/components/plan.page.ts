@@ -14,7 +14,8 @@ import { DocMd } from '../../ui/doc-md';
         <h1 class="doc__title">Plan</h1>
         <p class="doc__lead">
           The agent's plan / execution-trace as a vertical timeline of steps —
-          pending, active, done or error — with a progress summary in the header. Collapsible.
+          pending, active, done or error — with a progress summary in the
+          header. Collapsible.
         </p>
         <doc-md [markdown]="md" />
       </div>
@@ -37,8 +38,18 @@ import { DocMd } from '../../ui/doc-md';
 })
 export default class PlanPage {
   protected readonly props: DocProp[] = [
-    { name: 'steps', type: 'PlanStep[]', required: true, description: 'Ordered steps: { id, label, status }.' },
-    { name: 'title', type: 'string', default: "'Plan'", description: 'Header title.' },
+    {
+      name: 'steps',
+      type: 'PlanStep[]',
+      required: true,
+      description: 'Ordered steps: { id, label, status }.',
+    },
+    {
+      name: 'title',
+      type: 'string',
+      default: "'Plan'",
+      description: 'Header title.',
+    },
   ];
 
   protected readonly steps: PlanStep[] = [

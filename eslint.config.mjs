@@ -5,11 +5,11 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-      "ignores": [
-        "**/dist",
-        "**/vite.config.*.timestamp*",
-        "**/vitest.config.*.timestamp*"
-      ]
+    ignores: [
+      '**/dist',
+      '**/vite.config.*.timestamp*',
+      '**/vitest.config.*.timestamp*',
+    ],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -27,7 +27,11 @@ export default [
             {
               // The docs app consumes the published libraries as a real consumer would.
               sourceTag: 'type:app',
-              onlyDependOnLibsWithTags: ['type:app', 'type:runtime', 'type:themes'],
+              onlyDependOnLibsWithTags: [
+                'type:app',
+                'type:runtime',
+                'type:themes',
+              ],
             },
             {
               // The Angular runtime may use the framework-agnostic themes.

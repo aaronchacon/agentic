@@ -50,7 +50,9 @@
   border: 0;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 .pg__seg button.is-active {
   color: var(--agt-content-color, #0f172a);

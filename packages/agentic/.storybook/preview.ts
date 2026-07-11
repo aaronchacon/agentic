@@ -1,5 +1,10 @@
 import type { Decorator, Preview } from '@storybook/angular';
-import { Aurora, Base, buildThemeCss, type Preset } from '@aaronch/agentic-themes';
+import {
+  Aurora,
+  Base,
+  buildThemeCss,
+  type Preset,
+} from '@aaronch/agentic-themes';
 
 const PRESETS: Record<string, Preset> = { base: Base, aurora: Aurora };
 

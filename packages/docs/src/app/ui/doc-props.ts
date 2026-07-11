@@ -20,7 +20,11 @@ export function propsToMarkdown(rows: DocProp[], nameHeader = 'Prop'): string {
   const body = rows
     .map((r) => {
       const type = r.type.replace(/\|/g, '\\|');
-      const def = r.default ? `\`${r.default}\`` : r.required ? 'required' : '—';
+      const def = r.default
+        ? `\`${r.default}\``
+        : r.required
+          ? 'required'
+          : '—';
       return `| \`${r.name}\` | \`${type}\` | ${def} | ${r.description} |`;
     })
     .join('\n');
@@ -45,8 +49,12 @@ export function propsToMarkdown(rows: DocProp[], nameHeader = 'Prop'): string {
         <tbody>
           @for (row of rows(); track row.name) {
             <tr>
-              <td><code>{{ row.name }}</code></td>
-              <td><span class="doc-props__type">{{ row.type }}</span></td>
+              <td>
+                <code>{{ row.name }}</code>
+              </td>
+              <td>
+                <span class="doc-props__type">{{ row.type }}</span>
+              </td>
               <td>
                 @if (row.default) {
                   <code class="doc-props__default">{{ row.default }}</code>

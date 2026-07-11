@@ -19,10 +19,7 @@ export default defineConfig(({ mode }) => {
         allow: ['.'],
       },
     },
-    plugins: [
-      analog(),
-      nxViteTsPaths(),
-    ],
+    plugins: [analog(), nxViteTsPaths()],
     test: {
       globals: true,
       environment: 'jsdom',

@@ -30,7 +30,12 @@ export default meta;
 type Story = StoryObj<AgtSummary>;
 
 export const Loaded: Story = {
-  args: { title: 'Case summary', content: summary, loading: false, streaming: false },
+  args: {
+    title: 'Case summary',
+    content: summary,
+    loading: false,
+    streaming: false,
+  },
 };
 
 export const Loading: Story = {
@@ -38,5 +43,10 @@ export const Loading: Story = {
 };
 
 export const Streaming: Story = {
-  args: { title: 'Case summary', content: summary, loading: false, streaming: true },
+  args: {
+    title: 'Case summary',
+    content: summary,
+    loading: false,
+    streaming: true,
+  },
 };

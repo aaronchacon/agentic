@@ -29,7 +29,9 @@ export interface AgenticConfig {
  * });
  * ```
  */
-export function provideAgentic(config: AgenticConfig = {}): EnvironmentProviders {
+export function provideAgentic(
+  config: AgenticConfig = {},
+): EnvironmentProviders {
   return makeEnvironmentProviders([
     provideEnvironmentInitializer(() => {
       inject(AgenticThemeService).configure(config.theme?.preset, {

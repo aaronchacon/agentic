@@ -13,7 +13,13 @@ export type MessageRole = 'user' | 'agent';
 export type AgentEvent =
   | { type: 'reasoning'; delta: string }
   | { type: 'text'; delta: string }
-  | { type: 'tool_call'; id: string; name: string; status: ToolCallStatus; detail?: unknown }
+  | {
+      type: 'tool_call';
+      id: string;
+      name: string;
+      status: ToolCallStatus;
+      detail?: unknown;
+    }
   | { type: 'step'; id: string; label: string; status: PlanStepStatus }
   | { type: 'approval_request'; id: string; action: string; payload?: unknown }
   | { type: 'done' }

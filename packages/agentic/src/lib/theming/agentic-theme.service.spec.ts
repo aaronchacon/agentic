@@ -38,15 +38,22 @@ describe('AgenticThemeService', () => {
   it('swaps the preset at runtime', () => {
     service.setPreset(Aurora);
     expect(service.preset()).toBe(Aurora);
-    expect(document.getElementById('agt-theme')?.textContent).toContain('--agt-primary-color');
+    expect(document.getElementById('agt-theme')?.textContent).toContain(
+      '--agt-primary-color',
+    );
   });
 
   it('merges token overrides via updatePreset()', () => {
     service.configure();
     service.updatePreset({
-      semantic: { colorScheme: { light: { primary: { color: '#ff0000' } }, dark: {} } },
+      semantic: {
+        colorScheme: { light: { primary: { color: '#ff0000' } }, dark: {} },
+      },
     });
-    const light = service.preset().semantic?.colorScheme?.light as Record<string, Record<string, string>>;
+    const light = service.preset().semantic?.colorScheme?.light as Record<
+      string,
+      Record<string, string>
+    >;
     expect(light['primary']['color']).toBe('#ff0000');
   });
 });

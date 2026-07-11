@@ -45,7 +45,10 @@ import {
           stroke-linejoin="round"
           d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5Z"
         />
-        <path fill="currentColor" d="M12 7l.9 2.3L15 10l-2.1.7L12 13l-.9-2.3L9 10l2.1-.7z" />
+        <path
+          fill="currentColor"
+          d="M12 7l.9 2.3L15 10l-2.1.7L12 13l-.9-2.3L9 10l2.1-.7z"
+        />
       </svg>
       @if (hasBadge()) {
         <span class="agt-sidebar__badge">{{ badgeText() }}</span>
@@ -69,7 +72,13 @@ import {
           (click)="setOpen(false)"
         >
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              d="M6 6l12 12M18 6 6 18"
+            />
           </svg>
         </button>
       </div>
@@ -89,7 +98,8 @@ export class AgtSidebar {
   readonly badge = input<number | boolean>(false);
 
   private readonly fab = viewChild<ElementRef<HTMLButtonElement>>('fab');
-  private readonly closeBtn = viewChild<ElementRef<HTMLButtonElement>>('closeBtn');
+  private readonly closeBtn =
+    viewChild<ElementRef<HTMLButtonElement>>('closeBtn');
 
   protected readonly hasBadge = computed(() => {
     const badge = this.badge();

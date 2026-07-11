@@ -49,8 +49,15 @@ class SidebarDemo implements OnInit {
       injectAgent({
         transport: createFixtureTransport(
           [
-            { type: 'text', delta: 'We ask for this to verify your identity under KYC rules. ' },
-            { type: 'text', delta: 'Your data is encrypted and only used for verification.' },
+            {
+              type: 'text',
+              delta:
+                'We ask for this to verify your identity under KYC rules. ',
+            },
+            {
+              type: 'text',
+              delta: 'Your data is encrypted and only used for verification.',
+            },
             { type: 'done' },
           ],
           { defaultDelayMs: 45 },

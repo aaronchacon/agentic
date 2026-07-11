@@ -29,7 +29,13 @@ const AUTO_CLOSE_DELAY = 1000;
       [attr.aria-expanded]="isOpen()"
       (click)="toggle()"
     >
-      <svg class="agt-reasoning__icon" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+      <svg
+        class="agt-reasoning__icon"
+        viewBox="0 0 24 24"
+        width="15"
+        height="15"
+        aria-hidden="true"
+      >
         <path
           fill="none"
           stroke="currentColor"
@@ -42,7 +48,11 @@ const AUTO_CLOSE_DELAY = 1000;
       @if (streaming()) {
         <span class="agt-reasoning__shimmer">Thinking…</span>
       } @else if (displayDuration() !== undefined) {
-        <span>Thought for {{ displayDuration() }} second{{ displayDuration() === 1 ? '' : 's' }}</span>
+        <span
+          >Thought for {{ displayDuration() }} second{{
+            displayDuration() === 1 ? '' : 's'
+          }}</span
+        >
       } @else {
         <span>Thought for a few seconds</span>
       }
@@ -54,13 +64,23 @@ const AUTO_CLOSE_DELAY = 1000;
         height="14"
         aria-hidden="true"
       >
-        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m6 9 6 6 6-6" />
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          d="m6 9 6 6 6-6"
+        />
       </svg>
     </button>
 
     <div class="agt-reasoning__panel" [class.is-open]="isOpen()">
       <div class="agt-reasoning__panel-inner">
-        <agt-stream-text [text]="content()" [streaming]="streaming()" [speed]="speed()" />
+        <agt-stream-text
+          [text]="content()"
+          [streaming]="streaming()"
+          [speed]="speed()"
+        />
       </div>
     </div>
   `,
@@ -75,7 +95,9 @@ export class AgtReasoning {
 
   protected readonly isOpen = signal(false);
   private readonly measured = signal<number | undefined>(undefined);
-  protected readonly displayDuration = computed(() => this.duration() ?? this.measured());
+  protected readonly displayDuration = computed(
+    () => this.duration() ?? this.measured(),
+  );
 
   private startTime: number | null = null;
   private hasStreamed = false;
@@ -95,7 +117,9 @@ export class AgtReasoning {
         this.isOpen.set(true);
       } else {
         if (this.startTime !== null) {
-          this.measured.set(Math.max(1, Math.ceil((Date.now() - this.startTime) / 1000)));
+          this.measured.set(
+            Math.max(1, Math.ceil((Date.now() - this.startTime) / 1000)),
+          );
           this.startTime = null;
         }
         if (this.hasStreamed && !this.autoClosed) {

@@ -14,7 +14,11 @@ describe('injectAgent', () => {
   it('accumulates streaming text into a single agent message', () => {
     const store = makeStore(
       createFixtureTransport(
-        [{ type: 'text', delta: 'Hel' }, { type: 'text', delta: 'lo' }, { type: 'done' }],
+        [
+          { type: 'text', delta: 'Hel' },
+          { type: 'text', delta: 'lo' },
+          { type: 'done' },
+        ],
         { immediate: true },
       ),
     );
@@ -32,9 +36,19 @@ describe('injectAgent', () => {
     const store = makeStore(
       createFixtureTransport(
         [
-          { type: 'tool_call', id: 'tc1', name: 'verify_document', status: 'running' },
+          {
+            type: 'tool_call',
+            id: 'tc1',
+            name: 'verify_document',
+            status: 'running',
+          },
           { type: 'step', id: 's1', label: 'Extract', status: 'active' },
-          { type: 'tool_call', id: 'tc1', name: 'verify_document', status: 'success' },
+          {
+            type: 'tool_call',
+            id: 'tc1',
+            name: 'verify_document',
+            status: 'success',
+          },
           { type: 'step', id: 's1', label: 'Extract', status: 'done' },
           { type: 'done' },
         ],
@@ -76,7 +90,10 @@ describe('injectAgent', () => {
   it('captures error events and stops streaming', () => {
     const store = makeStore(
       createFixtureTransport(
-        [{ type: 'text', delta: 'partial' }, { type: 'error', message: 'rate limited' }],
+        [
+          { type: 'text', delta: 'partial' },
+          { type: 'error', message: 'rate limited' },
+        ],
         { immediate: true },
       ),
     );
@@ -111,7 +128,9 @@ describe('injectAgent', () => {
 
   it('keeps reasoningStreaming true while only reasoning arrives', () => {
     const store = makeStore(
-      createFixtureTransport([{ type: 'reasoning', delta: 'thinking…' }], { immediate: true }),
+      createFixtureTransport([{ type: 'reasoning', delta: 'thinking…' }], {
+        immediate: true,
+      }),
     );
 
     store.send('go');
@@ -122,7 +141,9 @@ describe('injectAgent', () => {
 
   it('reset() clears all state', () => {
     const store = makeStore(
-      createFixtureTransport([{ type: 'text', delta: 'x' }, { type: 'done' }], { immediate: true }),
+      createFixtureTransport([{ type: 'text', delta: 'x' }, { type: 'done' }], {
+        immediate: true,
+      }),
     );
     store.send('go');
     store.reset();

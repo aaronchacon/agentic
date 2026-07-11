@@ -8,7 +8,10 @@ import {
 } from '@angular/core';
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { injectAgent, type AgentStore } from '../../core/agent-store';
-import { createFixtureTransport, type FixtureScript } from '../../core/fixture-transport';
+import {
+  createFixtureTransport,
+  type FixtureScript,
+} from '../../core/fixture-transport';
 import { AgtChat } from './agt-chat';
 import type { StreamSpeed } from './agt-stream-text';
 
@@ -58,7 +61,9 @@ class ChatDemo implements OnInit {
 
   ngOnInit(): void {
     this.store = runInInjectionContext(this.injector, () =>
-      injectAgent({ transport: createFixtureTransport(this.script, { defaultDelayMs: 55 }) }),
+      injectAgent({
+        transport: createFixtureTransport(this.script, { defaultDelayMs: 55 }),
+      }),
     );
     if (this.seed) {
       const seed = this.seed;
@@ -73,8 +78,15 @@ const reply: FixtureScript = [
   { type: 'text', delta: '- Full name matches the application exactly\n' },
   { type: 'text', delta: '- No sanctions or PEP hits\n\n' },
   { type: 'text', delta: 'Suggested auto-approval rule:\n\n' },
-  { type: 'text', delta: '```ts\nif (score >= 0.9 && !sanctions) {\n  approve(caseId);\n}\n```\n\n' },
-  { type: 'text', delta: 'Recommendation: **approve** with a periodic review in 12 months.' },
+  {
+    type: 'text',
+    delta:
+      '```ts\nif (score >= 0.9 && !sanctions) {\n  approve(caseId);\n}\n```\n\n',
+  },
+  {
+    type: 'text',
+    delta: 'Recommendation: **approve** with a periodic review in 12 months.',
+  },
   { type: 'done' },
 ];
 
@@ -85,7 +97,8 @@ const meta: Meta<ChatDemo> = {
     streamSpeed: {
       control: 'select',
       options: ['instant', 'slow', 'smooth', 'fast'],
-      description: 'How fast streamed text is revealed (or a number in words/second).',
+      description:
+        'How fast streamed text is revealed (or a number in words/second).',
     },
     seed: { control: 'text' },
   },
@@ -98,7 +111,11 @@ type Story = StoryObj<ChatDemo>;
 export const EmptyWithSuggestions: Story = {
   args: {
     emptyTitle: 'Ask the KYC agent',
-    suggestions: ['Summarize this case', 'What documents are missing?', 'Any inconsistencies?'],
+    suggestions: [
+      'Summarize this case',
+      'What documents are missing?',
+      'Any inconsistencies?',
+    ],
     streamSpeed: 'smooth',
     script: reply,
   },
@@ -118,14 +135,26 @@ export const Reasoning: Story = {
     streamSpeed: 'smooth',
     script: [
       { type: 'reasoning', delta: 'Let me review this case step by step. ' },
-      { type: 'reasoning', delta: 'First, check document authenticity and extraction confidence. ' },
-      { type: 'reasoning', delta: 'The passport OCR is 98% and the name matches the application. ' },
-      { type: 'reasoning', delta: 'Next, screen against sanctions and PEP lists — no hits found. ' },
+      {
+        type: 'reasoning',
+        delta: 'First, check document authenticity and extraction confidence. ',
+      },
+      {
+        type: 'reasoning',
+        delta: 'The passport OCR is 98% and the name matches the application. ',
+      },
+      {
+        type: 'reasoning',
+        delta: 'Next, screen against sanctions and PEP lists — no hits found. ',
+      },
       { type: 'reasoning', delta: 'Finally, weigh the overall risk: low.' },
       { type: 'text', delta: 'This case looks **solid**.\n\n' },
       { type: 'text', delta: '- Passport `98%` confidence, name matches\n' },
       { type: 'text', delta: '- No sanctions or PEP hits\n\n' },
-      { type: 'text', delta: 'Recommendation: **approve** with a 12-month review.' },
+      {
+        type: 'text',
+        delta: 'Recommendation: **approve** with a 12-month review.',
+      },
       { type: 'done' },
     ],
   },

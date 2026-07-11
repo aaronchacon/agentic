@@ -1,6 +1,13 @@
 :host {
   display: block;
-  font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+  font-family: var(
+    --agt-font-family,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif
+  );
   color: var(--agt-content-color, #0f172a);
 }
 
@@ -26,7 +33,8 @@
 }
 .agt-suggestion__field:focus-within {
   border-color: var(--agt-primary-color, #2563eb);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--agt-primary-color, #2563eb) 20%, transparent);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--agt-primary-color, #2563eb) 20%, transparent);
 }
 /* Provenance accents */
 .agt-suggestion__field[data-state='suggested'] {

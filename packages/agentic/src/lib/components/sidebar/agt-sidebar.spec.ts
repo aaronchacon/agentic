@@ -20,22 +20,36 @@ describe('AgtSidebar', () => {
     expect(fab?.classList.contains('is-hidden')).toBe(false);
     expect(el.querySelector('.agt-sidebar__badge')?.textContent).toContain('3');
     expect(fab?.getAttribute('aria-label')).toContain('3 new');
-    expect(el.querySelector('.agt-sidebar__panel')?.hasAttribute('inert')).toBe(true);
+    expect(el.querySelector('.agt-sidebar__panel')?.hasAttribute('inert')).toBe(
+      true,
+    );
   });
 
   it('opens the panel when the FAB is clicked', () => {
     const fixture = render();
-    (fixture.nativeElement.querySelector('.agt-sidebar__fab') as HTMLButtonElement).click();
+    (
+      fixture.nativeElement.querySelector(
+        '.agt-sidebar__fab',
+      ) as HTMLButtonElement
+    ).click();
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
     expect(fixture.componentInstance.open()).toBe(true);
-    expect(el.querySelector('.agt-sidebar__panel')?.classList.contains('is-open')).toBe(true);
-    expect(el.querySelector('.agt-sidebar__fab')?.classList.contains('is-hidden')).toBe(true);
+    expect(
+      el.querySelector('.agt-sidebar__panel')?.classList.contains('is-open'),
+    ).toBe(true);
+    expect(
+      el.querySelector('.agt-sidebar__fab')?.classList.contains('is-hidden'),
+    ).toBe(true);
   });
 
   it('closes when the close button is clicked', () => {
     const fixture = render({ open: true });
-    (fixture.nativeElement.querySelector('.agt-sidebar__close') as HTMLButtonElement).click();
+    (
+      fixture.nativeElement.querySelector(
+        '.agt-sidebar__close',
+      ) as HTMLButtonElement
+    ).click();
     fixture.detectChanges();
     expect(fixture.componentInstance.open()).toBe(false);
   });

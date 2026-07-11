@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, input, model, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 
 let counter = 0;
 
@@ -20,13 +27,17 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
   host: { class: 'agt-suggestion' },
   template: `
     @if (label()) {
-      <label class="agt-suggestion__label" [attr.for]="fieldId">{{ label() }}</label>
+      <label class="agt-suggestion__label" [attr.for]="fieldId">{{
+        label()
+      }}</label>
     }
 
     <div class="agt-suggestion__field" [attr.data-state]="state()">
       <div class="agt-suggestion__input-wrap">
         @if (state() === 'suggested') {
-          <span class="agt-suggestion__ghost" aria-hidden="true">{{ suggestion() }}</span>
+          <span class="agt-suggestion__ghost" aria-hidden="true">{{
+            suggestion()
+          }}</span>
         }
         <input
           class="agt-suggestion__input"
@@ -34,7 +45,9 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
           [id]="fieldId"
           [value]="value()"
           [placeholder]="state() === 'suggested' ? '' : placeholder()"
-          [attr.aria-describedby]="state() === 'suggested' ? fieldId + '-hint' : null"
+          [attr.aria-describedby]="
+            state() === 'suggested' ? fieldId + '-hint' : null
+          "
           (input)="onInput($event)"
           (keydown.Tab)="onTab($event)"
         />
@@ -49,8 +62,20 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
               aria-label="Accept suggestion"
               (click)="accept()"
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4 10-10" />
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m5 12 4 4 10-10"
+                />
               </svg>
             </button>
             <button
@@ -59,8 +84,19 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
               aria-label="Reject suggestion"
               (click)="reject()"
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  d="M6 6l12 12M18 6 6 18"
+                />
               </svg>
             </button>
           </div>
@@ -68,21 +104,32 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
         @case ('accepted') {
           <span class="agt-suggestion__badge agt-suggestion__badge--ai">
             <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
-              <path fill="currentColor" d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2z" />
+              <path
+                fill="currentColor"
+                d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2z"
+              />
             </svg>
-            AI@if (confidencePct() !== null) {&nbsp;· {{ confidencePct() }}%}
+            AI
+            @if (confidencePct() !== null) {
+              &nbsp;· {{ confidencePct() }}%
+            }
           </span>
         }
         @case ('edited') {
-          <span class="agt-suggestion__badge agt-suggestion__badge--edited">Edited by human</span>
+          <span class="agt-suggestion__badge agt-suggestion__badge--edited"
+            >Edited by human</span
+          >
         }
       }
     </div>
 
     @if (state() === 'suggested') {
       <span class="agt-suggestion__hint" [id]="fieldId + '-hint'">
-        AI suggestion@if (confidencePct() !== null) {&nbsp;· {{ confidencePct() }}% confidence} · Tab to
-        accept
+        AI suggestion
+        @if (confidencePct() !== null) {
+          &nbsp;· {{ confidencePct() }}% confidence
+        }
+        · Tab to accept
       </span>
     }
   `,
@@ -106,7 +153,8 @@ export class AgtSuggestion {
   protected readonly state = computed<SuggestionState>(() => {
     const value = this.value();
     const suggestion = this.suggestion();
-    if (suggestion && !this.accepted() && !this.dismissed() && value === '') return 'suggested';
+    if (suggestion && !this.accepted() && !this.dismissed() && value === '')
+      return 'suggested';
     if (this.accepted()) return value === suggestion ? 'accepted' : 'edited';
     return value ? 'manual' : 'idle';
   });

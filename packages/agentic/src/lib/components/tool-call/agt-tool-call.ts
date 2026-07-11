@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  signal,
+} from '@angular/core';
 import type { ToolCall } from '../../core/types';
 import { AgtStreamText } from '../chat/agt-stream-text';
 import { toDetailMarkdown } from '../chat/markdown';
@@ -18,7 +24,10 @@ import { toDetailMarkdown } from '../chat/markdown';
   selector: 'agt-tool-call',
   imports: [AgtStreamText],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'agt-tool', '[class.agt-tool--running]': "toolCall().status === 'running'" },
+  host: {
+    class: 'agt-tool',
+    '[class.agt-tool--running]': "toolCall().status === 'running'",
+  },
   template: `
     <button
       type="button"
@@ -27,7 +36,13 @@ import { toDetailMarkdown } from '../chat/markdown';
       (click)="toggle()"
     >
       <span class="agt-tool__title">
-        <svg class="agt-tool__wrench" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+        <svg
+          class="agt-tool__wrench"
+          viewBox="0 0 24 24"
+          width="15"
+          height="15"
+          aria-hidden="true"
+        >
           <path
             fill="none"
             stroke="currentColor"
@@ -38,24 +53,70 @@ import { toDetailMarkdown } from '../chat/markdown';
           />
         </svg>
         <span class="agt-tool__name">{{ toolCall().name }}</span>
-        <span class="agt-tool__badge agt-tool__badge--{{ toolCall().status }}" role="status">
+        <span
+          class="agt-tool__badge agt-tool__badge--{{ toolCall().status }}"
+          role="status"
+        >
           @switch (toolCall().status) {
             @case ('running') {
-              <svg class="agt-tool__spinner" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-opacity="0.25" />
-                <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" d="M12 3a9 9 0 0 1 9 9" />
+              <svg
+                class="agt-tool__spinner"
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-opacity="0.25"
+                />
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  d="M12 3a9 9 0 0 1 9 9"
+                />
               </svg>
               Running
             }
             @case ('success') {
-              <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
-                <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4 10-10" />
+              <svg
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m5 12 4 4 10-10"
+                />
               </svg>
               Completed
             }
             @case ('error') {
-              <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
-                <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+              <svg
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  d="M6 6l12 12M18 6 6 18"
+                />
               </svg>
               Error
             }
@@ -70,30 +131,39 @@ import { toDetailMarkdown } from '../chat/markdown';
         height="14"
         aria-hidden="true"
       >
-        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m6 9 6 6 6-6" />
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          d="m6 9 6 6 6-6"
+        />
       </svg>
     </button>
 
     <div class="agt-tool__panel" [class.is-open]="isOpen()">
       <div class="agt-tool__panel-clip">
         <div class="agt-tool__panel-inner">
-        @if (toolCall().status === 'running') {
-          @if (steps().length) {
-            <ul class="agt-tool__steps">
-              @for (step of steps(); track step) {
-                <li>{{ step }}</li>
-              }
-            </ul>
-          } @else {
-            <p class="agt-tool__muted">Working…</p>
+          @if (toolCall().status === 'running') {
+            @if (steps().length) {
+              <ul class="agt-tool__steps">
+                @for (step of steps(); track step) {
+                  <li>{{ step }}</li>
+                }
+              </ul>
+            } @else {
+              <p class="agt-tool__muted">Working…</p>
+            }
           }
-        }
-        @if (detailMarkdown(); as detail) {
-          <div class="agt-tool__label" [class.agt-tool__label--error]="toolCall().status === 'error'">
-            {{ toolCall().status === 'error' ? 'Error' : 'Result' }}
-          </div>
-          <agt-stream-text [text]="detail" [streaming]="false" />
-        }
+          @if (detailMarkdown(); as detail) {
+            <div
+              class="agt-tool__label"
+              [class.agt-tool__label--error]="toolCall().status === 'error'"
+            >
+              {{ toolCall().status === 'error' ? 'Error' : 'Result' }}
+            </div>
+            <agt-stream-text [text]="detail" [streaming]="false" />
+          }
         </div>
       </div>
     </div>
@@ -108,7 +178,9 @@ export class AgtToolCall {
   protected readonly isOpen = signal(true);
 
   /** The tool `detail` rendered as markdown: JSON for objects, verbatim for strings. */
-  protected readonly detailMarkdown = computed(() => toDetailMarkdown(this.toolCall().detail));
+  protected readonly detailMarkdown = computed(() =>
+    toDetailMarkdown(this.toolCall().detail),
+  );
 
   protected toggle(): void {
     this.isOpen.update((open) => !open);

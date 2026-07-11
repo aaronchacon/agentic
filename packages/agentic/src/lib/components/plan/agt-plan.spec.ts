@@ -26,18 +26,25 @@ describe('AgtPlan', () => {
     expect(el.querySelectorAll('.agt-plan__step').length).toBe(4);
     expect(el.querySelectorAll('.agt-plan__step--done').length).toBe(2);
     expect(el.querySelector('.agt-plan__step--active')).toBeTruthy();
-    expect(el.querySelector('.agt-plan__progress')?.textContent).toContain('2/4');
+    expect(el.querySelector('.agt-plan__progress')?.textContent).toContain(
+      '2/4',
+    );
     expect(el.querySelector('.agt-plan__overall--active')).toBeTruthy();
   });
 
   it('marks the overall status as done when every step is done', () => {
-    const el = render(mixed.map((s) => ({ ...s, status: 'done' as const }))).nativeElement as HTMLElement;
+    const el = render(mixed.map((s) => ({ ...s, status: 'done' as const })))
+      .nativeElement as HTMLElement;
     expect(el.querySelector('.agt-plan__overall--done')).toBeTruthy();
-    expect(el.querySelector('.agt-plan__progress')?.textContent).toContain('4/4');
+    expect(el.querySelector('.agt-plan__progress')?.textContent).toContain(
+      '4/4',
+    );
   });
 
   it('marks the overall status as error when a step fails', () => {
-    const steps = mixed.map((s) => (s.id === '3' ? { ...s, status: 'error' as const } : s));
+    const steps = mixed.map((s) =>
+      s.id === '3' ? { ...s, status: 'error' as const } : s,
+    );
     const el = render(steps).nativeElement as HTMLElement;
     expect(el.querySelector('.agt-plan__overall--error')).toBeTruthy();
   });
@@ -45,9 +52,13 @@ describe('AgtPlan', () => {
   it('collapses when the header is clicked', () => {
     const fixture = render(mixed);
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('.agt-plan__panel')?.classList.contains('is-open')).toBe(true);
+    expect(
+      el.querySelector('.agt-plan__panel')?.classList.contains('is-open'),
+    ).toBe(true);
     (el.querySelector('.agt-plan__header') as HTMLButtonElement).click();
     fixture.detectChanges();
-    expect(el.querySelector('.agt-plan__panel')?.classList.contains('is-open')).toBe(false);
+    expect(
+      el.querySelector('.agt-plan__panel')?.classList.contains('is-open'),
+    ).toBe(false);
   });
 });

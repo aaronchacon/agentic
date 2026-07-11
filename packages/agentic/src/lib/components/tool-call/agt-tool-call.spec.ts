@@ -15,38 +15,68 @@ describe('AgtToolCall', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('shows a running badge, spinner and steps (expanded)', () => {
-    const el = render({ id: '1', name: 'verify_document', status: 'running' }, ['Scoring risk'])
-      .nativeElement as HTMLElement;
-    expect(el.querySelector('.agt-tool__badge--running')?.textContent).toContain('Running');
+    const el = render({ id: '1', name: 'verify_document', status: 'running' }, [
+      'Scoring risk',
+    ]).nativeElement as HTMLElement;
+    expect(
+      el.querySelector('.agt-tool__badge--running')?.textContent,
+    ).toContain('Running');
     expect(el.querySelector('.agt-tool__spinner')).toBeTruthy();
-    expect(el.querySelector('.agt-tool__name')?.textContent).toContain('verify_document');
+    expect(el.querySelector('.agt-tool__name')?.textContent).toContain(
+      'verify_document',
+    );
     expect(el.textContent).toContain('Scoring risk');
-    expect(el.querySelector('.agt-tool__panel')?.classList.contains('is-open')).toBe(true);
+    expect(
+      el.querySelector('.agt-tool__panel')?.classList.contains('is-open'),
+    ).toBe(true);
   });
 
   it('renders a success detail as a JSON result', () => {
-    const el = render({ id: '2', name: 'verify_document', status: 'success', detail: { confidence: 0.98 } })
-      .nativeElement as HTMLElement;
-    expect(el.querySelector('.agt-tool__badge--success')?.textContent).toContain('Completed');
+    const el = render({
+      id: '2',
+      name: 'verify_document',
+      status: 'success',
+      detail: { confidence: 0.98 },
+    }).nativeElement as HTMLElement;
+    expect(
+      el.querySelector('.agt-tool__badge--success')?.textContent,
+    ).toContain('Completed');
     expect(el.textContent).toContain('Result');
     expect(el.textContent).toContain('0.98');
   });
 
   it('shows the error detail expanded', () => {
-    const el = render({ id: '3', name: 'screen_sanctions', status: 'error', detail: 'Timeout (503).' })
-      .nativeElement as HTMLElement;
-    expect(el.querySelector('.agt-tool__badge--error')?.textContent).toContain('Error');
-    expect(el.querySelector('.agt-tool__panel')?.classList.contains('is-open')).toBe(true);
+    const el = render({
+      id: '3',
+      name: 'screen_sanctions',
+      status: 'error',
+      detail: 'Timeout (503).',
+    }).nativeElement as HTMLElement;
+    expect(el.querySelector('.agt-tool__badge--error')?.textContent).toContain(
+      'Error',
+    );
+    expect(
+      el.querySelector('.agt-tool__panel')?.classList.contains('is-open'),
+    ).toBe(true);
     expect(el.textContent).toContain('Timeout (503).');
   });
 
   it('toggles open state on header click', () => {
-    const fixture = render({ id: '4', name: 'x', status: 'error', detail: 'boom' });
+    const fixture = render({
+      id: '4',
+      name: 'x',
+      status: 'error',
+      detail: 'boom',
+    });
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('.agt-tool__panel')?.classList.contains('is-open')).toBe(true);
+    expect(
+      el.querySelector('.agt-tool__panel')?.classList.contains('is-open'),
+    ).toBe(true);
 
     (el.querySelector('.agt-tool__header') as HTMLButtonElement).click();
     fixture.detectChanges();
-    expect(el.querySelector('.agt-tool__panel')?.classList.contains('is-open')).toBe(false);
+    expect(
+      el.querySelector('.agt-tool__panel')?.classList.contains('is-open'),
+    ).toBe(false);
   });
 });

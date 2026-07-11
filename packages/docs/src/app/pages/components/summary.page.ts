@@ -21,8 +21,9 @@ Recommendation: **approve** with a standard 12-month review.`;
         <p class="doc__eyebrow">Components</p>
         <h1 class="doc__title">Summary</h1>
         <p class="doc__lead">
-          A card for AI-generated summaries — clearly marked as AI content, with regenerate + copy
-          actions and a skeleton while loading. Content renders as markdown and can stream in.
+          A card for AI-generated summaries — clearly marked as AI content, with
+          regenerate + copy actions and a skeleton while loading. Content
+          renders as markdown and can stream in.
         </p>
         <doc-md [markdown]="md" />
       </div>
@@ -55,15 +56,44 @@ Recommendation: **approve** with a standard 12-month review.`;
 })
 export default class SummaryPage {
   protected readonly props: DocProp[] = [
-    { name: 'title', type: 'string', default: "''", description: 'Summary heading.' },
-    { name: 'content', type: 'string', default: "''", description: 'Markdown content of the summary.' },
-    { name: 'loading', type: 'boolean', default: 'false', description: 'Shows a skeleton placeholder while true.' },
-    { name: 'streaming', type: 'boolean', default: 'false', description: 'Reveal the content progressively.' },
-    { name: 'streamSpeed', type: 'StreamSpeed', default: "'smooth'", description: "'instant' | 'slow' | 'smooth' | 'fast', or words/second." },
+    {
+      name: 'title',
+      type: 'string',
+      default: "''",
+      description: 'Summary heading.',
+    },
+    {
+      name: 'content',
+      type: 'string',
+      default: "''",
+      description: 'Markdown content of the summary.',
+    },
+    {
+      name: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: 'Shows a skeleton placeholder while true.',
+    },
+    {
+      name: 'streaming',
+      type: 'boolean',
+      default: 'false',
+      description: 'Reveal the content progressively.',
+    },
+    {
+      name: 'streamSpeed',
+      type: 'StreamSpeed',
+      default: "'smooth'",
+      description: "'instant' | 'slow' | 'smooth' | 'fast', or words/second.",
+    },
   ];
 
   protected readonly events: DocProp[] = [
-    { name: 'regenerate', type: 'void', description: 'Emitted when the regenerate button is pressed.' },
+    {
+      name: 'regenerate',
+      type: 'void',
+      description: 'Emitted when the regenerate button is pressed.',
+    },
   ];
 
   protected readonly summary = summary;

@@ -2,7 +2,14 @@
   display: block;
   margin-bottom: 10px;
   overflow: hidden;
-  font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+  font-family: var(
+    --agt-font-family,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif
+  );
   background: var(--agt-content-background, #ffffff);
   border: 1px solid var(--agt-content-border-color, #e5e5e5);
   border-radius: var(--agt-radius-md, 10px);

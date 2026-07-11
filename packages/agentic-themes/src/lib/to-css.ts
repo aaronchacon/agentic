@@ -33,7 +33,11 @@ export function resolveRefs(value: string): string {
   });
 }
 
-function flatten(node: TokenNode, prefix: string[], out: Map<string, string>): void {
+function flatten(
+  node: TokenNode,
+  prefix: string[],
+  out: Map<string, string>,
+): void {
   if (node === null || node === undefined) return;
   if (typeof node === 'object') {
     for (const [key, child] of Object.entries(node)) {
@@ -44,14 +48,23 @@ function flatten(node: TokenNode, prefix: string[], out: Map<string, string>): v
   out.set(varName(prefix), resolveRefs(String(node)));
 }
 
-function block(selector: string, vars: Map<string, string>, indent = ''): string {
+function block(
+  selector: string,
+  vars: Map<string, string>,
+  indent = '',
+): string {
   if (vars.size === 0) return '';
-  const lines = [...vars.entries()].map(([k, v]) => `${indent}  ${k}: ${v};`).join('\n');
+  const lines = [...vars.entries()]
+    .map(([k, v]) => `${indent}  ${k}: ${v};`)
+    .join('\n');
   return `${indent}${selector} {\n${lines}\n${indent}}`;
 }
 
 /** Compile a preset to a CSS string ready to inject into a `<style>` element. */
-export function buildThemeCss(preset: Preset, options: BuildThemeOptions = {}): string {
+export function buildThemeCss(
+  preset: Preset,
+  options: BuildThemeOptions = {},
+): string {
   const darkMode = options.darkMode ?? 'class';
   const darkSelector = options.darkSelector ?? '.agt-dark';
 

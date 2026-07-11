@@ -1,7 +1,14 @@
 :host {
   display: block;
   margin-bottom: 10px;
-  font-family: var(--agt-font-family, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+  font-family: var(
+    --agt-font-family,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif
+  );
 }
 
 .agt-reasoning__trigger {

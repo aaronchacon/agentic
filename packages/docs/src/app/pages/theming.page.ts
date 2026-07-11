@@ -1,6 +1,22 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { AgenticThemeService, AgtSummary, AgtToolCall, type ToolCall } from '@aaronch/agentic';
-import { Aurora, Base, definePreset, type DeepPartial, type Preset } from '@aaronch/agentic-themes';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
+import {
+  AgenticThemeService,
+  AgtSummary,
+  AgtToolCall,
+  type ToolCall,
+} from '@aaronch/agentic';
+import {
+  Aurora,
+  Base,
+  definePreset,
+  type DeepPartial,
+  type Preset,
+} from '@aaronch/agentic-themes';
 import { DocDemo } from '../ui/doc-demo';
 
 type PresetId = 'base' | 'aurora';
@@ -32,16 +48,20 @@ interface RadiusOption {
         <p class="doc__eyebrow">Getting started</p>
         <h1 class="doc__title">Theming</h1>
         <p class="doc__lead">
-          Every component is painted with a 3-layer token system — <strong>primitive → semantic →
-          component</strong> — compiled to CSS custom properties. Swap the preset or override any token
-          and the whole library recolors, no CSS forking. Try it live: these controls restyle this entire
-          site at runtime.
+          Every component is painted with a 3-layer token system —
+          <strong>primitive → semantic → component</strong> — compiled to CSS
+          custom properties. Swap the preset or override any token and the whole
+          library recolors, no CSS forking. Try it live: these controls restyle
+          this entire site at runtime.
         </p>
       </div>
 
       <section class="doc__section">
         <h2>Playground</h2>
-        <p>Pick a preset, an AI accent and a corner radius. Changes apply globally, instantly.</p>
+        <p>
+          Pick a preset, an AI accent and a corner radius. Changes apply
+          globally, instantly.
+        </p>
 
         <div class="pg">
           <div class="pg__controls">
@@ -97,20 +117,30 @@ interface RadiusOption {
               <span class="pg__label">Radius</span>
               <div class="pg__seg">
                 @for (r of radii; track r.id) {
-                  <button type="button" [class.is-active]="radius() === r.id" (click)="setRadius(r.id)">
+                  <button
+                    type="button"
+                    [class.is-active]="radius() === r.id"
+                    (click)="setRadius(r.id)"
+                  >
                     {{ r.label }}
                   </button>
                 }
               </div>
             </div>
 
-            <button type="button" class="pg__reset" (click)="reset()">Reset</button>
+            <button type="button" class="pg__reset" (click)="reset()">
+              Reset
+            </button>
           </div>
 
           <div class="pg__preview">
             <div class="pg__row">
-              <button type="button" class="pg__btn pg__btn--primary">Approve</button>
-              <button type="button" class="pg__btn pg__btn--ghost">Dismiss</button>
+              <button type="button" class="pg__btn pg__btn--primary">
+                Approve
+              </button>
+              <button type="button" class="pg__btn pg__btn--ghost">
+                Dismiss
+              </button>
               <span class="pg__chip">AI generated</span>
             </div>
             <div class="pg__grad" aria-hidden="true"></div>
@@ -126,7 +156,10 @@ interface RadiusOption {
               content="Passport matched with 98% confidence. No sanctions or PEP hits. Recommend approval with a 12-month review."
             />
 
-            <agt-tool-call [toolCall]="tool" [steps]="['Queried OFAC & EU lists', 'No matches found']" />
+            <agt-tool-call
+              [toolCall]="tool"
+              [steps]="['Queried OFAC & EU lists', 'No matches found']"
+            />
           </div>
         </div>
       </section>
@@ -134,8 +167,10 @@ interface RadiusOption {
       <section class="doc__section">
         <h2>Configure a preset</h2>
         <p>
-          Choose a built-in preset, or build your own by merging overrides onto one with
-          <code>definePreset()</code> — this is what "restyle outside of ours" means.
+          Choose a built-in preset, or build your own by merging overrides onto
+          one with
+          <code>definePreset()</code> — this is what "restyle outside of ours"
+          means.
         </p>
         <doc-demo [code]="configCode" [preview]="false" />
       </section>
@@ -143,15 +178,19 @@ interface RadiusOption {
       <section class="doc__section">
         <h2>Restyle at runtime</h2>
         <p>
-          Inject <code>AgenticThemeService</code> to swap presets, merge token overrides or toggle dark
-          mode after bootstrap — exactly what the playground above does.
+          Inject <code>AgenticThemeService</code> to swap presets, merge token
+          overrides or toggle dark mode after bootstrap — exactly what the
+          playground above does.
         </p>
         <doc-demo [code]="runtimeCode" [preview]="false" />
       </section>
 
       <section class="doc__section">
         <h2>Key semantic tokens</h2>
-        <p>Semantic tokens reference primitives and compile to these CSS variables.</p>
+        <p>
+          Semantic tokens reference primitives and compile to these CSS
+          variables.
+        </p>
         <div class="doc-props-wrap">
           <table class="doc-props">
             <thead>
@@ -164,8 +203,12 @@ interface RadiusOption {
             <tbody>
               @for (t of tokens; track t.name) {
                 <tr>
-                  <td><code>{{ t.name }}</code></td>
-                  <td><span class="tok">{{ t.css }}</span></td>
+                  <td>
+                    <code>{{ t.name }}</code>
+                  </td>
+                  <td>
+                    <span class="tok">{{ t.css }}</span>
+                  </td>
                   <td>{{ t.desc }}</td>
                 </tr>
               }
@@ -184,7 +227,11 @@ export default class ThemingPage {
   protected readonly accent = signal<string>('default');
   protected readonly radius = signal<RadiusId>('default');
 
-  protected readonly tool: ToolCall = { id: 't1', name: 'search_sanctions', status: 'success' };
+  protected readonly tool: ToolCall = {
+    id: 't1',
+    name: 'search_sanctions',
+    status: 'success',
+  };
 
   protected readonly accents: Accent[] = [
     {
@@ -235,20 +282,60 @@ export default class ThemingPage {
   ];
 
   protected readonly radii: RadiusOption[] = [
-    { id: 'sharp', label: 'Sharp', scale: { sm: '2px', md: '4px', lg: '6px', xl: '10px' } },
+    {
+      id: 'sharp',
+      label: 'Sharp',
+      scale: { sm: '2px', md: '4px', lg: '6px', xl: '10px' },
+    },
     { id: 'default', label: 'Default' },
-    { id: 'rounded', label: 'Rounded', scale: { sm: '10px', md: '14px', lg: '20px', xl: '28px' } },
+    {
+      id: 'rounded',
+      label: 'Rounded',
+      scale: { sm: '10px', md: '14px', lg: '20px', xl: '28px' },
+    },
   ];
 
   protected readonly tokens = [
-    { name: 'primary.color', css: '--agt-primary-color', desc: 'Primary action colour (buttons, links, user bubble).' },
-    { name: 'ai.color', css: '--agt-ai-color', desc: 'AI/agent accent — cursor, provenance, "generated by AI" marks.' },
-    { name: 'ai.gradient', css: '--agt-ai-gradient', desc: 'Signature gradient for AI surfaces (summary accent, FAB).' },
-    { name: 'content.background', css: '--agt-content-background', desc: 'Base surface behind panels and cards.' },
-    { name: 'content.color', css: '--agt-content-color', desc: 'Default foreground text colour.' },
-    { name: 'radius.lg', css: '--agt-radius-lg', desc: 'Large corner radius (bubbles, cards).' },
-    { name: 'state.success.color', css: '--agt-state-success-color', desc: 'Success state (verified, tool-call success).' },
-    { name: 'state.danger.color', css: '--agt-state-danger-color', desc: 'Danger state (flagged, errors, badges).' },
+    {
+      name: 'primary.color',
+      css: '--agt-primary-color',
+      desc: 'Primary action colour (buttons, links, user bubble).',
+    },
+    {
+      name: 'ai.color',
+      css: '--agt-ai-color',
+      desc: 'AI/agent accent — cursor, provenance, "generated by AI" marks.',
+    },
+    {
+      name: 'ai.gradient',
+      css: '--agt-ai-gradient',
+      desc: 'Signature gradient for AI surfaces (summary accent, FAB).',
+    },
+    {
+      name: 'content.background',
+      css: '--agt-content-background',
+      desc: 'Base surface behind panels and cards.',
+    },
+    {
+      name: 'content.color',
+      css: '--agt-content-color',
+      desc: 'Default foreground text colour.',
+    },
+    {
+      name: 'radius.lg',
+      css: '--agt-radius-lg',
+      desc: 'Large corner radius (bubbles, cards).',
+    },
+    {
+      name: 'state.success.color',
+      css: '--agt-state-success-color',
+      desc: 'Success state (verified, tool-call success).',
+    },
+    {
+      name: 'state.danger.color',
+      css: '--agt-state-danger-color',
+      desc: 'Danger state (flagged, errors, badges).',
+    },
   ];
 
   protected readonly configCode = [

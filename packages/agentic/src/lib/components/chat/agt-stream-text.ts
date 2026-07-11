@@ -16,14 +16,21 @@ import { renderMarkdown } from './markdown';
 /** How fast streamed text is revealed. Named presets are words/second; a number is words/second too. */
 export type StreamSpeed = 'instant' | 'slow' | 'smooth' | 'fast' | number;
 
-const WORDS_PER_SECOND: Record<string, number> = { slow: 7, smooth: 16, fast: 36 };
+const WORDS_PER_SECOND: Record<string, number> = {
+  slow: 7,
+  smooth: 16,
+  fast: 36,
+};
 
 function tokenize(text: string): string[] {
   return text.split(/(\s+)/).filter((t) => t.length > 0);
 }
 
 function prefersReducedMotion(): boolean {
-  return typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return (
+    typeof matchMedia !== 'undefined' &&
+    matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
 }
 
 /**
@@ -36,7 +43,12 @@ function prefersReducedMotion(): boolean {
 @Component({
   selector: 'agt-stream-text',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<div #md class="agt-md" [class.agt-md--streaming]="streaming()" [innerHTML]="html()"></div>`,
+  template: `<div
+    #md
+    class="agt-md"
+    [class.agt-md--streaming]="streaming()"
+    [innerHTML]="html()"
+  ></div>`,
   styleUrl: './agt-stream-text.scss',
 })
 export class AgtStreamText {
@@ -64,9 +76,16 @@ export class AgtStreamText {
       const tokens = tokenize(this.text());
       this.targetTokens.set(tokens);
       const speed = this.speed();
-      this.wps = typeof speed === 'number' ? speed : (WORDS_PER_SECOND[speed] ?? WORDS_PER_SECOND['smooth']);
+      this.wps =
+        typeof speed === 'number'
+          ? speed
+          : (WORDS_PER_SECOND[speed] ?? WORDS_PER_SECOND['smooth']);
 
-      const instant = speed === 'instant' || this.streaming() === false || prefersReducedMotion() || !hasRaf;
+      const instant =
+        speed === 'instant' ||
+        this.streaming() === false ||
+        prefersReducedMotion() ||
+        !hasRaf;
       if (instant) {
         this.stop();
         this.revealedCount.set(tokens.length);
@@ -118,7 +137,8 @@ export class AgtStreamText {
 
   private stop(): void {
     this.running = false;
-    if (typeof cancelAnimationFrame !== 'undefined') cancelAnimationFrame(this.raf);
+    if (typeof cancelAnimationFrame !== 'undefined')
+      cancelAnimationFrame(this.raf);
   }
 
   /** Wrap each `<pre>` in a VS Code-like card with a header (language + copy button). */

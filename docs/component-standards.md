@@ -80,7 +80,7 @@ components/<grupo>/agt-<nombre>.ts        // componente (standalone, OnPush)
 - **Referencia: ChatGPT.** Limpio, neutro, con aire. **No** Copilot: nada de gradientes chillones como identidad por defecto.
 - Columna de contenido centrada, buena tipografía y espaciado.
 - Inputs que **auto-crecen** (sin scrollbars inesperados).
-- Evitar la "estética AI genérica" (no Inter/gradiente-morado como *identidad* fija); exponerlo por tokens para que lo decida el consumidor.
+- Evitar la "estética AI genérica" (no Inter/gradiente-morado como _identidad_ fija); exponerlo por tokens para que lo decida el consumidor.
 
 ## 8. Storybook
 
@@ -115,6 +115,7 @@ components/<grupo>/agt-<nombre>.ts        // componente (standalone, OnPush)
 ## 11. Referencia canónica
 
 `src/lib/components/chat/`:
+
 - `agt-chat` — superficie de chat (columna centrada, burbuja usuario derecha, asistente a todo el ancho sin avatar, composer auto-grow, autoscroll con pausa).
 - `agt-stream-text` — reveal buffered de markdown + bloques de código VS Code.
 - `agt-reasoning` — chain-of-thought colapsable (auto-open/close, "Thinking…", duración) — patrón inspirado en AI Elements `Reasoning`.
@@ -129,9 +130,9 @@ components/<grupo>/agt-<nombre>.ts        // componente (standalone, OnPush)
 - **`:host ::ng-deep`** para estilar `[innerHTML]`; **inyección por DOM** para controles interactivos (el sanitizer quita `<button>`).
 - **Guards** `matchMedia`/`requestAnimationFrame` para tests/SSR.
 - **Colisión de nombres de tokens**: dos rutas que kebab-izan al mismo `--agt-*` producen un `var()` circular (inválido → fallback del navegador, p.ej. serif). No dupliques (p.ej. primitiva `font.family` **vs** semántica `fontFamily` → ambas `--agt-font-family`). Además, todo componente que renderiza texto debe fijar `font-family: var(--agt-font-family, …)` para ser autosuficiente.
-- **Colapsables (grid-rows)**: el elemento que anima debe ser un **wrapper de recorte** (`overflow:hidden; min-height:0`) **sin** border/padding; pon border/padding en un hijo, o el `border` deja un *sliver* al cerrar. Evita el **auto-colapso sorpresa** (abierto por defecto + toggle manual).
+- **Colapsables (grid-rows)**: el elemento que anima debe ser un **wrapper de recorte** (`overflow:hidden; min-height:0`) **sin** border/padding; pon border/padding en un hijo, o el `border` deja un _sliver_ al cerrar. Evita el **auto-colapso sorpresa** (abierto por defecto + toggle manual).
 - **`box-sizing: border-box`** en todo elemento con `width: 100%` + `padding` (inputs, campos, textareas): con el `content-box` por defecto el border-box mide `100% + padding` y **se desborda** del contenedor (invisible en anchos amplios, se corta/solapa en paneles estrechos p.ej. la sidebar). Colócalo también como offset visual con `--agt-<comp>-<algo>` para que el consumidor edite (p.ej. `--agt-sidebar-fab-background`).
 
 ---
 
-*Este estándar se aplica a partir de `agt-tool-call` y a todos los componentes siguientes del roadmap.*
+_Este estándar se aplica a partir de `agt-tool-call` y a todos los componentes siguientes del roadmap._

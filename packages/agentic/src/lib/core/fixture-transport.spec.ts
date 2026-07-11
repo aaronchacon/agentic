@@ -7,7 +7,11 @@ describe('createFixtureTransport', () => {
     const received: AgentEvent[] = [];
     let completed = false;
     const transport = createFixtureTransport(
-      [{ type: 'text', delta: 'Hi' }, { type: 'text', delta: '!' }, { type: 'done' }],
+      [
+        { type: 'text', delta: 'Hi' },
+        { type: 'text', delta: '!' },
+        { type: 'done' },
+      ],
       { immediate: true },
     );
 
@@ -31,11 +35,17 @@ describe('createFixtureTransport', () => {
       { immediate: true },
     );
 
-    transport.run({ message: 'x' }).subscribe({ next: (e) => received.push(e) });
+    transport
+      .run({ message: 'x' })
+      .subscribe({ next: (e) => received.push(e) });
     expect(received.map((e) => e.type)).toEqual(['approval_request']);
 
     transport.respondToApproval?.('a1', true);
-    expect(received.map((e) => e.type)).toEqual(['approval_request', 'text', 'done']);
+    expect(received.map((e) => e.type)).toEqual([
+      'approval_request',
+      'text',
+      'done',
+    ]);
   });
 
   it('does not emit synchronously in timer mode and stops after unsubscribe', () => {
@@ -45,7 +55,9 @@ describe('createFixtureTransport', () => {
       { type: 'done' },
     ]);
 
-    const sub = transport.run({ message: 'x' }).subscribe({ next: (e) => received.push(e) });
+    const sub = transport
+      .run({ message: 'x' })
+      .subscribe({ next: (e) => received.push(e) });
     sub.unsubscribe();
 
     expect(received).toEqual([]);

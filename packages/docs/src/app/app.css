@@ -22,7 +22,11 @@
   justify-content: space-between;
   height: 56px;
   padding: 0 20px;
-  background: color-mix(in srgb, var(--agt-content-background, #fff) 88%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--agt-content-background, #fff) 88%,
+    transparent
+  );
   border-bottom: 1px solid var(--agt-content-border-color, #e5e5e5);
   backdrop-filter: saturate(1.2) blur(8px);
 }
@@ -141,7 +145,11 @@
 .docs__nav-list a.is-active {
   font-weight: 600;
   color: var(--agt-primary-color, #2563eb);
-  background: color-mix(in srgb, var(--agt-primary-color, #2563eb) 10%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--agt-primary-color, #2563eb) 10%,
+    transparent
+  );
 }
 
 /* ---------- Main ---------- */

@@ -13,7 +13,9 @@ describe('AgtReasoning', () => {
 
     const el = fixture.nativeElement as HTMLElement;
     expect(el.textContent).toContain('Thought for');
-    expect(el.querySelector('.agt-reasoning__panel')?.classList.contains('is-open')).toBe(false);
+    expect(
+      el.querySelector('.agt-reasoning__panel')?.classList.contains('is-open'),
+    ).toBe(false);
     expect(el.innerHTML).toContain('<strong>important</strong>');
   });
 
@@ -24,7 +26,11 @@ describe('AgtReasoning', () => {
     fixture.detectChanges();
 
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('.agt-reasoning__shimmer')?.textContent).toContain('Thinking');
-    expect(el.querySelector('.agt-reasoning__panel')?.classList.contains('is-open')).toBe(true);
+    expect(el.querySelector('.agt-reasoning__shimmer')?.textContent).toContain(
+      'Thinking',
+    );
+    expect(
+      el.querySelector('.agt-reasoning__panel')?.classList.contains('is-open'),
+    ).toBe(true);
   });
 });

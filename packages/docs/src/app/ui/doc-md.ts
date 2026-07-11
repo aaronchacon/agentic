@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+} from '@angular/core';
 
 /**
  * A small "Copy as Markdown" action for a doc page — the AI-native touch.
@@ -10,14 +15,34 @@ import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="doc-md">
-      <button type="button" class="doc-md__btn" (click)="copy()" [attr.aria-label]="copied() ? 'Copied' : 'Copy this page as Markdown'">
+      <button
+        type="button"
+        class="doc-md__btn"
+        (click)="copy()"
+        [attr.aria-label]="copied() ? 'Copied' : 'Copy this page as Markdown'"
+      >
         <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
-          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M3 5h18v14H3z" />
-          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M6 15V9l3 3 3-3v6M18 9v4m0 0-1.5-1.5M18 13l1.5-1.5" />
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linejoin="round"
+            d="M3 5h18v14H3z"
+          />
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 15V9l3 3 3-3v6M18 9v4m0 0-1.5-1.5M18 13l1.5-1.5"
+          />
         </svg>
         {{ copied() ? 'Copied' : 'Copy as Markdown' }}
       </button>
-      <a class="doc-md__link" href="/llms.txt" target="_blank" rel="noreferrer">llms.txt ↗</a>
+      <a class="doc-md__link" href="/llms.txt" target="_blank" rel="noreferrer"
+        >llms.txt ↗</a
+      >
     </div>
   `,
   styles: [
@@ -41,7 +66,9 @@ import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core
         border: 1px solid var(--agt-content-border-color, #e5e5e5);
         border-radius: 8px;
         cursor: pointer;
-        transition: background 0.15s ease, color 0.15s ease;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
       }
       .doc-md__btn:hover {
         color: var(--agt-content-color, #0f172a);
