@@ -62,18 +62,36 @@ export const Base: Preset = {
           hoverColor: '{blue.700}',
           activeColor: '{blue.800}',
         },
+        // AI/agent accent — Angular-flavoured red -> violet, not the violet/cyan
+        // every AI project reuses. Built from our own primitives (refs, 3 layers).
         ai: {
-          color: '{violet.600}',
+          color: '{red.600}',
           contrastColor: '{neutral.0}',
-          subtleBackground: '{violet.50}',
-          borderColor: '{violet.200}',
-          gradient: 'linear-gradient(90deg, {violet.500}, {cyan.500})',
+          subtleBackground: '{red.50}',
+          borderColor: '{red.200}',
+          gradient: 'linear-gradient(90deg, {red.500}, {violet.500})',
         },
         state: {
-          success: { color: '{emerald.600}', contrastColor: '{neutral.0}', background: '{emerald.100}' },
-          warn: { color: '{amber.600}', contrastColor: '{neutral.950}', background: '{amber.100}' },
-          danger: { color: '{red.600}', contrastColor: '{neutral.0}', background: '{red.100}' },
-          info: { color: '{blue.600}', contrastColor: '{neutral.0}', background: '{blue.100}' },
+          success: {
+            color: '{emerald.600}',
+            contrastColor: '{neutral.0}',
+            background: '{emerald.100}',
+          },
+          warn: {
+            color: '{amber.600}',
+            contrastColor: '{neutral.950}',
+            background: '{amber.100}',
+          },
+          danger: {
+            color: '{red.600}',
+            contrastColor: '{neutral.0}',
+            background: '{red.100}',
+          },
+          info: {
+            color: '{blue.600}',
+            contrastColor: '{neutral.0}',
+            background: '{blue.100}',
+          },
         },
       },
       dark: {
@@ -105,18 +123,35 @@ export const Base: Preset = {
           hoverColor: '{blue.300}',
           activeColor: '{blue.200}',
         },
+        // Red -> violet, brightened for dark surfaces.
         ai: {
-          color: '{violet.400}',
+          color: '{red.400}',
           contrastColor: '{neutral.950}',
-          subtleBackground: '{violet.950}',
-          borderColor: '{violet.800}',
-          gradient: 'linear-gradient(90deg, {violet.400}, {cyan.400})',
+          subtleBackground: '{red.950}',
+          borderColor: '{red.800}',
+          gradient: 'linear-gradient(90deg, {red.400}, {violet.400})',
         },
         state: {
-          success: { color: '{emerald.400}', contrastColor: '{neutral.950}', background: '{emerald.950}' },
-          warn: { color: '{amber.400}', contrastColor: '{neutral.950}', background: '{amber.950}' },
-          danger: { color: '{red.400}', contrastColor: '{neutral.950}', background: '{red.950}' },
-          info: { color: '{blue.400}', contrastColor: '{neutral.950}', background: '#172554' },
+          success: {
+            color: '{emerald.400}',
+            contrastColor: '{neutral.950}',
+            background: '{emerald.950}',
+          },
+          warn: {
+            color: '{amber.400}',
+            contrastColor: '{neutral.950}',
+            background: '{amber.950}',
+          },
+          danger: {
+            color: '{red.400}',
+            contrastColor: '{neutral.950}',
+            background: '{red.950}',
+          },
+          info: {
+            color: '{blue.400}',
+            contrastColor: '{neutral.950}',
+            background: '#172554',
+          },
         },
       },
     },
@@ -167,13 +202,19 @@ export function deepMerge<T>(base: T, overrides: DeepPartial<T>): T {
   for (const key of Object.keys(overrides)) {
     const o = (overrides as Record<string, unknown>)[key];
     if (o === undefined) continue;
-    out[key] = isPlainObject(out[key]) && isPlainObject(o) ? deepMerge(out[key], o as never) : o;
+    out[key] =
+      isPlainObject(out[key]) && isPlainObject(o)
+        ? deepMerge(out[key], o as never)
+        : o;
   }
   return out as T;
 }
 
 /** Create a new preset by merging overrides onto a base preset. */
-export function definePreset(base: Preset, overrides: DeepPartial<Preset>): Preset {
+export function definePreset(
+  base: Preset,
+  overrides: DeepPartial<Preset>,
+): Preset {
   return deepMerge(base, overrides);
 }
 
