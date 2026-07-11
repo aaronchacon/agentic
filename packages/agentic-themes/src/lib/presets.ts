@@ -63,12 +63,13 @@ export const Base: Preset = {
           activeColor: '{blue.800}',
         },
         // AI/agent accent — Angular-flavoured red -> violet, not the violet/cyan
-        // every AI project reuses. Built from our own primitives (refs, 3 layers).
+        // every AI project reuses. `subtleBackground` and `borderColor` derive
+        // from `ai.color`, so overriding the colour keeps chips/cards harmonious.
         ai: {
           color: '{red.600}',
           contrastColor: '{neutral.0}',
-          subtleBackground: '{red.50}',
-          borderColor: '{red.200}',
+          subtleBackground: 'color-mix(in srgb, {ai.color} 10%, transparent)',
+          borderColor: 'color-mix(in srgb, {ai.color} 28%, transparent)',
           gradient: 'linear-gradient(90deg, {red.500}, {violet.500})',
         },
         state: {
@@ -123,12 +124,13 @@ export const Base: Preset = {
           hoverColor: '{blue.300}',
           activeColor: '{blue.200}',
         },
-        // Red -> violet, brightened for dark surfaces.
+        // Red -> violet, brightened for dark surfaces. Subtle bg / border derive
+        // from ai.color so any accent override stays coherent.
         ai: {
           color: '{red.400}',
           contrastColor: '{neutral.950}',
-          subtleBackground: '{red.950}',
-          borderColor: '{red.800}',
+          subtleBackground: 'color-mix(in srgb, {ai.color} 16%, transparent)',
+          borderColor: 'color-mix(in srgb, {ai.color} 34%, transparent)',
           gradient: 'linear-gradient(90deg, {red.400}, {violet.400})',
         },
         state: {
@@ -265,8 +267,8 @@ export const Aurora: Preset = definePreset(Base, {
         ai: {
           color: '#18181b',
           contrastColor: '#ffffff',
-          subtleBackground: '#f4f4f5',
-          borderColor: '#e4e4e7',
+          subtleBackground: 'color-mix(in srgb, {ai.color} 8%, transparent)',
+          borderColor: 'color-mix(in srgb, {ai.color} 18%, transparent)',
           gradient: 'linear-gradient(90deg, #18181b, #71717a)',
         },
       },
@@ -302,8 +304,8 @@ export const Aurora: Preset = definePreset(Base, {
         ai: {
           color: '#fafafa',
           contrastColor: '#09090b',
-          subtleBackground: '#27272a',
-          borderColor: '#3f3f46',
+          subtleBackground: 'color-mix(in srgb, {ai.color} 10%, transparent)',
+          borderColor: 'color-mix(in srgb, {ai.color} 20%, transparent)',
           gradient: 'linear-gradient(90deg, #fafafa, #a1a1aa)',
         },
       },

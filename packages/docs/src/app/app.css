@@ -137,6 +137,7 @@
   color: var(--agt-content-muted-color, #475569);
   text-decoration: none;
   border-radius: 8px;
+  margin-bottom: 2px;
 }
 .docs__nav-list a:hover {
   color: var(--agt-content-color, #0f172a);
