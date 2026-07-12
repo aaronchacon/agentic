@@ -1,3 +1,5 @@
 {
+  "name": "@ng-agentic/core-schematics",
+  "private": true,
   "type": "commonjs"
 }
