@@ -1,0 +1,31 @@
+<div class="doc-demo">
+  <div class="doc-demo__tabs">
+    @if (preview()) {
+    <button
+      type="button"
+      [class.is-active]="tab() === 'preview'"
+      (click)="tab.set('preview')"
+    >
+      Preview
+    </button>
+    }
+    <button
+      type="button"
+      [class.is-active]="tab() === 'code'"
+      (click)="tab.set('code')"
+    >
+      Code
+    </button>
+  </div>
+
+  @if (preview() && tab() === 'preview') {
+  <div class="doc-demo__preview"><ng-content /></div>
+  } @else {
+  <div class="doc-demo__code">
+    <button type="button" class="doc-demo__copy" (click)="copy()">
+      {{ copied() ? 'Copied' : 'Copy' }}
+    </button>
+    <pre><code class="hljs" [innerHTML]="highlighted()"></code></pre>
+  </div>
+  }
+</div>

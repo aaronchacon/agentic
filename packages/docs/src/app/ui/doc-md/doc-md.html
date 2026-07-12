@@ -1,0 +1,30 @@
+<div class="doc-md">
+  <button
+    type="button"
+    class="doc-md__btn"
+    (click)="copy()"
+    [attr.aria-label]="copied() ? 'Copied' : 'Copy this page as Markdown'"
+  >
+    <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linejoin="round"
+        d="M3 5h18v14H3z"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 15V9l3 3 3-3v6M18 9v4m0 0-1.5-1.5M18 13l1.5-1.5"
+      />
+    </svg>
+    {{ copied() ? 'Copied' : 'Copy as Markdown' }}
+  </button>
+  <a class="doc-md__link" href="/llms.txt" target="_blank" rel="noreferrer"
+    >llms.txt ↗</a
+  >
+</div>

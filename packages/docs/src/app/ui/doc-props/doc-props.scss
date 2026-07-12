@@ -1,0 +1,38 @@
+.doc-props-wrap {
+  overflow-x: auto;
+  margin-top: 12px;
+  border: 1px solid var(--agt-content-border-color, #e5e5e5);
+  border-radius: 12px;
+}
+
+.doc-props {
+  margin-top: 0;
+
+  :is(th, td):first-child {
+    padding-left: 16px;
+  }
+  :is(th, td):last-child {
+    padding-right: 16px;
+  }
+  tbody tr:last-child :is(td) {
+    border-bottom: 0;
+  }
+
+  &__type {
+    font-family: var(--agt-font-family-mono, ui-monospace, monospace);
+    font-size: 0.82rem;
+    color: var(--agt-primary-color, #2563eb);
+  }
+  &__default {
+    font-family: var(--agt-font-family-mono, ui-monospace, monospace);
+    font-size: 0.82rem;
+    color: var(--agt-content-muted-color, #64748b);
+  }
+  &__req {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--agt-state-danger-color, #dc2626);
+  }
+}

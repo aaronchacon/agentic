@@ -1,40 +1,14 @@
 import { Component } from '@angular/core';
 import { AgtPlan, type PlanStep } from '@ng-agentic/core';
-import { DocDemo } from '../../ui/doc-demo';
-import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
-import { DocMd } from '../../ui/doc-md';
+import { DocDemo } from '../../ui/doc-demo/doc-demo';
+import { DocProps } from '../../ui/doc-props/doc-props';
+import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import type { DocProp } from '../../model/doc-prop.model';
+import { DocMd } from '../../ui/doc-md/doc-md';
 
 @Component({
-  selector: 'docs-plan',
   imports: [AgtPlan, DocDemo, DocProps, DocMd],
-  template: `
-    <article class="doc">
-      <div class="doc__head">
-        <p class="doc__eyebrow">Components</p>
-        <h1 class="doc__title">Plan</h1>
-        <p class="doc__lead">
-          The agent's plan / execution-trace as a vertical timeline of steps —
-          pending, active, done or error — with a progress summary in the
-          header. Collapsible.
-        </p>
-        <doc-md [markdown]="md" />
-      </div>
-
-      <section class="doc__section">
-        <h2>Timeline</h2>
-        <doc-demo [code]="code">
-          <div style="max-width: 520px; margin: 0 auto; width: 100%;">
-            <agt-plan title="Verification" [steps]="steps" />
-          </div>
-        </doc-demo>
-      </section>
-
-      <section class="doc__section">
-        <h2>API</h2>
-        <doc-props [rows]="props" />
-      </section>
-    </article>
-  `,
+  templateUrl: './plan.page.html',
 })
 export default class PlanPage {
   protected readonly props: DocProp[] = [

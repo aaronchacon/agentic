@@ -1,45 +1,14 @@
 import { Component } from '@angular/core';
 import { AgtToolCall, type ToolCall } from '@ng-agentic/core';
-import { DocDemo } from '../../ui/doc-demo';
-import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
-import { DocMd } from '../../ui/doc-md';
+import { DocDemo } from '../../ui/doc-demo/doc-demo';
+import { DocProps } from '../../ui/doc-props/doc-props';
+import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import type { DocProp } from '../../model/doc-prop.model';
+import { DocMd } from '../../ui/doc-md/doc-md';
 
 @Component({
-  selector: 'docs-tool-call',
   imports: [AgtToolCall, DocDemo, DocProps, DocMd],
-  template: `
-    <article class="doc">
-      <div class="doc__head">
-        <p class="doc__eyebrow">Components</p>
-        <h1 class="doc__title">Tool Call</h1>
-        <p class="doc__lead">
-          An in-conversation card that visualizes a tool invocation — running
-          (spinner + optional steps), success (green, with the result) or error
-          (with the detail). The result renders as a syntax-highlighted JSON
-          block.
-        </p>
-        <doc-md [markdown]="md" />
-      </div>
-
-      <section class="doc__section">
-        <h2>States</h2>
-        <doc-demo [code]="code">
-          <div
-            style="display: flex; flex-direction: column; gap: 12px; max-width: 520px; margin: 0 auto; width: 100%;"
-          >
-            <agt-tool-call [toolCall]="running" [steps]="steps" />
-            <agt-tool-call [toolCall]="success" />
-            <agt-tool-call [toolCall]="errored" />
-          </div>
-        </doc-demo>
-      </section>
-
-      <section class="doc__section">
-        <h2>API</h2>
-        <doc-props [rows]="props" />
-      </section>
-    </article>
-  `,
+  templateUrl: './tool-call.page.html',
 })
 export default class ToolCallPage {
   protected readonly props: DocProp[] = [

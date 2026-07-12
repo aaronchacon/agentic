@@ -6,6 +6,7 @@ import {
   injectAgent,
   type FixtureScript,
 } from '@ng-agentic/core';
+import type { Feature } from '../model/feature.model';
 
 const reply: FixtureScript = [
   {
@@ -27,86 +28,9 @@ const reply: FixtureScript = [
 ];
 
 @Component({
-  selector: 'docs-home',
   imports: [RouterLink, AgtChat],
-  template: `
-    <div class="page">
-      <div class="glow" aria-hidden="true"></div>
-
-      <section class="hero">
-        <div class="hero__copy">
-          <span class="hero__eyebrow"
-            >Angular 21 · signals · AG-UI compatible</span
-          >
-          <h1 class="hero__title">
-            The <span class="grad">agent-experience</span> UI layer for Angular
-          </h1>
-          <p class="hero__lead">
-            Production-grade components for AI &amp; agent interfaces —
-            streaming chat, tool-calling, reasoning, plans and human-in-the-loop
-            approvals. Themeable design tokens, accessible, zero backend
-            lock-in.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" routerLink="/components/chat"
-              >Get started →</a
-            >
-            <a
-              class="btn btn--ghost"
-              href="https://github.com/aaronchacon"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View on GitHub
-            </a>
-          </div>
-          <code class="hero__install"
-            >npm i &#64;ng-agentic/core &#64;ng-agentic/themes</code
-          >
-        </div>
-
-        <div class="hero__demo">
-          <div class="hero__window">
-            <div class="hero__bar" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="hero__frame">
-              <agt-chat
-                [store]="store"
-                emptyTitle="Ask the KYC agent"
-                [suggestions]="suggestions"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="features">
-        @for (f of features; track f.title) {
-          <div class="feature">
-            <div class="feature__icon" aria-hidden="true"></div>
-            <h3>{{ f.title }}</h3>
-            <p>{{ f.body }}</p>
-          </div>
-        }
-      </section>
-
-      <footer class="footer">
-        Built by
-        <a href="https://aaronch.dev" target="_blank" rel="noreferrer"
-          >Aaron Chacón</a
-        >
-        · MIT licensed ·
-        <a
-          href="https://github.com/aaronchacon"
-          target="_blank"
-          rel="noreferrer"
-          >Source on GitHub</a
-        >
-      </footer>
-    </div>
-  `,
-  styleUrl: './home.css',
+  templateUrl: './(home).page.html',
+  styleUrl: './(home).page.scss',
 })
 export default class HomeComponent {
   protected readonly suggestions = [
@@ -117,22 +41,30 @@ export default class HomeComponent {
     transport: createFixtureTransport(reply, { defaultDelayMs: 42 }),
   });
 
-  protected readonly features = [
+  protected readonly features: Feature[] = [
     {
-      title: 'Streaming, done right',
-      body: 'Smooth, controllable markdown reveal with syntax-highlighted code, reasoning traces and a live cursor.',
+      title: 'Human-in-the-loop, built in',
+      body: 'Approval gates for actions that need a person: approve, edit or reject — with full state tracking, not a bolted-on confirm().',
     },
     {
-      title: 'Themeable by tokens',
-      body: '3-layer design tokens (primitive → semantic → component). Swap presets or restyle without forking.',
+      title: 'Provenance by default',
+      body: 'Users always see what the AI wrote, suggested or summarized — one consistent visual language across chat, summaries and form fields.',
     },
     {
       title: 'Agentic, not just chat',
-      body: 'Tool-calling cards, execution-trace plans and human-in-the-loop approval gates — built for regulated flows.',
+      body: "Tool-calling cards and execution-trace plans make the agent's work visible, step by step — not a black box.",
+    },
+    {
+      title: 'Streaming, done right',
+      body: 'Smooth markdown reveal with syntax-highlighted code, a collapsible reasoning trace and a live cursor.',
+    },
+    {
+      title: 'Themeable by tokens',
+      body: '3-layer design tokens (primitive → semantic → component), dark and light. Swap presets or restyle without forking CSS.',
     },
     {
       title: 'Accessible & headless',
-      body: 'axe-clean, keyboard-first, dark mode. Bring your own transport via the AG-UI-compatible contract.',
+      body: 'AA contrast, keyboard-first, dark mode. Bring your own transport via the AG-UI-compatible contract.',
     },
   ];
 

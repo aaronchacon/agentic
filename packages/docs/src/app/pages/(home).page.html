@@ -1,0 +1,102 @@
+<div class="page">
+  <div class="glow" aria-hidden="true"></div>
+
+  <section class="hero">
+    <div class="hero__copy">
+      <span class="hero__eyebrow">Angular 21 · signals · AG-UI compatible</span>
+      <h1 class="hero__title">
+        Agent UI your <span class="grad">compliance team</span> can sign off on
+      </h1>
+      <p class="hero__lead">
+        Streaming chat, visible tool-calling, execution plans, human-in-the-loop
+        approvals and AI provenance — production-grade Angular components born
+        from 4.5 years building KYC flows in fintech.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" routerLink="/components/chat"
+          >Get started →</a
+        >
+        <a
+          class="btn btn--ghost"
+          href="https://github.com/aaronchacon"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View on GitHub
+        </a>
+      </div>
+      <code class="hero__install"
+        >npm i &#64;ng-agentic/core &#64;ng-agentic/themes</code
+      >
+    </div>
+
+    <div class="hero__demo">
+      <div class="hero__window">
+        <div class="hero__bar" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="hero__frame">
+          <agt-chat
+            [store]="store"
+            emptyTitle="Ask the KYC agent"
+            [suggestions]="suggestions"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    @for (f of features; track f.title) {
+    <div class="feature">
+      <div class="feature__icon" aria-hidden="true"></div>
+      <h3>{{ f.title }}</h3>
+      <p>{{ f.body }}</p>
+    </div>
+    }
+  </section>
+
+  <section class="regulated">
+    <div class="regulated__inner">
+      <p class="regulated__eyebrow">Built for regulated products</p>
+      <h2 class="regulated__title">
+        When "the AI did it" isn't an acceptable answer
+      </h2>
+      <p class="regulated__lead">
+        In fintech, KYC, legal and health, AI features carry three extra
+        expectations: a human can intervene, AI content is distinguishable from
+        human content, and decisions are traceable. Most agent UI kits treat
+        these as edge cases. agentic treats them as the core.
+      </p>
+      <ul class="regulated__list">
+        <li>
+          <strong>KYC &amp; onboarding</strong> — approval gates and provenance
+          on every extracted field.
+        </li>
+        <li>
+          <strong>Fintech dashboards</strong> — visible agent actions and
+          execution traces, step by step.
+        </li>
+        <li>
+          <strong>Legal &amp; health workflows</strong> — human-in-the-loop
+          before anything is committed.
+        </li>
+      </ul>
+      <p class="regulated__note">
+        agentic gives you the UI building blocks — compliance itself is your
+        product's job.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Built by
+    <a href="https://aaronch.dev" target="_blank" rel="noreferrer"
+      >Aaron Chacón</a
+    >
+    · MIT licensed ·
+    <a href="https://github.com/aaronchacon" target="_blank" rel="noreferrer"
+      >Source on GitHub</a
+    >
+  </footer>
+</div>

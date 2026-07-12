@@ -1,0 +1,37 @@
+<article class="doc">
+  <div class="doc__head">
+    <p class="doc__eyebrow">Components</p>
+    <h1 class="doc__title">Tool Call</h1>
+    <p class="doc__lead">
+      An in-conversation card that visualizes a tool invocation — running
+      (spinner + optional steps), success (green, with the result) or error
+      (with the detail). The result renders as a syntax-highlighted JSON block.
+    </p>
+    <app-doc-md [markdown]="md" />
+  </div>
+
+  <section class="doc__section">
+    <h2>States</h2>
+    <app-doc-demo [code]="code">
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          max-width: 520px;
+          margin: 0 auto;
+          width: 100%;
+        "
+      >
+        <agt-tool-call [toolCall]="running" [steps]="steps" />
+        <agt-tool-call [toolCall]="success" />
+        <agt-tool-call [toolCall]="errored" />
+      </div>
+    </app-doc-demo>
+  </section>
+
+  <section class="doc__section">
+    <h2>API</h2>
+    <app-doc-props [rows]="props" />
+  </section>
+</article>

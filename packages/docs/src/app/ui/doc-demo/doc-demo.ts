@@ -10,42 +10,10 @@ import hljs from 'highlight.js/lib/common';
 
 /** A documentation demo card with Preview / Code tabs and a copy button. */
 @Component({
-  selector: 'doc-demo',
+  selector: 'app-doc-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="doc-demo">
-      <div class="doc-demo__tabs">
-        @if (preview()) {
-          <button
-            type="button"
-            [class.is-active]="tab() === 'preview'"
-            (click)="tab.set('preview')"
-          >
-            Preview
-          </button>
-        }
-        <button
-          type="button"
-          [class.is-active]="tab() === 'code'"
-          (click)="tab.set('code')"
-        >
-          Code
-        </button>
-      </div>
-
-      @if (preview() && tab() === 'preview') {
-        <div class="doc-demo__preview"><ng-content /></div>
-      } @else {
-        <div class="doc-demo__code">
-          <button type="button" class="doc-demo__copy" (click)="copy()">
-            {{ copied() ? 'Copied' : 'Copy' }}
-          </button>
-          <pre><code class="hljs" [innerHTML]="highlighted()"></code></pre>
-        </div>
-      }
-    </div>
-  `,
-  styleUrl: './doc-demo.css',
+  templateUrl: './doc-demo.html',
+  styleUrl: './doc-demo.scss',
 })
 export class DocDemo {
   readonly code = input('');

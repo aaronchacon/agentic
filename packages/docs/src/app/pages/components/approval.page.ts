@@ -1,49 +1,14 @@
 import { Component } from '@angular/core';
 import { AgtApproval } from '@ng-agentic/core';
-import { DocDemo } from '../../ui/doc-demo';
-import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
-import { DocMd } from '../../ui/doc-md';
+import { DocDemo } from '../../ui/doc-demo/doc-demo';
+import { DocProps } from '../../ui/doc-props/doc-props';
+import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import type { DocProp } from '../../model/doc-prop.model';
+import { DocMd } from '../../ui/doc-md/doc-md';
 
 @Component({
-  selector: 'docs-approval',
   imports: [AgtApproval, DocDemo, DocProps, DocMd],
-  template: `
-    <article class="doc">
-      <div class="doc__head">
-        <p class="doc__eyebrow">Components</p>
-        <h1 class="doc__title">Approval</h1>
-        <p class="doc__lead">
-          A human-in-the-loop gate: the agent pauses and asks a person to
-          approve, edit or reject an action before proceeding — non-negotiable
-          in regulated flows. Resolves to an approved or rejected state.
-        </p>
-        <doc-md [markdown]="md" />
-      </div>
-
-      <section class="doc__section">
-        <h2>Gate</h2>
-        <p>
-          Click Approve or Reject to resolve — the card records the decision.
-        </p>
-        <doc-demo [code]="code">
-          <div style="max-width: 520px; margin: 0 auto; width: 100%;">
-            <agt-approval
-              title="Approval required"
-              action="Auto-approve KYC case #4821 (low risk)."
-              [detail]="detail"
-              [editable]="true"
-            />
-          </div>
-        </doc-demo>
-      </section>
-
-      <section class="doc__section">
-        <h2>API</h2>
-        <doc-props [rows]="props" />
-        <doc-props nameHeader="Event" [rows]="events" />
-      </section>
-    </article>
-  `,
+  templateUrl: './approval.page.html',
 })
 export default class ApprovalPage {
   protected readonly props: DocProp[] = [

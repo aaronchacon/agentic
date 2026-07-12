@@ -1,21 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AgenticThemeService } from '@ng-agentic/core';
-
-interface NavItem {
-  label: string;
-  path: string;
-}
-interface NavSection {
-  title: string;
-  items: NavItem[];
-}
+import type { NavSection } from './model/nav.model';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrl: './app.scss',
 })
 export class App {
   private readonly theme = inject(AgenticThemeService);
@@ -27,6 +19,7 @@ export class App {
       title: 'Getting started',
       items: [
         { label: 'Introduction', path: '/' },
+        { label: 'Provenance', path: '/provenance' },
         { label: 'Theming', path: '/theming' },
       ],
     },

@@ -5,9 +5,11 @@ import {
   injectAgent,
   type FixtureScript,
 } from '@ng-agentic/core';
-import { DocDemo } from '../../ui/doc-demo';
-import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
-import { DocMd } from '../../ui/doc-md';
+import { DocDemo } from '../../ui/doc-demo/doc-demo';
+import { DocProps } from '../../ui/doc-props/doc-props';
+import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import type { DocProp } from '../../model/doc-prop.model';
+import { DocMd } from '../../ui/doc-md/doc-md';
 
 const reply: FixtureScript = [
   {
@@ -29,46 +31,8 @@ const reply: FixtureScript = [
 ];
 
 @Component({
-  selector: 'docs-chat',
   imports: [AgtChat, DocDemo, DocProps, DocMd],
-  template: `
-    <article class="doc">
-      <div class="doc__head">
-        <p class="doc__eyebrow">Components</p>
-        <h1 class="doc__title">Chat</h1>
-        <p class="doc__lead">
-          A ChatGPT-style chat surface: streaming markdown with
-          syntax-highlighted code blocks, a collapsible reasoning trace, a
-          thinking indicator, an empty state with suggestions and an
-          auto-growing composer.
-        </p>
-        <doc-md [markdown]="md" />
-      </div>
-
-      <section class="doc__section">
-        <h2>Basic</h2>
-        <p>
-          The component is presentational: pass a store created with
-          <code>injectAgent</code>. Connect your own transport (SSE/WebSocket)
-          or replay fixtures — the kit never talks to an LLM.
-        </p>
-        <doc-demo [code]="code">
-          <div style="height: 480px">
-            <agt-chat
-              [store]="store"
-              emptyTitle="Ask the KYC agent"
-              [suggestions]="suggestions"
-            />
-          </div>
-        </doc-demo>
-      </section>
-
-      <section class="doc__section">
-        <h2>API</h2>
-        <doc-props [rows]="props" />
-      </section>
-    </article>
-  `,
+  templateUrl: './chat.page.html',
 })
 export default class ChatPage {
   protected readonly props: DocProp[] = [

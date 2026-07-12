@@ -1,0 +1,42 @@
+.doc-md {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 14px;
+
+  &__btn {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    padding: 5px 11px;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--agt-content-muted-color, #64748b);
+    background: var(--agt-content-background, #fff);
+    border: 1px solid var(--agt-content-border-color, #e5e5e5);
+    border-radius: 8px;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      color: var(--agt-content-color, #0f172a);
+      background: var(--agt-content-hover-background, #f4f4f4);
+    }
+  }
+
+  &__link {
+    padding: 5px 9px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--agt-content-muted-color, #64748b);
+    text-decoration: none;
+    border-radius: 8px;
+
+    &:hover {
+      color: var(--agt-ai-color, #7c3aed);
+    }
+  }
+}

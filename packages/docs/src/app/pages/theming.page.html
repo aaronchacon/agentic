@@ -1,0 +1,169 @@
+<article class="doc">
+  <div class="doc__head">
+    <p class="doc__eyebrow">Getting started</p>
+    <h1 class="doc__title">Theming</h1>
+    <p class="doc__lead">
+      Every component is painted with a 3-layer token system —
+      <strong>primitive → semantic → component</strong> — compiled to CSS custom
+      properties. Swap the preset or override any token and the whole library
+      recolors, no CSS forking. Try it live: these controls restyle this entire
+      site at runtime.
+    </p>
+  </div>
+
+  <section class="doc__section">
+    <h2>Playground</h2>
+    <p>
+      Pick a preset, an AI accent and a corner radius. Changes apply globally,
+      instantly.
+    </p>
+
+    <div class="pg">
+      <div class="pg__controls">
+        <div class="pg__group">
+          <span class="pg__label">Preset</span>
+          <div class="pg__seg">
+            <button
+              type="button"
+              [class.is-active]="preset() === PresetId.Base"
+              (click)="setPreset(PresetId.Base)"
+            >
+              Base
+            </button>
+            <button
+              type="button"
+              [class.is-active]="preset() === PresetId.Aurora"
+              (click)="setPreset(PresetId.Aurora)"
+            >
+              Aurora
+            </button>
+          </div>
+        </div>
+
+        <div class="pg__group">
+          <span class="pg__label">AI accent</span>
+          <div class="pg__swatches">
+            <button
+              type="button"
+              class="pg__swatch pg__swatch--auto"
+              [class.is-active]="accent() === 'default'"
+              [attr.aria-pressed]="accent() === 'default'"
+              aria-label="Preset default accent"
+              title="Preset default"
+              (click)="setAccent('default')"
+            >
+              A
+            </button>
+            @for (a of accents; track a.id) {
+            <button
+              type="button"
+              class="pg__swatch"
+              [class.is-active]="accent() === a.id"
+              [style.background]="a.swatch"
+              [attr.aria-label]="a.label"
+              [attr.aria-pressed]="accent() === a.id"
+              (click)="setAccent(a.id)"
+            ></button>
+            }
+          </div>
+        </div>
+
+        <div class="pg__group">
+          <span class="pg__label">Radius</span>
+          <div class="pg__seg">
+            @for (r of radii; track r.id) {
+            <button
+              type="button"
+              [class.is-active]="radius() === r.id"
+              (click)="setRadius(r.id)"
+            >
+              {{ r.label }}
+            </button>
+            }
+          </div>
+        </div>
+
+        <button type="button" class="pg__reset" (click)="reset()">Reset</button>
+      </div>
+
+      <div class="pg__preview">
+        <div class="pg__row">
+          <button type="button" class="pg__btn pg__btn--primary">
+            Approve
+          </button>
+          <button type="button" class="pg__btn pg__btn--ghost">Dismiss</button>
+          <span class="pg__chip">AI generated</span>
+        </div>
+        <div class="pg__grad" aria-hidden="true"></div>
+        <div class="pg__row">
+          <span class="pg__badge pg__badge--success">Verified</span>
+          <span class="pg__badge pg__badge--warn">Review</span>
+          <span class="pg__badge pg__badge--danger">Flagged</span>
+          <span class="pg__badge pg__badge--info">Pending</span>
+        </div>
+
+        <agt-summary
+          title="Case summary"
+          content="Passport matched with 98% confidence. No sanctions or PEP hits. Recommend approval with a 12-month review."
+        />
+
+        <agt-tool-call
+          [toolCall]="tool"
+          [steps]="['Queried OFAC & EU lists', 'No matches found']"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="doc__section">
+    <h2>Configure a preset</h2>
+    <p>
+      Choose a built-in preset, or build your own by merging overrides onto one
+      with
+      <code>definePreset()</code> — this is what "restyle outside of ours"
+      means.
+    </p>
+    <app-doc-demo [code]="configCode" [preview]="false" />
+  </section>
+
+  <section class="doc__section">
+    <h2>Restyle at runtime</h2>
+    <p>
+      Inject <code>AgenticThemeService</code> to swap presets, merge token
+      overrides or toggle dark mode after bootstrap — exactly what the
+      playground above does.
+    </p>
+    <app-doc-demo [code]="runtimeCode" [preview]="false" />
+  </section>
+
+  <section class="doc__section">
+    <h2>Key semantic tokens</h2>
+    <p>
+      Semantic tokens reference primitives and compile to these CSS variables.
+    </p>
+    <div class="doc-props-wrap">
+      <table class="doc-props">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>CSS variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of tokens; track t.name) {
+          <tr>
+            <td>
+              <code>{{ t.name }}</code>
+            </td>
+            <td>
+              <span class="tok">{{ t.css }}</span>
+            </td>
+            <td>{{ t.desc }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</article>
