@@ -1,4 +1,4 @@
-# @aaronch/agentic-themes
+# @ng-agentic/themes
 
 ## 0.1.0
 

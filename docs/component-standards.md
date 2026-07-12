@@ -1,4 +1,4 @@
-# Estándar de componentes — `@aaronch/agentic`
+# Estándar de componentes — `@ng-agentic/core`
 
 > La norma: **cada componente debe estar completo** antes de avanzar al siguiente.
 > Este documento fija el estándar validado con `agt-chat` (+ `agt-reasoning`, `agt-stream-text`)

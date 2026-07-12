@@ -11,19 +11,19 @@ import type { Schema } from './schema';
 const THEMES_VERSION = '^0.1.0';
 
 /**
- * `ng add @aaronch/agentic`: installs `@aaronch/agentic-themes` and wires
+ * `ng add @ng-agentic/core`: installs `@ng-agentic/themes` and wires
  * `provideAgentic()` into the standalone application config.
  */
 export default function ngAdd(options: Schema): Rule {
   return chain([
-    addDependency('@aaronch/agentic-themes', THEMES_VERSION, {
+    addDependency('@ng-agentic/themes', THEMES_VERSION, {
       type: DependencyType.Default,
       install: InstallBehavior.Auto,
     }),
     addRootProvider(
       options.project,
       ({ code, external }) =>
-        code`${external('provideAgentic', '@aaronch/agentic')}()`,
+        code`${external('provideAgentic', '@ng-agentic/core')}()`,
     ),
   ]);
 }

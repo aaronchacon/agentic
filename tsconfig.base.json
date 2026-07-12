@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@aaronch/agentic": ["./packages/agentic/src/index.ts"],
-      "@aaronch/agentic-themes": ["./packages/agentic-themes/src/index.ts"]
+      "@ng-agentic/core": ["./packages/agentic/src/index.ts"],
+      "@ng-agentic/themes": ["./packages/agentic-themes/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

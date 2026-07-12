@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AgtSummary } from '@aaronch/agentic';
+import { AgtSummary } from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo';
 import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
 import { DocMd } from '../../ui/doc-md';

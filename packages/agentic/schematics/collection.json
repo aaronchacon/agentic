@@ -2,7 +2,7 @@
   "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Install @aaronch/agentic-themes and wire provideAgentic() into the app config.",
+      "description": "Install @ng-agentic/themes and wire provideAgentic() into the app config.",
       "factory": "./ng-add/index",
       "schema": "./ng-add/schema.json"
     }

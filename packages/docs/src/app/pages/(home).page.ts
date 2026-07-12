@@ -5,7 +5,7 @@ import {
   createFixtureTransport,
   injectAgent,
   type FixtureScript,
-} from '@aaronch/agentic';
+} from '@ng-agentic/core';
 
 const reply: FixtureScript = [
   {
@@ -61,7 +61,7 @@ const reply: FixtureScript = [
             </a>
           </div>
           <code class="hero__install"
-            >npm i &#64;aaronch/agentic &#64;aaronch/agentic-themes</code
+            >npm i &#64;ng-agentic/core &#64;ng-agentic/themes</code
           >
         </div>
 

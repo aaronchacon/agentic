@@ -9,14 +9,14 @@ import {
   AgtSummary,
   AgtToolCall,
   type ToolCall,
-} from '@aaronch/agentic';
+} from '@ng-agentic/core';
 import {
   Aurora,
   Base,
   definePreset,
   type DeepPartial,
   type Preset,
-} from '@aaronch/agentic-themes';
+} from '@ng-agentic/themes';
 import { DocDemo } from '../ui/doc-demo';
 
 type PresetId = 'base' | 'aurora';
@@ -339,8 +339,8 @@ export default class ThemingPage {
   ];
 
   protected readonly configCode = [
-    `import { provideAgentic } from '@aaronch/agentic';`,
-    `import { Aurora, definePreset } from '@aaronch/agentic-themes';`,
+    `import { provideAgentic } from '@ng-agentic/core';`,
+    `import { Aurora, definePreset } from '@ng-agentic/themes';`,
     ``,
     `// A built-in preset...`,
     `provideAgentic({ theme: { preset: Aurora, darkModeSelector: '.dark' } });`,
@@ -360,7 +360,7 @@ export default class ThemingPage {
 
   protected readonly runtimeCode = [
     `import { inject } from '@angular/core';`,
-    `import { AgenticThemeService } from '@aaronch/agentic';`,
+    `import { AgenticThemeService } from '@ng-agentic/core';`,
     ``,
     `const theme = inject(AgenticThemeService);`,
     ``,

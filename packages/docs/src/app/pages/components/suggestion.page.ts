@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AgtSuggestion } from '@aaronch/agentic';
+import { AgtSuggestion } from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo';
 import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
 import { DocMd } from '../../ui/doc-md';

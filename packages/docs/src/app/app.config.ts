@@ -12,7 +12,7 @@ import {
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
 import { withInMemoryScrolling } from '@angular/router';
-import { AgenticThemeService, provideAgentic } from '@aaronch/agentic';
+import { AgenticThemeService, provideAgentic } from '@ng-agentic/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [

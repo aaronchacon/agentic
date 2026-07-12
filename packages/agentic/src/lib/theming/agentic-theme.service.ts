@@ -7,7 +7,7 @@ import {
   type BuildThemeOptions,
   type DeepPartial,
   type Preset,
-} from '@aaronch/agentic-themes';
+} from '@ng-agentic/themes';
 
 const STYLE_ID = 'agt-theme';
 

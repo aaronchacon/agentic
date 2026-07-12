@@ -4,7 +4,7 @@ import {
   createFixtureTransport,
   injectAgent,
   type FixtureScript,
-} from '@aaronch/agentic';
+} from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo';
 import { DocProps, propsToMarkdown, type DocProp } from '../../ui/doc-props';
 import { DocMd } from '../../ui/doc-md';
@@ -120,7 +120,7 @@ export default class ChatPage {
 
   protected readonly code = [
     `import { Component } from '@angular/core';`,
-    `import { AgtChat, injectAgent } from '@aaronch/agentic';`,
+    `import { AgtChat, injectAgent } from '@ng-agentic/core';`,
     ``,
     `@Component({`,
     `  imports: [AgtChat],`,

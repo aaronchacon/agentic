@@ -35,14 +35,14 @@ dark-mode aware, and restyle-able without forking CSS.
 ## Install
 
 ```bash
-ng add @aaronch/agentic
+ng add @ng-agentic/core
 ```
 
-`ng add` installs `@aaronch/agentic-themes` and wires `provideAgentic()` into your app config for
+`ng add` installs `@ng-agentic/themes` and wires `provideAgentic()` into your app config for
 you. Prefer to do it by hand?
 
 ```bash
-npm i @aaronch/agentic @aaronch/agentic-themes
+npm i @ng-agentic/core @ng-agentic/themes
 ```
 
 Requires Angular 21+ (standalone, zoneless-friendly signals).
@@ -51,7 +51,7 @@ Requires Angular 21+ (standalone, zoneless-friendly signals).
 
 ```ts
 // app.config.ts
-import { provideAgentic } from '@aaronch/agentic';
+import { provideAgentic } from '@ng-agentic/core';
 
 export const appConfig = {
   providers: [provideAgentic({ theme: { darkModeSelector: '.dark' } })],
@@ -61,7 +61,7 @@ export const appConfig = {
 ```ts
 // case-chat.component.ts
 import { Component } from '@angular/core';
-import { AgtChat, injectAgent } from '@aaronch/agentic';
+import { AgtChat, injectAgent } from '@ng-agentic/core';
 
 @Component({
   selector: 'case-chat',
@@ -128,8 +128,8 @@ Tokens compile to CSS custom properties across three layers — **primitive → 
 so changing one value cascades everywhere. Swap a preset or override any token; nothing forks.
 
 ```ts
-import { provideAgentic } from '@aaronch/agentic';
-import { Aurora, definePreset } from '@aaronch/agentic-themes';
+import { provideAgentic } from '@ng-agentic/core';
+import { Aurora, definePreset } from '@ng-agentic/themes';
 
 // A built-in preset (Base = Angular red→violet accent; Aurora = PrimeNG-Aura-style noir)...
 provideAgentic({ theme: { preset: Aurora, darkModeSelector: '.dark' } });

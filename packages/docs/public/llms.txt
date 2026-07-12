@@ -2,7 +2,7 @@
 
 > Production-grade Angular 21 UI components for AI & agent interfaces - streaming chat, tool-calling, reasoning, plans and human-in-the-loop approvals. Themeable via a 3-layer design-token system, accessible (a11y AA), and backend-agnostic through an AG-UI-compatible event contract.
 
-agentic is a component library installed from npm (`@aaronch/agentic` + `@aaronch/agentic-themes`), not a copy-paste snippet kit. Components are standalone, signal-based, OnPush, dark/light and keyboard-first. The library never talks to an LLM: you connect your own transport (SSE / WebSocket / fixtures) that emits `AgentEvent`s, and the kit renders them.
+agentic is a component library installed from npm (`@ng-agentic/core` + `@ng-agentic/themes`), not a copy-paste snippet kit. Components are standalone, signal-based, OnPush, dark/light and keyboard-first. The library never talks to an LLM: you connect your own transport (SSE / WebSocket / fixtures) that emits `AgentEvent`s, and the kit renders them.
 
 ## Docs
 

@@ -1,4 +1,4 @@
-# @aaronch/agentic
+# @ng-agentic/core
 
 ## 0.1.0
 
@@ -9,4 +9,4 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @aaronch/agentic-themes@0.1.0
+  - @ng-agentic/themes@0.1.0

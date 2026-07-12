@@ -4,11 +4,11 @@ import {
   provideEnvironmentInitializer,
   type EnvironmentProviders,
 } from '@angular/core';
-import type { BuildThemeOptions, Preset } from '@aaronch/agentic-themes';
+import type { BuildThemeOptions, Preset } from '@ng-agentic/themes';
 import { AgenticThemeService } from './agentic-theme.service';
 
 export interface AgenticThemeConfig {
-  /** Preset to apply. Defaults to `Base` from `@aaronch/agentic-themes`. */
+  /** Preset to apply. Defaults to `Base` from `@ng-agentic/themes`. */
   preset?: Preset;
   /** `'class'` (default) toggles dark mode via a selector; `'media'` uses prefers-color-scheme. */
   darkMode?: BuildThemeOptions['darkMode'];

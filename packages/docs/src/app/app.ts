@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AgenticThemeService } from '@aaronch/agentic';
+import { AgenticThemeService } from '@ng-agentic/core';
 
 interface NavItem {
   label: string;

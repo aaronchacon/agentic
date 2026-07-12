@@ -10,12 +10,12 @@ This file concatenates the whole documentation site as markdown, for LLM consump
 ## Install
 
 ```bash
-npm i @aaronch/agentic @aaronch/agentic-themes
+npm i @ng-agentic/core @ng-agentic/themes
 ```
 
 ```ts
 // app.config.ts
-import { provideAgentic } from '@aaronch/agentic';
+import { provideAgentic } from '@ng-agentic/core';
 
 export const appConfig = {
   providers: [
@@ -79,8 +79,8 @@ Semantic tokens use `{path}` references; the compiler resolves them into `var(--
 Swap a preset or override any token and the whole library recolors - no CSS forking.
 
 ```ts
-import { provideAgentic } from '@aaronch/agentic';
-import { Aurora, definePreset } from '@aaronch/agentic-themes';
+import { provideAgentic } from '@ng-agentic/core';
+import { Aurora, definePreset } from '@ng-agentic/themes';
 
 // A built-in preset...
 provideAgentic({ theme: { preset: Aurora, darkModeSelector: '.dark' } });
@@ -130,7 +130,7 @@ The component is presentational - pass a store created with `injectAgent`.
 
 ```ts
 import { Component } from '@angular/core';
-import { AgtChat, injectAgent } from '@aaronch/agentic';
+import { AgtChat, injectAgent } from '@ng-agentic/core';
 
 @Component({
   imports: [AgtChat],

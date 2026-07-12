@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Aurora } from '@aaronch/agentic-themes';
+import { Aurora } from '@ng-agentic/themes';
 import { AgenticThemeService } from './agentic-theme.service';
 
 describe('AgenticThemeService', () => {

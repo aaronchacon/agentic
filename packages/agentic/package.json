@@ -1,5 +1,5 @@
 {
-  "name": "@aaronch/agentic",
+  "name": "@ng-agentic/core",
   "version": "0.1.0",
   "description": "Production-grade Angular UI components for AI & agent interfaces — streaming chat, tool-calling, reasoning, plans and human-in-the-loop approvals.",
   "keywords": [
@@ -30,7 +30,7 @@
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
-    "@aaronch/agentic-themes": "workspace:^",
+    "@ng-agentic/themes": "workspace:^",
     "rxjs": "^7.8.0"
   },
   "dependencies": {

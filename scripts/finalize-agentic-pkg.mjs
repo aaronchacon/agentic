@@ -1,5 +1,5 @@
 // ng-packagr strips custom package.json fields; re-add the ng-add wiring so
-// `ng add @aaronch/agentic` works from the published package.
+// `ng add @ng-agentic/core` works from the published package.
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const path = 'dist/packages/agentic/package.json';
