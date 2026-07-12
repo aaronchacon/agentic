@@ -1,6 +1,32 @@
 {
   "name": "@aaronch/agentic",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Production-grade Angular UI components for AI & agent interfaces — streaming chat, tool-calling, reasoning, plans and human-in-the-loop approvals.",
+  "keywords": [
+    "angular",
+    "ai",
+    "agent",
+    "agentic",
+    "chat",
+    "llm",
+    "ui",
+    "components",
+    "streaming",
+    "ag-ui",
+    "assistant",
+    "signals"
+  ],
+  "license": "MIT",
+  "author": "Aaron Chacón (https://github.com/aaronchacon)",
+  "homepage": "https://github.com/aaronchacon/agentic",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronchacon/agentic.git",
+    "directory": "packages/agentic"
+  },
+  "bugs": {
+    "url": "https://github.com/aaronchacon/agentic/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
@@ -12,5 +38,12 @@
     "marked-highlight": "^2.2.0",
     "highlight.js": "^11.11.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
