@@ -35,6 +35,13 @@ dark-mode aware, and restyle-able without forking CSS.
 ## Install
 
 ```bash
+ng add @aaronch/agentic
+```
+
+`ng add` installs `@aaronch/agentic-themes` and wires `provideAgentic()` into your app config for
+you. Prefer to do it by hand?
+
+```bash
 npm i @aaronch/agentic @aaronch/agentic-themes
 ```
 

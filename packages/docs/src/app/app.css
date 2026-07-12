@@ -145,7 +145,7 @@
 }
 .docs__nav-list a.is-active {
   font-weight: 600;
-  color: var(--agt-primary-color, #2563eb);
+  color: var(--agt-primary-hover-color, #1d4ed8);
   background: color-mix(
     in srgb,
     var(--agt-primary-color, #2563eb) 10%,

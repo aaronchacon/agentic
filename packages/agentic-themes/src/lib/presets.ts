@@ -66,30 +66,32 @@ export const Base: Preset = {
         // every AI project reuses. `subtleBackground` and `borderColor` derive
         // from `ai.color`, so overriding the colour keeps chips/cards harmonious.
         ai: {
-          color: '{red.600}',
+          color: '{red.700}',
           contrastColor: '{neutral.0}',
           subtleBackground: 'color-mix(in srgb, {ai.color} 10%, transparent)',
           borderColor: 'color-mix(in srgb, {ai.color} 28%, transparent)',
           gradient: 'linear-gradient(90deg, {red.500}, {violet.500})',
         },
+        // Text colours use the 700 shade so state badges (colour text on the
+        // colour-100 background) clear WCAG AA in light mode.
         state: {
           success: {
-            color: '{emerald.600}',
+            color: '{emerald.700}',
             contrastColor: '{neutral.0}',
             background: '{emerald.100}',
           },
           warn: {
-            color: '{amber.600}',
+            color: '{amber.700}',
             contrastColor: '{neutral.950}',
             background: '{amber.100}',
           },
           danger: {
-            color: '{red.600}',
+            color: '{red.700}',
             contrastColor: '{neutral.0}',
             background: '{red.100}',
           },
           info: {
-            color: '{blue.600}',
+            color: '{blue.700}',
             contrastColor: '{neutral.0}',
             background: '{blue.100}',
           },

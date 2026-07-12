@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "../../dist/packages/agentic/schematics",
+    "rootDir": "schematics",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2022",
+    "lib": ["es2022"],
+    "types": ["node"],
+    "declaration": false,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["schematics/**/*.ts"]
+}
