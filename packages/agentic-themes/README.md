@@ -1,11 +1,81 @@
-# agentic-themes
+# @ng-agentic/themes
 
-This library was generated with [Nx](https://nx.dev).
+Framework-agnostic **3-layer design tokens** and theme presets for
+[`@ng-agentic/core`](https://www.npmjs.com/package/@ng-agentic/core). Tokens compile to CSS custom
+properties, so a single value cascades across every component — swap a preset or override any token,
+nothing forks.
 
-## Building
+![License: MIT](https://img.shields.io/badge/License-MIT-informational)
 
-Run `nx build agentic-themes` to build the library.
+## The three layers
 
-## Running unit tests
+```
+primitive   →   semantic        →   component
+{red.500}       ai.color             chat.composerRadius
+#8b5cf6         primary.color        summary.accent
+```
 
-Run `nx test agentic-themes` to execute the unit tests via [Vitest](https://vitest.dev/).
+- **Primitive** — the raw palette (`red.50…950`, `violet`, `emerald`, radii, spacing).
+- **Semantic** — intent tokens that reference primitives (`primary`, `ai`, `content`, `state.*`,
+  `radius`), split by `colorScheme` (light / dark).
+- **Component** — per-component knobs that reference semantics (`chat.composerRadius`,
+  `sidebar.fabBackground`).
+
+Everything resolves to `--agt-*` CSS variables at runtime.
+
+## Install
+
+Usually pulled in automatically by `ng add @ng-agentic/core`. Standalone:
+
+```bash
+npm i @ng-agentic/themes
+```
+
+## Presets
+
+- **`Base`** — light/dark, Angular-style red→violet AI accent.
+- **`Aurora`** — a PrimeNG-Aura-style noir preset (dark-first).
+
+```ts
+import { provideAgentic } from '@ng-agentic/core';
+import { Aurora } from '@ng-agentic/themes';
+
+provideAgentic({ theme: { preset: Aurora, darkModeSelector: '.dark' } });
+```
+
+## Build your own with `definePreset`
+
+Merge overrides on top of any preset — deep-partial, type-safe:
+
+```ts
+import { Aurora, definePreset } from '@ng-agentic/themes';
+
+export const Brand = definePreset(Aurora, {
+  semantic: {
+    radius: { lg: '20px' },
+    colorScheme: {
+      light: { ai: { color: '{red.700}' } },
+      dark: { ai: { color: '{red.400}' } },
+    },
+  },
+});
+```
+
+Use `{token.ref}` to reference other tokens (and `color-mix()` for derived values) instead of
+hard-coding hex — the resolver expands them.
+
+## Runtime restyling
+
+Inject `AgenticThemeService` from `@ng-agentic/core` to swap presets, merge token overrides or
+toggle dark mode after bootstrap:
+
+```ts
+const theme = inject(AgenticThemeService);
+theme.setPreset(Aurora);
+theme.updatePreset({ semantic: { colorScheme: { light: { ai: { color: '#059669' } } } } });
+theme.toggleDarkMode();
+```
+
+## License
+
+MIT © [Aaron Chacón](https://github.com/aaronchacon)

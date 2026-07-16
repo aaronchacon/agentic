@@ -1,9 +1,10 @@
 # agentic
 
-**The agent-experience UI layer for Angular.** Production-grade components for building AI &
-agent interfaces — streaming chat, tool-calling, reasoning, execution plans and
-human-in-the-loop approvals. Themeable design tokens, accessible, and backend-agnostic through an
-[AG-UI](https://github.com/ag-ui-protocol/ag-ui)-compatible event contract.
+**Agent UI your compliance team can sign off on.** Production-grade Angular components for AI &
+agent interfaces — streaming chat, visible tool-calling, execution plans, human-in-the-loop
+approvals and AI provenance. Themeable design tokens, accessible (a11y AA), and backend-agnostic
+through an [AG-UI](https://github.com/ag-ui-protocol/ag-ui)-compatible event contract. Built for
+teams putting AI into regulated products.
 
 ![Angular](https://img.shields.io/badge/Angular-21-dd0031?logo=angular&logoColor=white)
 ![Signals](https://img.shields.io/badge/signals-zoneless-8514f5)
@@ -15,6 +16,18 @@ human-in-the-loop approvals. Themeable design tokens, accessible, and backend-ag
 > emits `AgentEvent`s, and the kit renders them.
 
 <!-- TODO: hero.gif — streaming chat + tool-call + approval. Live demos: <deployed docs URL> -->
+
+## Built for regulated products
+
+In regulated domains — fintech, KYC, legal, health — AI features carry three extra expectations,
+and `agentic` treats them as first-class instead of edge cases:
+
+- **A human can intervene** — `<agt-approval>` gates any action behind approve / edit / reject.
+- **AI content is distinguishable from human content** — one consistent AI accent and provenance
+  labelling across chat, summaries and form fields.
+- **Decisions are traceable** — visible tool-call cards and execution-trace plans, step by step.
+
+> agentic gives you the UI building blocks — compliance itself is your product's job.
 
 ## Why
 
