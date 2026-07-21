@@ -8,3 +8,7 @@ allowBuilds:
   nx: true
   unrs-resolver: true
   '@tailwindcss/oxide': true
+  # native/build deps pulled in by the Analog static prerender (nitro)
+  less: true
+  lmdb: true
+  msgpackr-extract: true
