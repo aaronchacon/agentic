@@ -3,7 +3,7 @@ import type { Localized } from '../../i18n/i18n';
 const EN = {
   eyebrow: 'Components',
   title: 'Chat',
-  lead: 'A ChatGPT-style chat surface: streaming markdown with syntax-highlighted code blocks, a collapsible reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.',
+  lead: 'A full chat surface: streaming markdown with syntax-highlighted code blocks, a collapsible reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.',
   basicTitle: 'Basic',
   basicIntro:
     'The component is presentational: pass a store created with <code>injectAgent</code>. Connect your own transport (SSE/WebSocket) or replay fixtures — the kit never talks to an LLM.',
@@ -23,7 +23,7 @@ export const CHAT_I18N: Localized<typeof EN> = {
   es: {
     eyebrow: 'Componentes',
     title: 'Chat',
-    lead: 'Una superficie de chat al estilo ChatGPT: markdown en streaming con bloques de código resaltados, traza de razonamiento plegable, indicador de pensamiento, estado vacío con sugerencias y un compositor que crece automáticamente.',
+    lead: 'Una superficie de chat completa: markdown en streaming con bloques de código resaltados, traza de razonamiento plegable, indicador de pensamiento, estado vacío con sugerencias y un compositor que crece automáticamente.',
     basicTitle: 'Básico',
     basicIntro:
       'El componente es presentacional: pásale un store creado con <code>injectAgent</code>. Conecta tu propio transport (SSE/WebSocket) o reproduce fixtures — el kit nunca habla con un LLM.',

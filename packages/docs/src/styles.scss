@@ -36,6 +36,15 @@ a {
   color: var(--agt-primary-color, #2563eb);
 }
 
+/* Theme-gradient text accent. Global on purpose: it's used inside localized
+   strings injected via [innerHTML], which scoped component styles can't reach. */
+.grad {
+  background: var(--agt-ai-gradient, linear-gradient(90deg, #8b5cf6, #06b6d4));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ---------- Component doc pages ---------- */
 .doc {
   max-width: 880px;

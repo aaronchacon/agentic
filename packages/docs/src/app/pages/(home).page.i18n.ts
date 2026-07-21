@@ -60,7 +60,7 @@ export const HOME_I18N: Localized<typeof EN> = {
     hero: {
       eyebrow: 'Angular 21 · signals · compatible con AG-UI',
       title:
-        'UI de agentes que tu <span class="grad">equipo de compliance</span> puede aprobar',
+        'UI de agentes con el visto bueno de tu <span class="grad">equipo de compliance</span>',
       lead: 'Chat en streaming, tool-calling visible, planes de ejecución, aprobaciones human-in-the-loop y procedencia de IA — componentes Angular de calidad de producción para equipos que integran IA en productos regulados.',
       getStarted: 'Empieza ahora →',
       viewOnGitHub: 'Ver en GitHub',

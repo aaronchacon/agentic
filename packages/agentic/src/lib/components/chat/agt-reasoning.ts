@@ -13,7 +13,7 @@ import { AgtStreamText, type StreamSpeed } from './agt-stream-text';
 const AUTO_CLOSE_DELAY = 1000;
 
 /**
- * Collapsible chain-of-thought display (ChatGPT/Claude style). Auto-opens while
+ * Collapsible chain-of-thought display. Auto-opens while
  * reasoning streams and auto-closes ~1s after it finishes; shows a shimmering
  * "Thinking…" while active and "Thought for Ns" once done. The reasoning text
  * streams inside via {@link AgtStreamText}.

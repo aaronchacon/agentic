@@ -1,10 +1,9 @@
 @use '../../styles/tokens' as t;
 
+/* No overflow clip here: the hero glow must bleed past the main's padding to
+   the viewport edge. html/body { overflow-x: clip } already prevents panning. */
 .page {
   position: relative;
-  /* Contain the glow horizontally (it hangs off the right edge by design)
-     while leaving vertical overflow visible. */
-  overflow-x: clip;
 }
 
 /* Ambient glow behind the hero */
@@ -127,12 +126,8 @@
   }
 }
 
-.grad {
-  background: var(--agt-ai-gradient, linear-gradient(90deg, #8b5cf6, #06b6d4));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* .grad lives in styles.scss: it's injected via [innerHTML] (localized hero
+   title), so component-scoped styles can't reach it. */
 
 .btn {
   display: inline-flex;
@@ -277,7 +272,9 @@
       border-radius: 12px;
     }
 
-    strong {
+    /* The <li> content is localized and injected via [innerHTML], so the
+       <strong> lacks the scoping attribute — pierce with ::ng-deep. */
+    ::ng-deep strong {
       color: var(--agt-content-color, #0f172a);
     }
   }

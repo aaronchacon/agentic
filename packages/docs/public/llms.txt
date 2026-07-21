@@ -13,7 +13,7 @@ Built for regulated products (fintech, KYC, legal, health): a human can interven
 
 ## Components
 
-- [Chat](/components/chat): ChatGPT-style streaming chat - markdown with syntax-highlighted code, a collapsible reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.
+- [Chat](/components/chat): Full streaming chat - markdown with syntax-highlighted code, a collapsible reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.
 - [Tool Call](/components/tool-call): Visualizes a tool invocation - running (spinner + steps), success (result) or error (detail), with a syntax-highlighted JSON block.
 - [Suggestion](/components/suggestion): A form field with an AI suggestion shown as ghost text; tracks provenance (suggested -> accepted -> edited by human) and a confidence badge.
 - [Summary](/components/summary): An AI-generated summary card, clearly marked as AI content, with regenerate + copy actions and a loading skeleton.

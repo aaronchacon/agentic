@@ -1,6 +1,6 @@
 /**
- * Token tree model (inspired by PrimeNG's 3-tier design token system:
- * primitive -> semantic -> component). Values are plain CSS strings/numbers and
+ * Token tree model — a 3-tier design token system
+ * (primitive -> semantic -> component). Values are plain CSS strings/numbers and
  * may reference other tokens with the `{path.to.token}` syntax, which is compiled
  * to `var(--agt-path-to-token)`.
  */

@@ -13,7 +13,7 @@ import { AgtReasoning } from './agt-reasoning';
 import { AgtStreamText, type StreamSpeed } from './agt-stream-text';
 
 /**
- * ChatGPT-style chat surface: a centered conversation column with right-aligned
+ * Full chat surface: a centered conversation column with right-aligned
  * user bubbles and full-width assistant turns (no avatar), smooth markdown
  * streaming, a collapsible reasoning block, a thinking indicator, an empty state
  * with suggestions, and an auto-growing rounded composer.
