@@ -1,4 +1,8 @@
-import { Component, afterNextRender } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   AgtChat,
@@ -29,6 +33,7 @@ const reply: FixtureScript = [
 ];
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, AgtChat],
   templateUrl: './(home).page.html',
   styleUrl: './(home).page.scss',

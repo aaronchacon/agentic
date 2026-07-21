@@ -1,3 +1,5 @@
+@use '../../styles/tokens' as t;
+
 .page {
   position: relative;
   /* Contain the glow horizontally (it hangs off the right edge by design)
@@ -21,7 +23,7 @@
   );
   filter: blur(20px);
 
-  @media (max-width: 860px) {
+  @media (max-width: t.$bp-mobile) {
     right: -160px;
   }
 }
@@ -114,7 +116,7 @@
     overflow: hidden;
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: t.$bp-mobile) {
     grid-template-columns: 1fr;
     gap: 36px;
     padding-top: 16px;

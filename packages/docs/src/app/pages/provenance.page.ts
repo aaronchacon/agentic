@@ -1,4 +1,8 @@
-import { Component, afterNextRender } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+} from '@angular/core';
 import {
   AgtChat,
   AgtSuggestion,
@@ -28,6 +32,7 @@ const summary = `**Low risk.** The passport was extracted with 98% confidence an
 Recommendation: **approve** with a standard 12-month review.`;
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DocDemo, AgtSummary, AgtSuggestion, AgtChat],
   templateUrl: './provenance.page.html',
 })
