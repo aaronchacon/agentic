@@ -33,8 +33,13 @@ npm i @ng-agentic/themes
 
 ## Presets
 
-- **`Base`** — light/dark, Angular-style red→violet AI accent.
-- **`Aurora`** — a PrimeNG-Aura-style noir preset (dark-first).
+- **`Base`** — light/dark, red→violet AI accent.
+- **`Aurora`** — a noir, dark-first preset.
+
+<p>
+  <img src="https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/theme-base.png" alt="Base preset — red-violet AI accent" width="49%" />
+  <img src="https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/theme-aurora.png" alt="Aurora preset — monochrome noir" width="49%" />
+</p>
 
 ```ts
 import { provideAgentic } from '@ng-agentic/core';

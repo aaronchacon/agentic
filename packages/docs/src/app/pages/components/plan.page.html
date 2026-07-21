@@ -1,17 +1,13 @@
 <article class="doc">
   <div class="doc__head">
-    <p class="doc__eyebrow">Components</p>
-    <h1 class="doc__title">Plan</h1>
-    <p class="doc__lead">
-      The agent's plan / execution-trace as a vertical timeline of steps —
-      pending, active, done or error — with a progress summary in the header.
-      Collapsible.
-    </p>
+    <p class="doc__eyebrow">{{ t().eyebrow }}</p>
+    <h1 class="doc__title">{{ t().title }}</h1>
+    <p class="doc__lead">{{ t().lead }}</p>
     <app-doc-md [markdown]="md" />
   </div>
 
   <section class="doc__section">
-    <h2>Timeline</h2>
+    <h2>{{ t().timelineTitle }}</h2>
     <app-doc-demo [code]="code">
       <div style="max-width: 520px; margin: 0 auto; width: 100%">
         <agt-plan title="Verification" [steps]="steps" />
@@ -20,7 +16,7 @@
   </section>
 
   <section class="doc__section">
-    <h2>API</h2>
-    <app-doc-props [rows]="props" />
+    <h2>{{ t().apiTitle }}</h2>
+    <app-doc-props [rows]="props()" />
   </section>
 </article>

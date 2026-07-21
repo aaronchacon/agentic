@@ -124,7 +124,7 @@ Key semantic tokens -> CSS variables:
 
 ## Chat (`<agt-chat>`)
 
-A ChatGPT-style chat surface: streaming markdown with syntax-highlighted code blocks, a collapsible
+A full chat surface: streaming markdown with syntax-highlighted code blocks, a collapsible
 reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.
 The component is presentational - pass a store created with `injectAgent`.
 

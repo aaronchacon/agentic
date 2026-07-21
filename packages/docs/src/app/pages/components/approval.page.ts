@@ -1,65 +1,53 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { AgtApproval } from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo/doc-demo';
 import { DocProps } from '../../ui/doc-props/doc-props';
-import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import {
+  propsToMarkdown,
+  withDescriptions,
+  type BaseProp,
+} from '../../ui/doc-props/doc-props.util';
 import type { DocProp } from '../../model/doc-prop.model';
 import { DocMd } from '../../ui/doc-md/doc-md';
+import { injectT } from '../../i18n/i18n';
+import { APPROVAL_I18N } from './approval.page.i18n';
+
+const BASE_PROPS: BaseProp<keyof (typeof APPROVAL_I18N)['en']['props']>[] = [
+  { name: 'action', type: 'string', required: true },
+  { name: 'title', type: 'string', default: "'Approval required'" },
+  { name: 'detail', type: 'unknown' },
+  { name: 'editable', type: 'boolean', default: 'false' },
+  {
+    name: 'state',
+    type: "'pending' | 'approved' | 'rejected'",
+    default: "'pending'",
+  },
+];
+
+const BASE_EVENTS: BaseProp<keyof (typeof APPROVAL_I18N)['en']['events']>[] = [
+  { name: 'approve', type: 'void' },
+  { name: 'reject', type: 'void' },
+  { name: 'edit', type: 'void' },
+];
+
+/** English rows for the copied markdown, which stays English (llms.txt parity). */
+const PROPS_EN = withDescriptions(BASE_PROPS, APPROVAL_I18N.en.props);
+
+const EVENTS_EN = withDescriptions(BASE_EVENTS, APPROVAL_I18N.en.events);
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AgtApproval, DocDemo, DocProps, DocMd],
   templateUrl: './approval.page.html',
 })
 export default class ApprovalPage {
-  protected readonly props: DocProp[] = [
-    {
-      name: 'action',
-      type: 'string',
-      required: true,
-      description: 'The action being gated, shown to the reviewer.',
-    },
-    {
-      name: 'title',
-      type: 'string',
-      default: "'Approval required'",
-      description: 'Card heading.',
-    },
-    {
-      name: 'detail',
-      type: 'unknown',
-      description: 'Optional payload rendered as a JSON block.',
-    },
-    {
-      name: 'editable',
-      type: 'boolean',
-      default: 'false',
-      description: 'Show an Edit action alongside Approve / Reject.',
-    },
-    {
-      name: 'state',
-      type: "'pending' | 'approved' | 'rejected'",
-      default: "'pending'",
-      description: 'Current decision (two-way, [(state)]).',
-    },
-  ];
-
-  protected readonly events: DocProp[] = [
-    {
-      name: 'approve',
-      type: 'void',
-      description: 'Emitted when the reviewer approves.',
-    },
-    {
-      name: 'reject',
-      type: 'void',
-      description: 'Emitted when the reviewer rejects.',
-    },
-    {
-      name: 'edit',
-      type: 'void',
-      description: 'Emitted when the Edit action is pressed (if editable).',
-    },
-  ];
+  protected readonly t = injectT(APPROVAL_I18N);
+  protected readonly props = computed<DocProp[]>(() =>
+    withDescriptions(BASE_PROPS, this.t().props),
+  );
+  protected readonly events = computed<DocProp[]>(() =>
+    withDescriptions(BASE_EVENTS, this.t().events),
+  );
 
   protected readonly detail = {
     risk: 'low',
@@ -76,19 +64,18 @@ export default class ApprovalPage {
     `  (reject)="agent.reject(id)" />`,
   ].join('\n');
 
-  protected get md(): string {
-    return [
-      '# Approval',
-      '',
-      'A human-in-the-loop gate: the agent pauses and asks a person to approve, edit or reject an action before proceeding — non-negotiable in regulated flows. Resolves to an approved or rejected state.',
-      '',
-      '```html',
-      this.code,
-      '```',
-      '',
-      propsToMarkdown(this.props),
-      '',
-      propsToMarkdown(this.events, 'Event'),
-    ].join('\n');
-  }
+  // Built once — locale-independent (the copied markdown stays English).
+  protected readonly md = [
+    '# Approval',
+    '',
+    APPROVAL_I18N.en.lead,
+    '',
+    '```html',
+    this.code,
+    '```',
+    '',
+    propsToMarkdown(PROPS_EN),
+    '',
+    propsToMarkdown(EVENTS_EN, 'Event'),
+  ].join('\n');
 }

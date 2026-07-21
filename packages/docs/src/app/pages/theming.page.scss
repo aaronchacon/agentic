@@ -1,3 +1,5 @@
+@use '../../styles/tokens' as t;
+
 /* ---------- Playground ---------- */
 .pg {
   display: grid;
@@ -219,7 +221,9 @@
     }
   }
 
-  @media (max-width: 720px) {
+  /* Match the shell's mobile breakpoint so the playground stacks before the
+     drawer/backdrop kick in. */
+  @media (max-width: t.$bp-mobile) {
     grid-template-columns: 1fr;
 
     .pg__controls {

@@ -1,17 +1,13 @@
 <article class="doc">
   <div class="doc__head">
-    <p class="doc__eyebrow">Components</p>
-    <h1 class="doc__title">Tool Call</h1>
-    <p class="doc__lead">
-      An in-conversation card that visualizes a tool invocation — running
-      (spinner + optional steps), success (green, with the result) or error
-      (with the detail). The result renders as a syntax-highlighted JSON block.
-    </p>
+    <p class="doc__eyebrow">{{ t().eyebrow }}</p>
+    <h1 class="doc__title">{{ t().title }}</h1>
+    <p class="doc__lead">{{ t().lead }}</p>
     <app-doc-md [markdown]="md" />
   </div>
 
   <section class="doc__section">
-    <h2>States</h2>
+    <h2>{{ t().statesTitle }}</h2>
     <app-doc-demo [code]="code">
       <div
         style="
@@ -31,7 +27,7 @@
   </section>
 
   <section class="doc__section">
-    <h2>API</h2>
-    <app-doc-props [rows]="props" />
+    <h2>{{ t().apiTitle }}</h2>
+    <app-doc-props [rows]="props()" />
   </section>
 </article>

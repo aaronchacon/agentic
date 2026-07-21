@@ -1,30 +1,35 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { AgtPlan, type PlanStep } from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo/doc-demo';
 import { DocProps } from '../../ui/doc-props/doc-props';
-import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import {
+  propsToMarkdown,
+  withDescriptions,
+  type BaseProp,
+} from '../../ui/doc-props/doc-props.util';
 import type { DocProp } from '../../model/doc-prop.model';
 import { DocMd } from '../../ui/doc-md/doc-md';
+import { injectT } from '../../i18n/i18n';
+import { PLAN_I18N } from './plan.page.i18n';
+
+const BASE_PROPS: BaseProp<keyof (typeof PLAN_I18N)['en']['props']>[] = [
+  { name: 'steps', type: 'PlanStep[]', required: true },
+  { name: 'title', type: 'string', default: "'Plan'" },
+];
+
+/** English rows for the copied markdown, which stays English (llms.txt parity). */
+const PROPS_EN = withDescriptions(BASE_PROPS, PLAN_I18N.en.props);
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AgtPlan, DocDemo, DocProps, DocMd],
   templateUrl: './plan.page.html',
 })
 export default class PlanPage {
-  protected readonly props: DocProp[] = [
-    {
-      name: 'steps',
-      type: 'PlanStep[]',
-      required: true,
-      description: 'Ordered steps: { id, label, status }.',
-    },
-    {
-      name: 'title',
-      type: 'string',
-      default: "'Plan'",
-      description: 'Header title.',
-    },
-  ];
+  protected readonly t = injectT(PLAN_I18N);
+  protected readonly props = computed<DocProp[]>(() =>
+    withDescriptions(BASE_PROPS, this.t().props),
+  );
 
   protected readonly steps: PlanStep[] = [
     { id: '1', label: 'Extract document fields', status: 'done' },
@@ -40,17 +45,16 @@ export default class PlanPage {
     `// fed from the store's step events`,
   ].join('\n');
 
-  protected get md(): string {
-    return [
-      '# Plan',
-      '',
-      "The agent's plan / execution-trace as a vertical timeline of steps — pending, active, done or error — with a progress summary in the header. Collapsible.",
-      '',
-      '```html',
-      this.code,
-      '```',
-      '',
-      propsToMarkdown(this.props),
-    ].join('\n');
-  }
+  // Built once — locale-independent (the copied markdown stays English).
+  protected readonly md = [
+    '# Plan',
+    '',
+    PLAN_I18N.en.lead,
+    '',
+    '```html',
+    this.code,
+    '```',
+    '',
+    propsToMarkdown(PROPS_EN),
+  ].join('\n');
 }

@@ -1,5 +1,11 @@
 # @ng-agentic/themes
 
+## 0.1.1
+
+### Patch Changes
+
+- Self-referential copy across READMEs and published JSDoc (no third-party library references), component demo media (streaming/progression gifs and screenshots) in the READMEs, and package homepage pointing to the docs site.
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,3 +1,7 @@
+@use '../../styles/tokens' as t;
+
+/* No overflow clip here: the hero glow must bleed past the main's padding to
+   the viewport edge. html/body { overflow-x: clip } already prevents panning. */
 .page {
   position: relative;
 }
@@ -18,7 +22,7 @@
   );
   filter: blur(20px);
 
-  @media (max-width: 860px) {
+  @media (max-width: t.$bp-mobile) {
     right: -160px;
   }
 }
@@ -111,7 +115,7 @@
     overflow: hidden;
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: t.$bp-mobile) {
     grid-template-columns: 1fr;
     gap: 36px;
     padding-top: 16px;
@@ -122,12 +126,8 @@
   }
 }
 
-.grad {
-  background: var(--agt-ai-gradient, linear-gradient(90deg, #8b5cf6, #06b6d4));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* .grad lives in styles.scss: it's injected via [innerHTML] (localized hero
+   title), so component-scoped styles can't reach it. */
 
 .btn {
   display: inline-flex;
@@ -169,7 +169,8 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* min(100%, …) keeps the min track from forcing overflow on narrow phones */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 16px;
   max-width: 1120px;
   margin: 0 auto;
@@ -255,7 +256,7 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
     gap: 14px;
     margin: 0 0 22px;
     padding: 0;
@@ -271,7 +272,9 @@
       border-radius: 12px;
     }
 
-    strong {
+    /* The <li> content is localized and injected via [innerHTML], so the
+       <strong> lacks the scoping attribute — pierce with ::ng-deep. */
+    ::ng-deep strong {
       color: var(--agt-content-color, #0f172a);
     }
   }

@@ -1,4 +1,9 @@
-import { Component, afterNextRender } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+  computed,
+} from '@angular/core';
 import {
   AgtChat,
   createFixtureTransport,
@@ -7,9 +12,15 @@ import {
 } from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo/doc-demo';
 import { DocProps } from '../../ui/doc-props/doc-props';
-import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import {
+  propsToMarkdown,
+  withDescriptions,
+  type BaseProp,
+} from '../../ui/doc-props/doc-props.util';
 import type { DocProp } from '../../model/doc-prop.model';
 import { DocMd } from '../../ui/doc-md/doc-md';
+import { injectT } from '../../i18n/i18n';
+import { CHAT_I18N } from './chat.page.i18n';
 
 const reply: FixtureScript = [
   {
@@ -30,49 +41,28 @@ const reply: FixtureScript = [
   { type: 'done' },
 ];
 
+const BASE_PROPS: BaseProp<keyof (typeof CHAT_I18N)['en']['props']>[] = [
+  { name: 'store', type: 'AgentStore', required: true },
+  { name: 'suggestions', type: 'string[]', default: '[]' },
+  { name: 'emptyTitle', type: 'string', default: "'What can I help with?'" },
+  { name: 'placeholder', type: 'string', default: "'Ask anything'" },
+  { name: 'ariaLabel', type: 'string', default: "'Message'" },
+  { name: 'streamSpeed', type: 'StreamSpeed', default: "'smooth'" },
+];
+
+/** English rows for the copied markdown, which stays English (llms.txt parity). */
+const PROPS_EN = withDescriptions(BASE_PROPS, CHAT_I18N.en.props);
+
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AgtChat, DocDemo, DocProps, DocMd],
   templateUrl: './chat.page.html',
 })
 export default class ChatPage {
-  protected readonly props: DocProp[] = [
-    {
-      name: 'store',
-      type: 'AgentStore',
-      required: true,
-      description: 'Agent store created with injectAgent().',
-    },
-    {
-      name: 'suggestions',
-      type: 'string[]',
-      default: '[]',
-      description: 'Prompt chips shown in the empty state.',
-    },
-    {
-      name: 'emptyTitle',
-      type: 'string',
-      default: "'What can I help with?'",
-      description: 'Title shown in the empty state.',
-    },
-    {
-      name: 'placeholder',
-      type: 'string',
-      default: "'Ask anything'",
-      description: 'Composer placeholder text.',
-    },
-    {
-      name: 'ariaLabel',
-      type: 'string',
-      default: "'Message'",
-      description: 'Accessible label for the composer.',
-    },
-    {
-      name: 'streamSpeed',
-      type: 'StreamSpeed',
-      default: "'smooth'",
-      description: "'instant' | 'slow' | 'smooth' | 'fast', or words/second.",
-    },
-  ];
+  protected readonly t = injectT(CHAT_I18N);
+  protected readonly props = computed<DocProp[]>(() =>
+    withDescriptions(BASE_PROPS, this.t().props),
+  );
 
   protected readonly suggestions = [
     'Summarize this case',
@@ -96,19 +86,18 @@ export default class ChatPage {
     `}`,
   ].join('\n');
 
-  protected get md(): string {
-    return [
-      '# Chat',
-      '',
-      'A ChatGPT-style chat surface: streaming markdown with syntax-highlighted code blocks, a collapsible reasoning trace, a thinking indicator, an empty state with suggestions and an auto-growing composer.',
-      '',
-      '```ts',
-      this.code,
-      '```',
-      '',
-      propsToMarkdown(this.props),
-    ].join('\n');
-  }
+  // Built once — locale-independent (the copied markdown stays English).
+  protected readonly md = [
+    '# Chat',
+    '',
+    CHAT_I18N.en.lead,
+    '',
+    '```ts',
+    this.code,
+    '```',
+    '',
+    propsToMarkdown(PROPS_EN),
+  ].join('\n');
 
   constructor() {
     afterNextRender(() => this.store.send('Summarize this case'));

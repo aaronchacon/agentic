@@ -11,9 +11,11 @@ teams putting AI into regulated products.
 ![License: MIT](https://img.shields.io/badge/License-MIT-informational)
 ![Status](https://img.shields.io/badge/status-v0.1%20pre--release-f11653)
 
-> It's a component library (installed from npm, PrimeNG-style) — not a copy-paste snippet kit. The
+> It's a proper component library — installed from npm, themed by design tokens — not a copy-paste snippet kit. The
 > library never talks to an LLM: you connect your own transport (SSE / WebSocket / fixtures) that
 > emits `AgentEvent`s, and the kit renders them.
+
+![agt-chat streaming a reply with a collapsible reasoning trace](https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/chat.gif)
 
 <!-- TODO: hero.gif — streaming chat + tool-call + approval. Live demos: <deployed docs URL> -->
 
@@ -103,13 +105,20 @@ agent.approve(id);
 
 | Component          | What it is                                                                                     |
 | ------------------ | ---------------------------------------------------------------------------------------------- |
-| `<agt-chat>`       | ChatGPT-style chat — streaming markdown, code + copy, reasoning trace, empty state, composer.  |
+| `<agt-chat>`       | Full chat surface — streaming markdown, code + copy, reasoning trace, empty state, composer.   |
 | `<agt-tool-call>`  | Tool invocation card — running (spinner + steps), success (JSON result) or error.              |
 | `<agt-suggestion>` | AI form suggestion as ghost text with accept/reject, confidence, and provenance tracking.      |
 | `<agt-summary>`    | AI-generated summary card — marked as AI content, with regenerate/copy and a loading skeleton. |
 | `<agt-sidebar>`    | Collapsible agent side panel with a floating launcher and unread badge (focus + `inert`).      |
 | `<agt-plan>`       | Agent execution-trace as a vertical timeline (pending / active / done / error).                |
 | `<agt-approval>`   | Human-in-the-loop gate — approve, edit or reject an action before the agent proceeds.          |
+
+![agt-tool-call in its three states: running with steps, completed with a JSON result, and error](https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/tool-call.gif)
+
+<p>
+  <img src="https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/plan.gif" alt="agt-plan execution timeline with done, active and pending steps" width="49%" />
+  <img src="https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/approval.png" alt="agt-approval human-in-the-loop gate with approve, edit and reject actions" width="49%" />
+</p>
 
 ## The contract (AG-UI compatible)
 
@@ -144,7 +153,7 @@ so changing one value cascades everywhere. Swap a preset or override any token; 
 import { provideAgentic } from '@ng-agentic/core';
 import { Aurora, definePreset } from '@ng-agentic/themes';
 
-// A built-in preset (Base = Angular red→violet accent; Aurora = PrimeNG-Aura-style noir)...
+// A built-in preset (Base = red→violet accent; Aurora = noir, dark-first)...
 provideAgentic({ theme: { preset: Aurora, darkModeSelector: '.dark' } });
 
 // ...or your own brand, merged on top of one:

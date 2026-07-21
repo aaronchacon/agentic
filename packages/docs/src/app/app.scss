@@ -1,3 +1,5 @@
+@use '../styles/tokens' as t;
+
 :host {
   display: block;
   min-height: 100vh;
@@ -14,12 +16,12 @@
   &__header {
     position: sticky;
     top: 0;
-    z-index: 40;
+    z-index: t.$z-header;
     display: flex;
     gap: 16px;
     align-items: center;
     justify-content: space-between;
-    height: 56px;
+    height: t.$header-h;
     padding: 0 20px;
     background: color-mix(
       in srgb,
@@ -101,6 +103,12 @@
     }
   }
 
+  &__lang-btn {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
   &__menu-btn {
     display: none;
   }
@@ -116,10 +124,10 @@
 
   &__sidebar {
     position: sticky;
-    top: 56px;
+    top: t.$header-h;
     flex: 0 0 auto;
     width: 240px;
-    height: calc(100vh - 56px);
+    height: calc(100vh - #{t.$header-h});
     padding: 24px 12px;
     overflow-y: auto;
   }
@@ -175,16 +183,30 @@
     padding: 40px clamp(20px, 4vw, 56px) 80px;
   }
 
-  @media (max-width: 860px) {
+  /* Material-style scrim behind the mobile drawer; desktop never shows it. */
+  &__backdrop {
+    display: none;
+  }
+
+  @media (max-width: t.$bp-mobile) {
     &__menu-btn {
       display: inline-flex;
     }
 
+    &__backdrop {
+      display: block;
+      position: fixed;
+      inset: t.$header-h 0 0 0;
+      z-index: t.$z-backdrop;
+      background: rgb(0 0 0 / 0.45);
+      animation: docs-backdrop-in 0.2s ease;
+    }
+
     &__sidebar {
       position: fixed;
-      top: 56px;
+      top: t.$header-h;
       left: 0;
-      z-index: 30;
+      z-index: t.$z-sidebar;
       width: 260px;
       background: var(--agt-content-background, #fff);
       border-right: 1px solid var(--agt-content-border-color, #e5e5e5);
@@ -195,5 +217,14 @@
         transform: translateX(0);
       }
     }
+  }
+}
+
+@keyframes docs-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

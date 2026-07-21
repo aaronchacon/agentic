@@ -1,4 +1,8 @@
-import { Component, afterNextRender } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+} from '@angular/core';
 import {
   AgtChat,
   AgtSuggestion,
@@ -8,6 +12,8 @@ import {
   type FixtureScript,
 } from '@ng-agentic/core';
 import { DocDemo } from '../ui/doc-demo/doc-demo';
+import { injectT } from '../i18n/i18n';
+import { PROVENANCE_I18N } from './provenance.page.i18n';
 
 const chatReply: FixtureScript = [
   {
@@ -26,10 +32,13 @@ const summary = `**Low risk.** The passport was extracted with 98% confidence an
 Recommendation: **approve** with a standard 12-month review.`;
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DocDemo, AgtSummary, AgtSuggestion, AgtChat],
   templateUrl: './provenance.page.html',
 })
 export default class ProvenancePage {
+  protected readonly t = injectT(PROVENANCE_I18N);
+
   protected readonly summary = summary;
   protected readonly suggestions = [
     'Summarize this case',

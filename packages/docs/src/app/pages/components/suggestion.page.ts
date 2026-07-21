@@ -1,53 +1,39 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { AgtSuggestion } from '@ng-agentic/core';
 import { DocDemo } from '../../ui/doc-demo/doc-demo';
 import { DocProps } from '../../ui/doc-props/doc-props';
-import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
+import {
+  propsToMarkdown,
+  withDescriptions,
+  type BaseProp,
+} from '../../ui/doc-props/doc-props.util';
 import type { DocProp } from '../../model/doc-prop.model';
 import { DocMd } from '../../ui/doc-md/doc-md';
+import { injectT } from '../../i18n/i18n';
+import { SUGGESTION_I18N } from './suggestion.page.i18n';
+
+const BASE_PROPS: BaseProp<keyof (typeof SUGGESTION_I18N)['en']['props']>[] = [
+  { name: 'label', type: 'string', default: "''" },
+  { name: 'suggestion', type: 'string | null', default: 'null' },
+  { name: 'confidence', type: 'number' },
+  { name: 'placeholder', type: 'string', default: "''" },
+  { name: 'value', type: 'string', default: "''" },
+  { name: 'accepted', type: 'boolean', default: 'false' },
+];
+
+/** English rows for the copied markdown, which stays English (llms.txt parity). */
+const PROPS_EN = withDescriptions(BASE_PROPS, SUGGESTION_I18N.en.props);
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AgtSuggestion, DocDemo, DocProps, DocMd],
   templateUrl: './suggestion.page.html',
 })
 export default class SuggestionPage {
-  protected readonly props: DocProp[] = [
-    {
-      name: 'label',
-      type: 'string',
-      default: "''",
-      description: 'Field label.',
-    },
-    {
-      name: 'suggestion',
-      type: 'string | null',
-      default: 'null',
-      description: 'AI-suggested value, shown as ghost text.',
-    },
-    {
-      name: 'confidence',
-      type: 'number',
-      description: 'Confidence 0–1, shown as a percentage badge.',
-    },
-    {
-      name: 'placeholder',
-      type: 'string',
-      default: "''",
-      description: 'Input placeholder text.',
-    },
-    {
-      name: 'value',
-      type: 'string',
-      default: "''",
-      description: 'The field value (two-way, [(value)]).',
-    },
-    {
-      name: 'accepted',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the value came from the AI suggestion (two-way).',
-    },
-  ];
+  protected readonly t = injectT(SUGGESTION_I18N);
+  protected readonly props = computed<DocProp[]>(() =>
+    withDescriptions(BASE_PROPS, this.t().props),
+  );
 
   protected readonly code = [
     `<agt-suggestion`,
@@ -58,17 +44,16 @@ export default class SuggestionPage {
     `  [(accepted)]="fromAi" />`,
   ].join('\n');
 
-  protected get md(): string {
-    return [
-      '# Suggestion',
-      '',
-      'A form field with an AI suggestion shown as ghost text, with accept/reject controls and a confidence badge. Tracks provenance for compliance — suggested → accepted (AI) → edited by human.',
-      '',
-      '```html',
-      this.code,
-      '```',
-      '',
-      propsToMarkdown(this.props),
-    ].join('\n');
-  }
+  // Built once — locale-independent (the copied markdown stays English).
+  protected readonly md = [
+    '# Suggestion',
+    '',
+    SUGGESTION_I18N.en.lead,
+    '',
+    '```html',
+    this.code,
+    '```',
+    '',
+    propsToMarkdown(PROPS_EN),
+  ].join('\n');
 }

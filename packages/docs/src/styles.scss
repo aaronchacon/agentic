@@ -7,6 +7,9 @@
 html,
 body {
   height: 100%;
+  /* Mobile safety net: decorative absolutes (hero glow) must never create a
+     horizontal pan. `clip` forbids overflow without creating a scroll container. */
+  overflow-x: clip;
 }
 
 body {
@@ -22,10 +25,24 @@ body {
   color: var(--agt-content-color, #0f172a);
   background: var(--agt-surface-50, #f8fafc);
   -webkit-font-smoothing: antialiased;
+
+  /* Set while the mobile nav drawer is open (see App): no scrolling behind it. */
+  &.nav-locked {
+    overflow: hidden;
+  }
 }
 
 a {
   color: var(--agt-primary-color, #2563eb);
+}
+
+/* Theme-gradient text accent. Global on purpose: it's used inside localized
+   strings injected via [innerHTML], which scoped component styles can't reach. */
+.grad {
+  background: var(--agt-ai-gradient, linear-gradient(90deg, #8b5cf6, #06b6d4));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ---------- Component doc pages ---------- */

@@ -1,7 +1,7 @@
 /**
  * Presets compose the 3 token layers into a full theme.
  *
- * - `Base` is the default preset (neutral/professional, PrimeNG-like).
+ * - `Base` is the default preset (neutral/professional).
  * - `Aurora` is an alternate preset built with {@link definePreset} to prove that
  *   consumers can restyle "outside of ours" by merging overrides.
  *
@@ -223,15 +223,14 @@ export function definePreset(
 }
 
 /**
- * Alternate preset: a faithful clone of PrimeNG's **Aura** theme — a monochrome
- * "noir" look on the zinc palette (near-white primary on near-black surfaces in
- * dark mode). Proves restyle-by-override: the whole surface + accent system is
- * swapped by merging onto {@link Base}. Semantic state colours (success/danger/…)
- * and component tokens are inherited.
+ * Alternate preset: a monochrome "noir" look on the zinc palette (near-white
+ * primary on near-black surfaces in dark mode). Proves restyle-by-override: the
+ * whole surface + accent system is swapped by merging onto {@link Base}.
+ * Semantic state colours (success/danger/…) and component tokens are inherited.
  *
- * Values mirror PrimeNG Aura dark: page `#09090b`, content `#18181b`,
- * hover `#27272a`, border `#3f3f46`, text `#ffffff`, muted `#a1a1aa`,
- * primary `#fafafa`, radius 6px.
+ * Dark values: page `#09090b`, content `#18181b`, hover `#27272a`,
+ * border `#3f3f46`, text `#ffffff`, muted `#a1a1aa`, primary `#fafafa`,
+ * radius 6px.
  */
 export const Aurora: Preset = definePreset(Base, {
   semantic: {

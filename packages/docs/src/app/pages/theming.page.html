@@ -1,27 +1,18 @@
 <article class="doc">
   <div class="doc__head">
-    <p class="doc__eyebrow">Getting started</p>
-    <h1 class="doc__title">Theming</h1>
-    <p class="doc__lead">
-      Every component is painted with a 3-layer token system —
-      <strong>primitive → semantic → component</strong> — compiled to CSS custom
-      properties. Swap the preset or override any token and the whole library
-      recolors, no CSS forking. Try it live: these controls restyle this entire
-      site at runtime.
-    </p>
+    <p class="doc__eyebrow">{{ t().eyebrow }}</p>
+    <h1 class="doc__title">{{ t().title }}</h1>
+    <p class="doc__lead" [innerHTML]="t().lead"></p>
   </div>
 
   <section class="doc__section">
-    <h2>Playground</h2>
-    <p>
-      Pick a preset, an AI accent and a corner radius. Changes apply globally,
-      instantly.
-    </p>
+    <h2>{{ t().playground.title }}</h2>
+    <p>{{ t().playground.intro }}</p>
 
     <div class="pg">
       <div class="pg__controls">
         <div class="pg__group">
-          <span class="pg__label">Preset</span>
+          <span class="pg__label">{{ t().playground.presetLabel }}</span>
           <div class="pg__seg">
             <button
               type="button"
@@ -41,20 +32,20 @@
         </div>
 
         <div class="pg__group">
-          <span class="pg__label">AI accent</span>
+          <span class="pg__label">{{ t().playground.accentLabel }}</span>
           <div class="pg__swatches">
             <button
               type="button"
               class="pg__swatch pg__swatch--auto"
               [class.is-active]="accent() === 'default'"
               [attr.aria-pressed]="accent() === 'default'"
-              aria-label="Preset default accent"
-              title="Preset default"
+              [attr.aria-label]="t().playground.presetDefaultAria"
+              [title]="t().playground.presetDefaultTitle"
               (click)="setAccent('default')"
             >
               A
             </button>
-            @for (a of accents; track a.id) {
+            @for (a of accents(); track a.id) {
             <button
               type="button"
               class="pg__swatch"
@@ -69,9 +60,9 @@
         </div>
 
         <div class="pg__group">
-          <span class="pg__label">Radius</span>
+          <span class="pg__label">{{ t().playground.radiusLabel }}</span>
           <div class="pg__seg">
-            @for (r of radii; track r.id) {
+            @for (r of radii(); track r.id) {
             <button
               type="button"
               [class.is-active]="radius() === r.id"
@@ -83,7 +74,9 @@
           </div>
         </div>
 
-        <button type="button" class="pg__reset" (click)="reset()">Reset</button>
+        <button type="button" class="pg__reset" (click)="reset()">
+          {{ t().playground.reset }}
+        </button>
       </div>
 
       <div class="pg__preview">
@@ -116,50 +109,39 @@
   </section>
 
   <section class="doc__section">
-    <h2>Configure a preset</h2>
-    <p>
-      Choose a built-in preset, or build your own by merging overrides onto one
-      with
-      <code>definePreset()</code> — this is what "restyle outside of ours"
-      means.
-    </p>
+    <h2>{{ t().config.title }}</h2>
+    <p [innerHTML]="t().config.body"></p>
     <app-doc-demo [code]="configCode" [preview]="false" />
   </section>
 
   <section class="doc__section">
-    <h2>Restyle at runtime</h2>
-    <p>
-      Inject <code>AgenticThemeService</code> to swap presets, merge token
-      overrides or toggle dark mode after bootstrap — exactly what the
-      playground above does.
-    </p>
+    <h2>{{ t().runtime.title }}</h2>
+    <p [innerHTML]="t().runtime.body"></p>
     <app-doc-demo [code]="runtimeCode" [preview]="false" />
   </section>
 
   <section class="doc__section">
-    <h2>Key semantic tokens</h2>
-    <p>
-      Semantic tokens reference primitives and compile to these CSS variables.
-    </p>
+    <h2>{{ t().tokens.title }}</h2>
+    <p>{{ t().tokens.intro }}</p>
     <div class="doc-props-wrap">
       <table class="doc-props">
         <thead>
           <tr>
-            <th>Token</th>
-            <th>CSS variable</th>
-            <th>Description</th>
+            <th>{{ t().tokens.headers.token }}</th>
+            <th>{{ t().tokens.headers.css }}</th>
+            <th>{{ t().tokens.headers.desc }}</th>
           </tr>
         </thead>
         <tbody>
-          @for (t of tokens; track t.name) {
+          @for (tok of tokens(); track tok.name) {
           <tr>
             <td>
-              <code>{{ t.name }}</code>
+              <code>{{ tok.name }}</code>
             </td>
             <td>
-              <span class="tok">{{ t.css }}</span>
+              <span class="tok">{{ tok.css }}</span>
             </td>
-            <td>{{ t.desc }}</td>
+            <td>{{ tok.desc }}</td>
           </tr>
           }
         </tbody>

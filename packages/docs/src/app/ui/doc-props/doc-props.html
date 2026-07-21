@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th>{{ nameHeader() }}</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th>Description</th>
+        <th>{{ t().props.type }}</th>
+        <th>{{ t().props.default }}</th>
+        <th>{{ t().props.description }}</th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
           @if (row.default) {
           <code class="doc-props__default">{{ row.default }}</code>
           } @else if (row.required) {
-          <span class="doc-props__req">required</span>
+          <span class="doc-props__req">{{ t().props.required }}</span>
           } @else {
           <span class="doc-props__default">—</span>
           }

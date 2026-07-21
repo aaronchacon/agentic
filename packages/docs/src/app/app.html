@@ -24,7 +24,7 @@
       <button
         type="button"
         class="docs__icon-btn"
-        [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+        [attr.aria-label]="isDark() ? chrome().header.toLight : chrome().header.toDark"
         (click)="toggleDark()"
       >
         @if (isDark()) {
@@ -58,8 +58,16 @@
       </button>
       <button
         type="button"
+        class="docs__icon-btn docs__lang-btn"
+        [attr.aria-label]="chrome().header.toggleLang"
+        (click)="toggleLocale()"
+      >
+        {{ locale() === 'en' ? 'ES' : 'EN' }}
+      </button>
+      <button
+        type="button"
         class="docs__menu-btn"
-        aria-label="Toggle navigation"
+        [attr.aria-label]="chrome().header.toggleNav"
         (click)="navOpen.set(!navOpen())"
       >
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
@@ -75,8 +83,15 @@
   </header>
 
   <div class="docs__body">
+    @if (navOpen()) {
+    <div
+      class="docs__backdrop"
+      aria-hidden="true"
+      (click)="navOpen.set(false)"
+    ></div>
+    }
     <aside class="docs__sidebar" [class.is-open]="navOpen()">
-      @for (section of sections; track section.title) {
+      @for (section of sections(); track section.title) {
       <div class="docs__nav-section">
         <p class="docs__nav-title">{{ section.title }}</p>
         <ul class="docs__nav-list">
