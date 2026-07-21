@@ -188,6 +188,21 @@
     display: none;
   }
 
+  /* Header text links move into the drawer on compact screens. */
+  &__sidebar-links {
+    display: none;
+  }
+
+  @media (max-width: t.$bp-compact) {
+    &__toplink {
+      display: none;
+    }
+
+    &__sidebar-links {
+      display: block;
+    }
+  }
+
   @media (max-width: t.$bp-mobile) {
     &__menu-btn {
       display: inline-flex;

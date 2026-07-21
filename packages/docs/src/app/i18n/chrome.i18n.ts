@@ -7,6 +7,7 @@ const EN = {
     toDark: 'Switch to dark mode',
     toggleLang: 'Cambiar a español',
     toggleNav: 'Toggle navigation',
+    linksTitle: 'Links',
   },
   nav: [
     {
@@ -58,6 +59,7 @@ export const CHROME_I18N: Localized<typeof EN> = {
       toDark: 'Cambiar a modo oscuro',
       toggleLang: 'Switch to English',
       toggleNav: 'Abrir o cerrar la navegación',
+      linksTitle: 'Enlaces',
     },
     nav: [
       {

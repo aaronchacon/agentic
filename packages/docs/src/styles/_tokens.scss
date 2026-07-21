@@ -2,6 +2,8 @@
 // mobile breakpoint, header height and the shell's stacking order.
 $header-h: 56px;
 $bp-mobile: 860px;
+// Below this the header text links (llms.txt / GitHub) move into the drawer.
+$bp-compact: 560px;
 
 $z-backdrop: 25;
 $z-sidebar: 30;
