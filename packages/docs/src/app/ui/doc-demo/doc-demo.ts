@@ -7,6 +7,8 @@ import {
   signal,
 } from '@angular/core';
 import hljs from 'highlight.js/lib/common';
+import { CHROME_I18N } from '../../i18n/chrome.i18n';
+import { injectT } from '../../i18n/i18n';
 
 /** A documentation demo card with Preview / Code tabs and a copy button. */
 @Component({
@@ -21,6 +23,7 @@ export class DocDemo {
   /** Whether to show a live Preview tab (projected content). Set false for code-only snippets. */
   readonly preview = input(true);
 
+  protected readonly t = injectT(CHROME_I18N);
   protected readonly tab = linkedSignal<'preview' | 'code'>(() =>
     this.preview() ? 'preview' : 'code',
   );

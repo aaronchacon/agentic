@@ -1,5 +1,8 @@
 .page {
   position: relative;
+  /* Contain the glow horizontally (it hangs off the right edge by design)
+     while leaving vertical overflow visible. */
+  overflow-x: clip;
 }
 
 /* Ambient glow behind the hero */
@@ -169,7 +172,8 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* min(100%, …) keeps the min track from forcing overflow on narrow phones */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 16px;
   max-width: 1120px;
   margin: 0 auto;
@@ -255,7 +259,7 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
     gap: 14px;
     margin: 0 0 22px;
     padding: 0;

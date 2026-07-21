@@ -6,7 +6,8 @@ import {
   injectAgent,
   type FixtureScript,
 } from '@ng-agentic/core';
-import type { Feature } from '../model/feature.model';
+import { injectT } from '../i18n/i18n';
+import { HOME_I18N } from './(home).page.i18n';
 
 const reply: FixtureScript = [
   {
@@ -33,6 +34,8 @@ const reply: FixtureScript = [
   styleUrl: './(home).page.scss',
 })
 export default class HomeComponent {
+  protected readonly t = injectT(HOME_I18N);
+
   protected readonly suggestions = [
     'Summarize this case',
     'Any inconsistencies?',
@@ -40,33 +43,6 @@ export default class HomeComponent {
   protected readonly store = injectAgent({
     transport: createFixtureTransport(reply, { defaultDelayMs: 42 }),
   });
-
-  protected readonly features: Feature[] = [
-    {
-      title: 'Human-in-the-loop, built in',
-      body: 'Approval gates for actions that need a person: approve, edit or reject — with full state tracking, not a bolted-on confirm().',
-    },
-    {
-      title: 'Provenance by default',
-      body: 'Users always see what the AI wrote, suggested or summarized — one consistent visual language across chat, summaries and form fields.',
-    },
-    {
-      title: 'Agentic, not just chat',
-      body: "Tool-calling cards and execution-trace plans make the agent's work visible, step by step — not a black box.",
-    },
-    {
-      title: 'Streaming, done right',
-      body: 'Smooth markdown reveal with syntax-highlighted code, a collapsible reasoning trace and a live cursor.',
-    },
-    {
-      title: 'Themeable by tokens',
-      body: '3-layer design tokens (primitive → semantic → component), dark and light. Swap presets or restyle without forking CSS.',
-    },
-    {
-      title: 'Accessible & headless',
-      body: 'AA contrast, keyboard-first, dark mode. Bring your own transport via the AG-UI-compatible contract.',
-    },
-  ];
 
   constructor() {
     afterNextRender(() => this.store.send('Summarize this case'));

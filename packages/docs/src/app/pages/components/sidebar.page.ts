@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import {
   AgtChat,
   AgtSidebar,
@@ -11,6 +11,8 @@ import { DocProps } from '../../ui/doc-props/doc-props';
 import { propsToMarkdown } from '../../ui/doc-props/doc-props.util';
 import type { DocProp } from '../../model/doc-prop.model';
 import { DocMd } from '../../ui/doc-md/doc-md';
+import { injectT } from '../../i18n/i18n';
+import { SIDEBAR_I18N } from './sidebar.page.i18n';
 
 const reply: FixtureScript = [
   {
@@ -24,38 +26,34 @@ const reply: FixtureScript = [
   { type: 'done' },
 ];
 
+/** Prop rows minus descriptions; those live (localized) in sidebar.page.i18n.ts. */
+const BASE_PROPS: Array<
+  Omit<DocProp, 'description'> & {
+    name: keyof (typeof SIDEBAR_I18N)['en']['props'];
+  }
+> = [
+  { name: 'open', type: 'boolean', default: 'false' },
+  { name: 'title', type: 'string', default: "'Agent'" },
+  { name: 'side', type: "'right' | 'left'", default: "'right'" },
+  { name: 'badge', type: 'number | boolean', default: 'false' },
+];
+
+/** English rows for the copied markdown, which stays English (llms.txt parity). */
+const PROPS_EN: DocProp[] = BASE_PROPS.map((p) => ({
+  ...p,
+  description: SIDEBAR_I18N.en.props[p.name],
+}));
+
 @Component({
   imports: [AgtSidebar, AgtChat, DocDemo, DocProps, DocMd],
   templateUrl: './sidebar.page.html',
   styleUrl: './sidebar.page.scss',
 })
 export default class SidebarPage {
-  protected readonly props: DocProp[] = [
-    {
-      name: 'open',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the panel is open (two-way, [(open)]).',
-    },
-    {
-      name: 'title',
-      type: 'string',
-      default: "'Agent'",
-      description: 'Panel header title.',
-    },
-    {
-      name: 'side',
-      type: "'right' | 'left'",
-      default: "'right'",
-      description: 'Which edge the panel docks to.',
-    },
-    {
-      name: 'badge',
-      type: 'number | boolean',
-      default: 'false',
-      description: 'Unread badge on the launcher (count or dot).',
-    },
-  ];
+  protected readonly t = injectT(SIDEBAR_I18N);
+  protected readonly props = computed<DocProp[]>(() =>
+    BASE_PROPS.map((p) => ({ ...p, description: this.t().props[p.name] })),
+  );
 
   protected readonly suggestions = [
     'Why do you need this?',
@@ -75,13 +73,13 @@ export default class SidebarPage {
     return [
       '# Sidebar',
       '',
-      'A collapsible agent side panel that wraps its content (e.g. the chat). When closed it shows a floating action button with an optional badge; when open it slides in a docked panel with managed focus and `inert`.',
+      SIDEBAR_I18N.en.lead,
       '',
       '```html',
       this.code,
       '```',
       '',
-      propsToMarkdown(this.props),
+      propsToMarkdown(PROPS_EN),
     ].join('\n');
   }
 }

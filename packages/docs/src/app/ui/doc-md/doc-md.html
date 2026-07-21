@@ -3,7 +3,7 @@
     type="button"
     class="doc-md__btn"
     (click)="copy()"
-    [attr.aria-label]="copied() ? 'Copied' : 'Copy this page as Markdown'"
+    [attr.aria-label]="copied() ? t().md.ariaCopied : t().md.ariaCopy"
   >
     <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
       <path
@@ -22,7 +22,7 @@
         d="M6 15V9l3 3 3-3v6M18 9v4m0 0-1.5-1.5M18 13l1.5-1.5"
       />
     </svg>
-    {{ copied() ? 'Copied' : 'Copy as Markdown' }}
+    {{ copied() ? t().md.copied : t().md.copy }}
   </button>
   <a class="doc-md__link" href="/llms.txt" target="_blank" rel="noreferrer"
     >llms.txt ↗</a

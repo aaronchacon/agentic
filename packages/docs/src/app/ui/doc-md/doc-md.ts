@@ -4,6 +4,8 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { CHROME_I18N } from '../../i18n/chrome.i18n';
+import { injectT } from '../../i18n/i18n';
 
 /**
  * A small "Copy as Markdown" action for a doc page — the AI-native touch.
@@ -20,6 +22,7 @@ export class DocMd {
   /** The page's markdown, copied verbatim on click. */
   readonly markdown = input('');
 
+  protected readonly t = injectT(CHROME_I18N);
   protected readonly copied = signal(false);
 
   protected copy(): void {

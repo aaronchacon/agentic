@@ -1,22 +1,14 @@
 <article class="doc">
   <div class="doc__head">
-    <p class="doc__eyebrow">Components</p>
-    <h1 class="doc__title">Chat</h1>
-    <p class="doc__lead">
-      A ChatGPT-style chat surface: streaming markdown with syntax-highlighted
-      code blocks, a collapsible reasoning trace, a thinking indicator, an empty
-      state with suggestions and an auto-growing composer.
-    </p>
+    <p class="doc__eyebrow">{{ t().eyebrow }}</p>
+    <h1 class="doc__title">{{ t().title }}</h1>
+    <p class="doc__lead">{{ t().lead }}</p>
     <app-doc-md [markdown]="md" />
   </div>
 
   <section class="doc__section">
-    <h2>Basic</h2>
-    <p>
-      The component is presentational: pass a store created with
-      <code>injectAgent</code>. Connect your own transport (SSE/WebSocket) or
-      replay fixtures — the kit never talks to an LLM.
-    </p>
+    <h2>{{ t().basicTitle }}</h2>
+    <p [innerHTML]="t().basicIntro"></p>
     <app-doc-demo [code]="code">
       <div style="height: 480px">
         <agt-chat
@@ -29,7 +21,7 @@
   </section>
 
   <section class="doc__section">
-    <h2>API</h2>
-    <app-doc-props [rows]="props" />
+    <h2>{{ t().apiTitle }}</h2>
+    <app-doc-props [rows]="props()" />
   </section>
 </article>

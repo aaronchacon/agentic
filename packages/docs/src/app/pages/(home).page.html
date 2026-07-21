@@ -3,18 +3,12 @@
 
   <section class="hero">
     <div class="hero__copy">
-      <span class="hero__eyebrow">Angular 21 · signals · AG-UI compatible</span>
-      <h1 class="hero__title">
-        Agent UI your <span class="grad">compliance team</span> can sign off on
-      </h1>
-      <p class="hero__lead">
-        Streaming chat, visible tool-calling, execution plans, human-in-the-loop
-        approvals and AI provenance — production-grade Angular components for
-        teams building AI into regulated products.
-      </p>
+      <span class="hero__eyebrow">{{ t().hero.eyebrow }}</span>
+      <h1 class="hero__title" [innerHTML]="t().hero.title"></h1>
+      <p class="hero__lead">{{ t().hero.lead }}</p>
       <div class="hero__actions">
         <a class="btn btn--primary" routerLink="/components/chat"
-          >Get started →</a
+          >{{ t().hero.getStarted }}</a
         >
         <a
           class="btn btn--ghost"
@@ -22,7 +16,7 @@
           target="_blank"
           rel="noreferrer"
         >
-          View on GitHub
+          {{ t().hero.viewOnGitHub }}
         </a>
       </div>
       <code class="hero__install"
@@ -47,7 +41,7 @@
   </section>
 
   <section class="features">
-    @for (f of features; track f.title) {
+    @for (f of t().features; track f.title) {
     <div class="feature">
       <div class="feature__icon" aria-hidden="true"></div>
       <h3>{{ f.title }}</h3>
@@ -58,45 +52,26 @@
 
   <section class="regulated">
     <div class="regulated__inner">
-      <p class="regulated__eyebrow">Built for regulated products</p>
-      <h2 class="regulated__title">
-        When "the AI did it" isn't an acceptable answer
-      </h2>
-      <p class="regulated__lead">
-        In fintech, KYC, legal and health, AI features carry three extra
-        expectations: a human can intervene, AI content is distinguishable from
-        human content, and decisions are traceable. Most agent UI kits treat
-        these as edge cases. agentic treats them as the core.
-      </p>
+      <p class="regulated__eyebrow">{{ t().regulated.eyebrow }}</p>
+      <h2 class="regulated__title">{{ t().regulated.title }}</h2>
+      <p class="regulated__lead">{{ t().regulated.lead }}</p>
       <ul class="regulated__list">
-        <li>
-          <strong>KYC &amp; onboarding</strong> — approval gates and provenance
-          on every extracted field.
-        </li>
-        <li>
-          <strong>Fintech dashboards</strong> — visible agent actions and
-          execution traces, step by step.
-        </li>
-        <li>
-          <strong>Legal &amp; health workflows</strong> — human-in-the-loop
-          before anything is committed.
-        </li>
+        @for (item of t().regulated.items; track item) {
+        <li [innerHTML]="item"></li>
+        }
       </ul>
-      <p class="regulated__note">
-        agentic gives you the UI building blocks — compliance itself is your
-        product's job.
-      </p>
+      <p class="regulated__note">{{ t().regulated.note }}</p>
     </div>
   </section>
 
   <footer class="footer">
-    Built by
+    {{ t().footer.builtBy }}
     <a href="https://aaronch.dev" target="_blank" rel="noreferrer"
       >Aaron Chacón</a
     >
-    · MIT licensed ·
+    · {{ t().footer.license }} ·
     <a href="https://github.com/aaronchacon" target="_blank" rel="noreferrer"
-      >Source on GitHub</a
+      >{{ t().footer.source }}</a
     >
   </footer>
 </div>

@@ -1,21 +1,14 @@
 <article class="doc">
   <div class="doc__head">
-    <p class="doc__eyebrow">Components</p>
-    <h1 class="doc__title">Suggestion</h1>
-    <p class="doc__lead">
-      A form field with an AI suggestion shown as ghost text, with accept/reject
-      controls and a confidence badge. Tracks provenance for compliance —
-      <strong>suggested → accepted (AI) → edited by human</strong>.
-    </p>
+    <p class="doc__eyebrow">{{ t().eyebrow }}</p>
+    <h1 class="doc__title">{{ t().title }}</h1>
+    <p class="doc__lead" [innerHTML]="t().lead"></p>
     <app-doc-md [markdown]="md" />
   </div>
 
   <section class="doc__section">
-    <h2>Provenance</h2>
-    <p>
-      Accept the suggestion (Tab), then edit the value to see it flip to "Edited
-      by human".
-    </p>
+    <h2>{{ t().provenanceTitle }}</h2>
+    <p>{{ t().provenanceIntro }}</p>
     <app-doc-demo [code]="code">
       <div
         style="
@@ -52,7 +45,7 @@
   </section>
 
   <section class="doc__section">
-    <h2>API</h2>
-    <app-doc-props [rows]="props" />
+    <h2>{{ t().apiTitle }}</h2>
+    <app-doc-props [rows]="props()" />
   </section>
 </article>

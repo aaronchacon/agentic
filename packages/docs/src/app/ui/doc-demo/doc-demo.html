@@ -6,7 +6,7 @@
       [class.is-active]="tab() === 'preview'"
       (click)="tab.set('preview')"
     >
-      Preview
+      {{ t().demo.preview }}
     </button>
     }
     <button
@@ -14,7 +14,7 @@
       [class.is-active]="tab() === 'code'"
       (click)="tab.set('code')"
     >
-      Code
+      {{ t().demo.code }}
     </button>
   </div>
 
@@ -23,7 +23,7 @@
   } @else {
   <div class="doc-demo__code">
     <button type="button" class="doc-demo__copy" (click)="copy()">
-      {{ copied() ? 'Copied' : 'Copy' }}
+      {{ copied() ? t().demo.copied : t().demo.copy }}
     </button>
     <pre><code class="hljs" [innerHTML]="highlighted()"></code></pre>
   </div>

@@ -219,7 +219,9 @@
     }
   }
 
-  @media (max-width: 720px) {
+  /* Match the shell's mobile breakpoint (860px) so the playground stacks
+     before the drawer/backdrop kick in. */
+  @media (max-width: 860px) {
     grid-template-columns: 1fr;
 
     .pg__controls {

@@ -1,17 +1,13 @@
 <article class="doc">
   <div class="doc__head">
-    <p class="doc__eyebrow">Components</p>
-    <h1 class="doc__title">Summary</h1>
-    <p class="doc__lead">
-      A card for AI-generated summaries — clearly marked as AI content, with
-      regenerate + copy actions and a skeleton while loading. Content renders as
-      markdown and can stream in.
-    </p>
+    <p class="doc__eyebrow">{{ t().eyebrow }}</p>
+    <h1 class="doc__title">{{ t().title }}</h1>
+    <p class="doc__lead">{{ t().lead }}</p>
     <app-doc-md [markdown]="md" />
   </div>
 
   <section class="doc__section">
-    <h2>Loaded</h2>
+    <h2>{{ t().loadedTitle }}</h2>
     <app-doc-demo [code]="code">
       <div style="max-width: 560px; margin: 0 auto; width: 100%">
         <agt-summary title="Case summary" [content]="summary" />
@@ -20,7 +16,7 @@
   </section>
 
   <section class="doc__section">
-    <h2>Loading</h2>
+    <h2>{{ t().loadingTitle }}</h2>
     <app-doc-demo [code]="loadingCode">
       <div style="max-width: 560px; margin: 0 auto; width: 100%">
         <agt-summary title="Case summary" [loading]="true" />
@@ -29,8 +25,8 @@
   </section>
 
   <section class="doc__section">
-    <h2>API</h2>
-    <app-doc-props [rows]="props" />
-    <app-doc-props nameHeader="Event" [rows]="events" />
+    <h2>{{ t().apiTitle }}</h2>
+    <app-doc-props [rows]="props()" />
+    <app-doc-props [nameHeader]="t().eventHeader" [rows]="events()" />
   </section>
 </article>
