@@ -10,9 +10,13 @@
     Roboto,
     sans-serif
   );
-  background: var(--agt-content-background, #ffffff);
-  border: 1px solid var(--agt-content-border-color, #e5e5e5);
-  border-radius: var(--agt-radius-md, 10px);
+  background: var(
+    --agt-tool-call-background,
+    var(--agt-content-background, #ffffff)
+  );
+  border: 1px solid
+    var(--agt-tool-call-border-color, var(--agt-content-border-color, #e5e5e5));
+  border-radius: var(--agt-tool-call-radius, var(--agt-radius-md, 10px));
 }
 
 .agt-tool__header {
@@ -65,15 +69,24 @@
   border-radius: 999px;
 }
 .agt-tool__badge--running {
-  color: var(--agt-content-muted-color, #64748b);
+  color: var(
+    --agt-tool-call-running-color,
+    var(--agt-content-muted-color, #64748b)
+  );
   background: var(--agt-content-muted-background, #f1f5f9);
 }
 .agt-tool__badge--success {
-  color: var(--agt-state-success-color, #059669);
+  color: var(
+    --agt-tool-call-success-color,
+    var(--agt-state-success-color, #059669)
+  );
   background: var(--agt-state-success-background, #d1fae5);
 }
 .agt-tool__badge--error {
-  color: var(--agt-state-danger-color, #dc2626);
+  color: var(
+    --agt-tool-call-error-color,
+    var(--agt-state-danger-color, #dc2626)
+  );
   background: var(--agt-state-danger-background, #fee2e2);
 }
 

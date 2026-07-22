@@ -5,6 +5,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 import type { ToolCall } from '../../core/types';
 import { AgtStreamText } from '../chat/agt-stream-text';
 import { toDetailMarkdown } from '../chat/markdown';
@@ -83,7 +84,7 @@ import { toDetailMarkdown } from '../chat/markdown';
                   d="M12 3a9 9 0 0 1 9 9"
                 />
               </svg>
-              Running
+              {{ labels().toolCall.statuses.running }}
             }
             @case ('success') {
               <svg
@@ -101,7 +102,7 @@ import { toDetailMarkdown } from '../chat/markdown';
                   d="m5 12 4 4 10-10"
                 />
               </svg>
-              Completed
+              {{ labels().toolCall.statuses.success }}
             }
             @case ('error') {
               <svg
@@ -118,7 +119,7 @@ import { toDetailMarkdown } from '../chat/markdown';
                   d="M6 6l12 12M18 6 6 18"
                 />
               </svg>
-              Error
+              {{ labels().toolCall.statuses.error }}
             }
           }
         </span>
@@ -152,7 +153,7 @@ import { toDetailMarkdown } from '../chat/markdown';
                 }
               </ul>
             } @else {
-              <p class="agt-tool__muted">Working…</p>
+              <p class="agt-tool__muted">{{ labels().toolCall.working }}</p>
             }
           }
           @if (detailMarkdown(); as detail) {
@@ -160,7 +161,11 @@ import { toDetailMarkdown } from '../chat/markdown';
               class="agt-tool__label"
               [class.agt-tool__label--error]="toolCall().status === 'error'"
             >
-              {{ toolCall().status === 'error' ? 'Error' : 'Result' }}
+              {{
+                toolCall().status === 'error'
+                  ? labels().toolCall.error
+                  : labels().toolCall.result
+              }}
             </div>
             <agt-stream-text [text]="detail" [streaming]="false" />
           }
@@ -175,6 +180,7 @@ export class AgtToolCall {
   /** Optional progress steps shown while running. */
   readonly steps = input<string[]>([]);
 
+  protected readonly labels = injectLabels();
   protected readonly isOpen = signal(true);
 
   /** The tool `detail` rendered as markdown: JSON for objects, verbatim for strings. */

@@ -6,6 +6,14 @@ export type {
 } from './lib/theming/provide-agentic';
 export { AgenticThemeService } from './lib/theming/agentic-theme.service';
 
+// Labels / i18n
+export {
+  AGT_DEFAULT_LABELS,
+  AGT_LABELS,
+  injectLabels,
+} from './lib/core/labels';
+export type { AgtLabels, AgtLabelsInput } from './lib/core/labels';
+
 // Components
 export { AgtChat } from './lib/components/chat/agt-chat';
 export { AgtReasoning } from './lib/components/chat/agt-reasoning';

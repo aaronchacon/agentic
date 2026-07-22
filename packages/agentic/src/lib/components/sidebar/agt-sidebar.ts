@@ -8,6 +8,7 @@ import {
   model,
   viewChild,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 
 /**
  * A collapsible agent side panel that wraps its content (e.g. `<agt-chat>`).
@@ -68,7 +69,7 @@ import {
           #closeBtn
           type="button"
           class="agt-sidebar__close"
-          aria-label="Close agent panel"
+          [attr.aria-label]="labels().sidebar.close"
           (click)="setOpen(false)"
         >
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
@@ -97,6 +98,8 @@ export class AgtSidebar {
   /** `true` shows a dot; a number shows a count. */
   readonly badge = input<number | boolean>(false);
 
+  protected readonly labels = injectLabels();
+
   private readonly fab = viewChild<ElementRef<HTMLButtonElement>>('fab');
   private readonly closeBtn =
     viewChild<ElementRef<HTMLButtonElement>>('closeBtn');
@@ -115,7 +118,8 @@ export class AgtSidebar {
   protected readonly fabLabel = computed(() => {
     const badge = this.badge();
     const count = typeof badge === 'number' ? badge : 0;
-    return count > 0 ? `Open agent panel, ${count} new` : 'Open agent panel';
+    const labels = this.labels().sidebar;
+    return count > 0 ? labels.openWithCount(count) : labels.open;
   });
 
   private skipInitial = true;

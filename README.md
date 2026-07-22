@@ -120,6 +120,12 @@ agent.approve(id);
   <img src="https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/approval.png" alt="agt-approval human-in-the-loop gate with approve, edit and reject actions" width="49%" />
 </p>
 
+## See it in a real product
+
+[**KYC Vetted**](https://aaronchacon.github.io/kyc-vetted/) — an AI-assisted KYC onboarding demo built entirely on these components, installed from npm: document extraction with a visible plan, per-field AI suggestions with provenance, and a human approval gate in a compliance console. [Source](https://github.com/aaronchacon/kyc-vetted).
+
+![KYC Vetted demo](https://raw.githubusercontent.com/aaronchacon/kyc-vetted/main/.github/media/demo.gif)
+
 ## The contract (AG-UI compatible)
 
 The consumer connects a transport; the library only renders. The event stream is a small,

@@ -6,6 +6,7 @@ import {
   model,
   signal,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 
 let counter = 0;
 
@@ -59,7 +60,7 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
             <button
               type="button"
               class="agt-suggestion__accept"
-              aria-label="Accept suggestion"
+              [attr.aria-label]="labels().suggestion.acceptAria"
               (click)="accept()"
             >
               <svg
@@ -81,7 +82,7 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
             <button
               type="button"
               class="agt-suggestion__reject"
-              aria-label="Reject suggestion"
+              [attr.aria-label]="labels().suggestion.rejectAria"
               (click)="reject()"
             >
               <svg
@@ -109,27 +110,27 @@ type SuggestionState = 'idle' | 'suggested' | 'accepted' | 'edited' | 'manual';
                 d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2z"
               />
             </svg>
-            AI
+            {{ labels().suggestion.aiBadge }}
             @if (confidencePct() !== null) {
               &nbsp;· {{ confidencePct() }}%
             }
           </span>
         }
         @case ('edited') {
-          <span class="agt-suggestion__badge agt-suggestion__badge--edited"
-            >Edited by human</span
-          >
+          <span class="agt-suggestion__badge agt-suggestion__badge--edited">{{
+            labels().suggestion.editedByHuman
+          }}</span>
         }
       }
     </div>
 
     @if (state() === 'suggested') {
       <span class="agt-suggestion__hint" [id]="fieldId + '-hint'">
-        AI suggestion
+        {{ labels().suggestion.aiSuggestion }}
         @if (confidencePct() !== null) {
-          &nbsp;· {{ confidencePct() }}% confidence
+          &nbsp;· {{ labels().suggestion.confidence(confidencePct()!) }}
         }
-        · Tab to accept
+        · {{ labels().suggestion.tabToAccept }}
       </span>
     }
   `,
@@ -147,6 +148,7 @@ export class AgtSuggestion {
   /** Whether the current value originated from the AI suggestion (two-way). */
   readonly accepted = model(false);
 
+  protected readonly labels = injectLabels();
   protected readonly fieldId = `agt-suggestion-${(counter += 1)}`;
   private readonly dismissed = signal(false);
 

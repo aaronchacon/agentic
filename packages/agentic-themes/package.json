@@ -1,6 +1,6 @@
 {
   "name": "@ng-agentic/themes",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Framework-agnostic 3-layer design tokens and theme presets for @ng-agentic/core.",
   "keywords": [
     "design-tokens",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/aaronchacon/agentic/issues"
   },
-  "type": "commonjs",
+  "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
@@ -33,5 +33,15 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "module": "./src/index.js",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
   }
 }

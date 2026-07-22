@@ -9,6 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import type { AgentStore } from '../../core/agent-store';
+import { injectLabels } from '../../core/labels';
 import { AgtReasoning } from './agt-reasoning';
 import { AgtStreamText, type StreamSpeed } from './agt-stream-text';
 
@@ -38,6 +39,7 @@ export class AgtChat {
   /** Streaming reveal speed: `'instant' | 'slow' | 'smooth' | 'fast'` or words/second. */
   readonly streamSpeed = input<StreamSpeed>('smooth');
 
+  protected readonly labels = injectLabels();
   protected readonly draft = signal('');
 
   private readonly scrollEl = viewChild<ElementRef<HTMLElement>>('scroll');

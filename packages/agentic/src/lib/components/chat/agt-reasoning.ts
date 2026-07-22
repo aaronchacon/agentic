@@ -8,6 +8,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 import { AgtStreamText, type StreamSpeed } from './agt-stream-text';
 
 const AUTO_CLOSE_DELAY = 1000;
@@ -46,15 +47,13 @@ const AUTO_CLOSE_DELAY = 1000;
         />
       </svg>
       @if (streaming()) {
-        <span class="agt-reasoning__shimmer">Thinking…</span>
+        <span class="agt-reasoning__shimmer">{{
+          labels().reasoning.thinking
+        }}</span>
       } @else if (displayDuration() !== undefined) {
-        <span
-          >Thought for {{ displayDuration() }} second{{
-            displayDuration() === 1 ? '' : 's'
-          }}</span
-        >
+        <span>{{ labels().reasoning.thoughtFor(displayDuration()!) }}</span>
       } @else {
-        <span>Thought for a few seconds</span>
+        <span>{{ labels().reasoning.thoughtForUnknown }}</span>
       }
       <svg
         class="agt-reasoning__chevron"
@@ -93,6 +92,7 @@ export class AgtReasoning {
   /** Optional externally-provided duration (seconds); otherwise measured internally. */
   readonly duration = input<number | undefined>(undefined);
 
+  protected readonly labels = injectLabels();
   protected readonly isOpen = signal(false);
   private readonly measured = signal<number | undefined>(undefined);
   protected readonly displayDuration = computed(
