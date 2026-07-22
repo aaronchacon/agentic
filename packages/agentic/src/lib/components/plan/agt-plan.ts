@@ -5,14 +5,8 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 import type { PlanStep, PlanStepStatus } from '../../core/types';
-
-const STATUS_LABEL: Record<PlanStepStatus, string> = {
-  pending: 'Pending',
-  active: 'In progress',
-  done: 'Completed',
-  error: 'Failed',
-};
 
 /**
  * Agent plan / execution-trace: a vertical timeline of steps with status
@@ -195,6 +189,7 @@ export class AgtPlan {
   readonly steps = input.required<PlanStep[]>();
   readonly title = input('Plan');
 
+  protected readonly labels = injectLabels();
   protected readonly isOpen = signal(true);
 
   protected readonly progress = computed(() => {
@@ -215,7 +210,7 @@ export class AgtPlan {
   });
 
   protected statusLabel(status: PlanStepStatus): string {
-    return STATUS_LABEL[status];
+    return this.labels().plan.statuses[status];
   }
 
   protected toggle(): void {

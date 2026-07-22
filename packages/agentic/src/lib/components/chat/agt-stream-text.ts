@@ -11,6 +11,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 import { renderMarkdown } from './markdown';
 
 /** How fast streamed text is revealed. Named presets are words/second; a number is words/second too. */
@@ -56,6 +57,7 @@ export class AgtStreamText {
   readonly streaming = input(false);
   readonly speed = input<StreamSpeed>('smooth');
 
+  protected readonly labels = injectLabels();
   private readonly mdEl = viewChild<ElementRef<HTMLElement>>('md');
   private readonly targetTokens = signal<string[]>([]);
   private readonly revealedCount = signal(0);
@@ -162,13 +164,16 @@ export class AgtStreamText {
       const copy = document.createElement('button');
       copy.type = 'button';
       copy.className = 'agt-code__copy';
-      copy.setAttribute('aria-label', 'Copy code');
-      copy.textContent = 'Copy';
+      copy.setAttribute('aria-label', this.labels().codeBlock.copyAria);
+      copy.textContent = this.labels().codeBlock.copy;
       copy.addEventListener('click', () => {
         const text = codeEl?.textContent ?? pre.textContent ?? '';
         navigator.clipboard?.writeText(text);
-        copy.textContent = 'Copied';
-        setTimeout(() => (copy.textContent = 'Copy'), 1200);
+        copy.textContent = this.labels().codeBlock.copied;
+        setTimeout(
+          () => (copy.textContent = this.labels().codeBlock.copy),
+          1200,
+        );
       });
 
       head.append(lang, copy);

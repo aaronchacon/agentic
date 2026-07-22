@@ -6,6 +6,7 @@ import {
   model,
   output,
 } from '@angular/core';
+import { injectLabels } from '../../core/labels';
 import { AgtStreamText } from '../chat/agt-stream-text';
 import { toDetailMarkdown } from '../chat/markdown';
 
@@ -63,7 +64,7 @@ import { toDetailMarkdown } from '../chat/markdown';
                 d="m5 12 4 4 10-10"
               />
             </svg>
-            Approved
+            {{ labels().approval.approved }}
           } @else {
             <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
               <path
@@ -74,7 +75,7 @@ import { toDetailMarkdown } from '../chat/markdown';
                 d="M6 6l12 12M18 6 6 18"
               />
             </svg>
-            Rejected
+            {{ labels().approval.rejected }}
           }
         </span>
       }
@@ -95,7 +96,7 @@ import { toDetailMarkdown } from '../chat/markdown';
             class="agt-approval__btn agt-approval__btn--ghost"
             (click)="onEdit()"
           >
-            Edit
+            {{ labels().approval.edit }}
           </button>
         }
         <button
@@ -103,14 +104,14 @@ import { toDetailMarkdown } from '../chat/markdown';
           class="agt-approval__btn agt-approval__btn--reject"
           (click)="onReject()"
         >
-          Reject
+          {{ labels().approval.reject }}
         </button>
         <button
           type="button"
           class="agt-approval__btn agt-approval__btn--approve"
           (click)="onApprove()"
         >
-          Approve
+          {{ labels().approval.approve }}
         </button>
       </div>
     }
@@ -131,6 +132,7 @@ export class AgtApproval {
   readonly reject = output<void>();
   readonly edit = output<void>();
 
+  protected readonly labels = injectLabels();
   protected readonly detailMarkdown = computed(() =>
     toDetailMarkdown(this.detail()),
   );

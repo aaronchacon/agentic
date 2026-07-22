@@ -190,6 +190,24 @@ export const Base: Preset = {
       fabColor: '{ai.contrastColor}',
       badgeBackground: '{state.danger.color}',
     },
+    /** Syntax-highlighted code blocks (dark, editor-style by default). */
+    codeBlock: {
+      background: '#1e1e1e',
+      headBackground: '#252526',
+      borderColor: '#2a2a2a',
+      color: '#d4d4d4',
+      mutedColor: '#9aa1ab',
+      actionColor: '#cccccc',
+      commentColor: '#6a9955',
+      keywordColor: '#569cd6',
+      stringColor: '#ce9178',
+      numberColor: '#b5cea8',
+      titleColor: '#dcdcaa',
+      typeColor: '#4ec9b0',
+      variableColor: '#9cdcfe',
+      metaColor: '#c586c0',
+      deletionColor: '#f48771',
+    },
   },
 };
 

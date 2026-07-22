@@ -85,8 +85,8 @@
   .agt-code {
     margin: 0 0 0.85em;
     overflow: hidden;
-    background: #1e1e1e;
-    border: 1px solid #2a2a2a;
+    background: var(--agt-code-block-background, #1e1e1e);
+    border: 1px solid var(--agt-code-block-border-color, #2a2a2a);
     border-radius: var(--agt-radius-md, 10px);
   }
 
@@ -95,14 +95,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 5px 8px 5px 14px;
-    background: #252526;
-    border-bottom: 1px solid #333333;
+    background: var(--agt-code-block-head-background, #252526);
+    border-bottom: 1px solid var(--agt-code-block-border-color, #333333);
   }
 
   .agt-code__lang {
     font-family: var(--agt-font-family-mono, ui-monospace, monospace);
     font-size: 0.72rem;
-    color: #9aa1ab;
+    color: var(--agt-code-block-muted-color, #9aa1ab);
     letter-spacing: 0.02em;
   }
 
@@ -112,7 +112,7 @@
     padding: 3px 9px;
     font: inherit;
     font-size: 0.72rem;
-    color: #cccccc;
+    color: var(--agt-code-block-action-color, #cccccc);
     background: transparent;
     border: 1px solid transparent;
     border-radius: var(--agt-radius-sm, 6px);
@@ -139,62 +139,62 @@
     font-family: var(--agt-font-family-mono, ui-monospace, monospace);
     font-size: 0.85rem;
     line-height: 1.6;
-    color: #d4d4d4;
+    color: var(--agt-code-block-color, #d4d4d4);
     background: none;
   }
 
   /* highlight.js — VS Code Dark+ palette */
   .hljs-comment,
   .hljs-quote {
-    color: #6a9955;
+    color: var(--agt-code-block-comment-color, #6a9955);
     font-style: italic;
   }
   .hljs-keyword,
   .hljs-literal,
   .hljs-name,
   .hljs-selector-tag {
-    color: #569cd6;
+    color: var(--agt-code-block-keyword-color, #569cd6);
   }
   .hljs-string,
   .hljs-regexp,
   .hljs-meta .hljs-string {
-    color: #ce9178;
+    color: var(--agt-code-block-string-color, #ce9178);
   }
   .hljs-number,
   .hljs-symbol,
   .hljs-bullet {
-    color: #b5cea8;
+    color: var(--agt-code-block-number-color, #b5cea8);
   }
   .hljs-title,
   .hljs-title.function_,
   .hljs-section {
-    color: #dcdcaa;
+    color: var(--agt-code-block-title-color, #dcdcaa);
   }
   .hljs-title.class_,
   .hljs-type,
   .hljs-built_in {
-    color: #4ec9b0;
+    color: var(--agt-code-block-type-color, #4ec9b0);
   }
   .hljs-variable,
   .hljs-attr,
   .hljs-attribute,
   .hljs-property,
   .hljs-template-variable {
-    color: #9cdcfe;
+    color: var(--agt-code-block-variable-color, #9cdcfe);
   }
   .hljs-operator,
   .hljs-punctuation {
-    color: #d4d4d4;
+    color: var(--agt-code-block-color, #d4d4d4);
   }
   .hljs-meta,
   .hljs-doctag {
-    color: #c586c0;
+    color: var(--agt-code-block-meta-color, #c586c0);
   }
   .hljs-deletion {
-    color: #f48771;
+    color: var(--agt-code-block-deletion-color, #f48771);
   }
   .hljs-addition {
-    color: #b5cea8;
+    color: var(--agt-code-block-number-color, #b5cea8);
   }
   .hljs-emphasis {
     font-style: italic;

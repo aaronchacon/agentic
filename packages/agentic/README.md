@@ -118,6 +118,12 @@ agent.approve(id);
   <img src="https://raw.githubusercontent.com/aaronchacon/agentic/main/.github/media/approval.png" alt="agt-approval human-in-the-loop gate with approve, edit and reject actions" width="49%" />
 </p>
 
+## See it in a real product
+
+[**KYC Vetted**](https://aaronchacon.github.io/kyc-vetted/) — an AI-assisted KYC onboarding demo built entirely on these components, installed from npm: document extraction with a visible plan, per-field AI suggestions with provenance, and a human approval gate in a compliance console. [Source](https://github.com/aaronchacon/kyc-vetted).
+
+![KYC Vetted demo](https://raw.githubusercontent.com/aaronchacon/kyc-vetted/main/.github/media/demo.gif)
+
 ## The contract (AG-UI compatible)
 
 The consumer connects a transport; the library only renders. The event stream is a small,
@@ -162,6 +168,51 @@ const Brand = definePreset(Aurora, {
 ```
 
 Restyle at runtime with `AgenticThemeService` (`setPreset`, `updatePreset`, `toggleDarkMode`).
+
+## Labels & i18n
+
+Every built-in string (status badges, buttons, aria-labels, hints) is provided through the
+`AGT_LABELS` token and defaults to English (`AGT_DEFAULT_LABELS`). Override it via
+`provideAgentic({ labels })` — with a static object for a single locale:
+
+```ts
+import { provideAgentic, AGT_DEFAULT_LABELS, type AgtLabels } from '@ng-agentic/core';
+
+const es: AgtLabels = {
+  ...AGT_DEFAULT_LABELS,
+  approval: {
+    approve: 'Aprobar',
+    reject: 'Rechazar',
+    edit: 'Editar',
+    approved: 'Aprobado',
+    rejected: 'Rechazado',
+  },
+  plan: {
+    statuses: { pending: 'Pendiente', active: 'En curso', done: 'Completado', error: 'Fallido' },
+  },
+  reasoning: {
+    thinking: 'Pensando…',
+    thoughtFor: (s) => `Pensó durante ${s} segundo${s === 1 ? '' : 's'}`,
+    thoughtForUnknown: 'Pensó durante unos segundos',
+  },
+  // …override as much or as little as you need, spreading the defaults for the rest.
+};
+
+provideAgentic({ labels: es });
+```
+
+…or with a `Signal<AgtLabels>` for live language switching — components re-render when it changes:
+
+```ts
+import { computed, signal } from '@angular/core';
+
+const locale = signal<'en' | 'es'>('en');
+const labels = computed(() => (locale() === 'es' ? es : AGT_DEFAULT_LABELS));
+
+provideAgentic({ labels }); // locale.set('es') switches every component live
+```
+
+Per-instance strings (`title`, `placeholder`, `emptyTitle`, …) remain regular inputs.
 
 ## Accessibility
 

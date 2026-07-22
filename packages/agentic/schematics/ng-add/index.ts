@@ -8,7 +8,7 @@ import {
 import type { Schema } from './schema';
 
 /** Version range for the framework-agnostic themes peer, installed by `ng add`. */
-const THEMES_VERSION = '^0.1.0';
+const THEMES_VERSION = '^0.2.0';
 
 /**
  * `ng add @ng-agentic/core`: installs `@ng-agentic/themes` and wires

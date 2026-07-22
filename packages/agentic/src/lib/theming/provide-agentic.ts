@@ -5,6 +5,7 @@ import {
   type EnvironmentProviders,
 } from '@angular/core';
 import type { BuildThemeOptions, Preset } from '@ng-agentic/themes';
+import { AGT_LABELS, type AgtLabelsInput } from '../core/labels';
 import { AgenticThemeService } from './agentic-theme.service';
 
 export interface AgenticThemeConfig {
@@ -18,6 +19,12 @@ export interface AgenticThemeConfig {
 
 export interface AgenticConfig {
   theme?: AgenticThemeConfig;
+  /**
+   * Overrides the built-in component strings (status badges, buttons,
+   * aria-labels). Pass a static {@link AgtLabels} object, or a `Signal` for
+   * live language switching. Defaults to the built-in English labels.
+   */
+  labels?: AgtLabelsInput;
 }
 
 /**
@@ -33,6 +40,9 @@ export function provideAgentic(
   config: AgenticConfig = {},
 ): EnvironmentProviders {
   return makeEnvironmentProviders([
+    ...(config.labels
+      ? [{ provide: AGT_LABELS, useValue: config.labels }]
+      : []),
     provideEnvironmentInitializer(() => {
       inject(AgenticThemeService).configure(config.theme?.preset, {
         darkMode: config.theme?.darkMode,
