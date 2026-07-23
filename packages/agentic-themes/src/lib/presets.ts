@@ -180,8 +180,11 @@ export const Base: Preset = {
       errorColor: '{state.danger.color}',
     },
     summary: {
-      background: '{ai.subtleBackground}',
-      borderColor: '{ai.borderColor}',
+      // Base surface like every other component — the info is what matters.
+      // AI provenance lives in the small accents (label + gradient bar), not
+      // in a coloured card background.
+      background: '{content.background}',
+      borderColor: '{content.borderColor}',
       accent: '{ai.gradient}',
       radius: '{radius.lg}',
     },

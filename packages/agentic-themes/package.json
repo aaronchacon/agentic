@@ -1,6 +1,6 @@
 {
   "name": "@ng-agentic/themes",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Framework-agnostic 3-layer design tokens and theme presets for @ng-agentic/core.",
   "keywords": [
     "design-tokens",
